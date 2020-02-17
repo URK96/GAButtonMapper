@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">GAButtonMapper</string>
+  <string name="app_explain">LG 스마트폰을 위한 구글 어시스턴트 맵핑 앱</string>
+  <string name="accessibility_description">테스트</string>
+
+  <!--Common-->
+  <string name="Common_CheckSuccess">확인되었습니다.</string>
+  <string name="Common_PermissionGranted">권한이 부여되었습니다.</string>
+  <string name="Common_PermissionDenied">권한이 거절되었습니다.</string>
+  <string name="Common_EssentialPermissionDenied">권한을 부여하지 않으면 앱을 사용하실 수 없습니다.</string>
+
+  <!--Init Setting-->
+  <string name="InitSetting_Title">시작하기 전에</string>
+  <string name="InitSetting_GrantPermission_Title">권한 설정</string>
+  <string name="InitSetting_GrantPermission_Summary">PC 작업이 필요합니다.\n해당 작업을 하지 않을 경우 맵핑 기능을 사용할 수 없습니다.</string>
+  <string name="InitSetting_GrantPermission_Explain">
+    1. 설정 - 개발자 옵션 - USB 디버깅을 활성화한 후 LG 스마트폰을 PC에 연결합니다.\n\n
+    * 개발자 옵션이 없는 경우 휴대폰 정보 - 소프트웨어 정보 - 빌드 번호를 연속으로 눌러 활성화 시킬 수 있습니다. *\n\n
+    2. adb를 실행하여 다음 명령어를 입력합니다.\n\n
+    adb shell pm grant com.lgplus.gabtmap android.permission.READ_LOGS\n\n
+    3. 명령어를 실행하고 LG 스마트폰을 PC와 연결 해제 후 아래 버튼을 클릭하여 앱을 완전히 종료 후 다시 시작해 주세요.
+  </string>
+  <string name="InitSetting_GrantPermission_ExplainAfterRestart">
+    1. 아래 버튼을 눌러 권한이 제대로 입력됐는지 확인해 주세요.\n\n
+    2. 만약 Fail이 뜨면 다시 PC 연결 후 adb 명령어를 입력합니다.\n\n
+    adb shell pm grant com.lgplus.gabtmap android.permission.READ_LOGS
+  </string>
+  <string name="InitSetting_Accessibility_Title">접근성 서비스 활성화</string>
+  <string name="InitSetting_Accessibility_Summary">지속적인 모니터링을 위해 사용합니다.\n해당 서비스를 활성화/비활성화 하는 것으로도 맵핑 기능을 활성화/비활성화 할 수 있습니다.</string>
+  <string name="InitSetting_Accessibility_Explain">
+    1. 아래 Go 버튼을 클릭하여 접근성 설정으로 이동합니다.\n\n
+    2. 서비스 목록에서 GAButtonMapper의 접근성 서비스를 활성화 합니다.\n\n
+    3. 활성화 후 아래의 Finish 버튼을 클릭하여 진행합니다.
+  </string>
+
+  <!--Toolbar Menu-->
+  <string name="ToolbarMenu_AppInfo">앱 정보</string>
+
+  <!--App Selector-->
+  <string name="AppSelector_SearchHint">앱 이름 검색</string>
+
+  <!--App Info-->
+  <string name="AppInfo_Title">앱 정보</string>
+  <string name="AppInfo_DeveloperInfo">
+    URK96\n
+    E-Mail : chlwlsgur96@hotmail.com
+  </string>
+  <string name="AppInfo_Xamarin">Powered by Xamarin.Android</string>
+
+  <!--Alert Dialog-->
+  <string name="AlertDialog_Close">닫기</string>
+  <string name="AlertDialog_Accessibility_Title">주의사항</string>
+  <string name="AlertDialog_Accessibility_Message">
+    해당 기능을 사용하기 전에 접근성 서비스를 활성화 해야합니다.\n
+    설정 변경을 선택하시면 설정 화면으로 넘어가며, GAButtonMapper를 활성화 하면 됩니다.
+  </string>
+  <string name="AlertDialog_Accessibility_OK">설정 변경</string>
+  <string name="AlertDialog_DoNotDisturb_Title">주의사항</string>
+  <string name="AlertDialog_DoNotDisturb_Message">
+    해당 기능은 방해금지 모드가 새로 생긴 이후로 별도의 권한이 필요합니다.\n
+    권한 변경을 선택하시면 설정 화면으로 넘어가며, GAButtonMapper를 활성화 하면 됩니다.\n\n
+    기존 무음모드는 방해금지 모드로 대체되어 적용되며, 세부 설정은 기기 설정의 방해금지 모드 설정에서 설정하실 수 있습니다.
+  </string>
+  <string name="AlertDialog_DoNotDisturb_OK">권한 변경</string>
+  <string name="AlertDialog_IgnoreBatteryOptimization_Title">주의사항</string>
+  <string name="AlertDialog_IgnoreBatteryOptimization_Message">
+    해당 설정은 본 기능을 조금 더 안정적으로 사용하기 위한 설정입니다.\n
+    해당 설정을 활성화 할 경우 서비스가 자동적으로 일시정지 되는 빈도가 매우 줄어들지만 배터리 소모량이 조금 증가할 수 있습니다.\n
+    설정 변경을 선택하시면 설정 화면으로 넘어가며, 활성화/비활성화 할 경우GAButtonMapper를 활성화/비활성화 하면 됩니다.\n\n
+  </string>
+  <string name="AlertDialog_IgnoreBatteryOptimization_OK">설정 변경</string>
+  <string name="AlertDialog_AudioRecorderPermission_Title">녹음 권한 요청</string>
+  <string name="AlertDialog_AudioRecorderPermission_Message">
+    녹음 기능을 사용하기 위해서 권한이 필요합니다.\n
+    권한 부여 버튼을 누르면 권한 요구 창이 표시됩니다.\n
+    해당 권한을 부여하지 않을 시 녹음 기능을 사용하실 수 없습니다.\n\n
+  </string>
+  <string name="AlertDialog_AudioRecorderPermission_OK">권한 부여</string>
+
+  <!--Toast Message-->
+  <string name="ToastMessage_QPayNotification">LG Quick Pay가 곧 실행됩니다.</string>
+
+  <!--Main Menus-->
+  <string name="MainMenu_Caution">
+    해당 맵핑 기능을 안정적으로 사용하기 위해서는\n기본 어시스턴트 연결 기능을 해제해야 합니다.\n
+    기기의 기본 설정에서 어시스턴트 키에 연결된\n어시스턴트 바로가기 기능을 전부 해제해주세요.\n
+    맵핑 기능을 활성화해도 기존 어시스턴트 바로가기 기능은\n홈버튼 길게 누르기로 사용하실 수 있습니다.\n\n
+    맵핑 기능을 사용하지 않을 경우\n접근성 서비스를 비활성화 하시면 배터리 소모를 줄일 수 있습니다.
+  </string>
+  <string name="MainMenu_Category_Basic">기본</string>
+  <string name="MainMenu_Basic_EnableMapping_Title">맵핑 활성화</string>
+  <string name="MainMenu_Basic_EnableMapping_SummaryOn">구글 어시스턴트 키의 맵핑을 사용 중입니다.</string>
+  <string name="MainMenu_Basic_EnableMapping_SummaryOff">구글 어시스턴트 키의 맵핑을 사용하지 않는 중입니다.</string>
+  <string name="MainMenu_Basic_ScreenOffDisableMapping_Title">화면 꺼질 때 비활성화</string>
+  <string name="MainMenu_Basic_ScreenOffDisableMapping_SummaryOn">화면이 꺼질 때 맵핑이 비활성화 됩니다.</string>
+  <string name="MainMenu_Basic_ScreenOffDisableMapping_SummaryOff">화면이 꺼질 때에도 맵핑이 활성화 됩니다.</string>
+  <string name="MainMenu_Basic_LongClickVibrator_Title">롱클릭 진동 안내</string>
+  <string name="MainMenu_Basic_LongClickVibrator_SummaryOn">롱클릭 시 진동으로 알려줍니다.</string>
+  <string name="MainMenu_Basic_LongClickVibrator_SummaryOff">롱클릭 시 진동으로 알려주지 않습니다.</string>
+  <string name="MainMenu_Basic_ActionFeatureVibrator_Title">특정 기능 진동 안내</string>
+  <string name="MainMenu_Basic_ActionFeatureVibrator_SummaryOn">특정 기능 실행 시 진동으로 알려줍니다.</string>
+  <string name="MainMenu_Basic_ActionFeatureVibrator_SummaryOff">특정 기능 실행 시 진동으로 알려주지 않습니다.</string>
+
+  <string name="MainMenu_Detail_MappingType_Title">키 맵핑 종류</string>
+  <string name="MainMenu_Detail_MappingTypeEntry_App">앱</string>
+  <string name="MainMenu_Detail_MappingTypeEntry_Action">동작</string>
+  <string name="MainMenu_Detail_AppSelector_Title">사용자 앱 선택</string>
+  <string name="MainMenu_Detail_AppSelector_Summary">어시스턴트 키를 입력할 때 실행할 사용자 앱을 선택하세요</string>
+  <string name="MainMenu_Detail_AppSelector_Summary_NowApp">선택된 앱</string>
+  <string name="MainMenu_Detail_ActionSelector_Title">사용자 정의 동작 선택</string>
+  <string name="MainMenu_Detail_ActionSelector_Summary">어시스턴트 키를 입력할 때 실행할 동작을 선택하세요</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_Back">Back 버튼</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_Home">Home 버튼</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_Recent">최근 앱 목록</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_Notification">알림 창</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_ScreenShot">스크린 샷</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_LockScreen">화면 잠금</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_QuickSetting">빠른 설정</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_SplitScreen">Split Screen</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_Flashlight">플래시 라이트</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_QuickMemo">빠른 메모 (Q메모+)</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_PrestoMemo">바로 메모 (Q메모+)</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_ChangeRingerMode">소리 상태 변경</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_MusicPlayPause">음악 재생/일시정지</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_MusicSkipNext">다음 곡 재생</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_MusicSkipPrevious">이전 곡 재생</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_LGPayQLauncher">LG Quick Pay</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_VoiceRecoder">녹음 실행/정지</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_SwitchPreviousApp">빠른 앱 전환</string>
+
+  <string name="MainMenu_Category_SingleClick">단일 클릭</string>
+  <string name="MainMenu_SingleClick_FeatureEnable_Title">활성화</string>
+  <string name="MainMenu_SingleClick_FeatureEnable_SummaryOn">단일 클릭 기능이 활성화 되었습니다.</string>
+  <string name="MainMenu_SingleClick_FeatureEnable_SummaryOff">단일 클릭 기능이 비활성화 되었습니다.</string>
+
+  <string name="MainMenu_Category_DoubleClick">이중 클릭(베타)</string>
+  <string name="MainMenu_DoubleClick_FeatureEnable_Title">활성화</string>
+  <string name="MainMenu_DoubleClick_FeatureEnable_SummaryOn">이중 클릭 기능이 활성화 되었습니다.</string>
+  <string name="MainMenu_DoubleClick_FeatureEnable_SummaryOff">이중 클릭 기능이 비활성화 되었습니다.</string>
+  
+  <string name="MainMenu_Category_TripleClick">삼중 클릭(베타)</string>
+  <string name="MainMenu_TripleClick_FeatureEnable_Title">활성화</string>
+  <string name="MainMenu_TripleClick_FeatureEnable_SummaryOn">삼중 클릭 기능이 활성화 되었습니다.</string>
+  <string name="MainMenu_TripleClick_FeatureEnable_SummaryOff">삼중 클릭 기능이 비활성화 되었습니다.</string>
+
+  <string name="MainMenu_Category_SingleLongClick">단일 롱클릭(베타)</string>
+  <string name="MainMenu_SingleLongClick_FeatureEnable_Title">활성화</string>
+  <string name="MainMenu_SingleLongClick_FeatureEnable_SummaryOn">단일 롱클릭 기능이 활성화 되었습니다.</string>
+  <string name="MainMenu_SingleLongClick_FeatureEnable_SummaryOff">단일 롱클릭 기능이 비활성화 되었습니다.</string>
+
+  <string name="MainMenu_Category_DoubleLongClick">이중 롱클릭(베타)</string>
+  <string name="MainMenu_DoubleLongClick_FeatureEnable_Title">활성화</string>
+  <string name="MainMenu_DoubleLongClick_FeatureEnable_SummaryOn">이중 롱클릭 기능이 활성화 되었습니다.</string>
+  <string name="MainMenu_DoubleLongClick_FeatureEnable_SummaryOff">이중 롱클릭 기능이 비활성화 되었습니다.</string>
+
+  <string name="MainMenu_Category_TripleLongClick">삼중 롱클릭(베타)</string>
+  <string name="MainMenu_TripleLongClick_FeatureEnable_Title">활성화</string>
+  <string name="MainMenu_TripleLongClick_FeatureEnable_SummaryOn">삼중 롱클릭 기능이 활성화 되었습니다.</string>
+  <string name="MainMenu_TripleLongClick_FeatureEnable_SummaryOff">삼중 롱클릭 기능이 비활성화 되었습니다.</string>
+
+  <string name="MainMenu_Category_ETC">기타</string>
+  <string name="MainMenu_ETC_GoAccessibilitySetting_Title">접근성 설정 바로가기</string>
+  <string name="MainMenu_ETC_GoAccessibilitySetting_Summary_On">접근성 서비스가 활성화(ON) 되어있습니다.</string>
+  <string name="MainMenu_ETC_GoAccessibilitySetting_Summary_Off">접근성 서비스가 비활성화(OFF) 되어있습니다.</string>
+  <string name="MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Title">배터리 최적화 제외 설정 바로가기</string>
+  <string name="MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary">배터리 최적화 제외 목록에 해당 앱을 등록하면 기능을 좀 더 안정적으로 이용하실 수 있습니다.</string>
+  <string name="MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary_On">활성화(ON) 되어있습니다.</string>
+  <string name="MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary_Off">비활성화(OFF) 되어있습니다.</string>
+
+  <!--App Selector-->
+  <string name="AppSelector_Title">앱 선택</string>
+</resources>

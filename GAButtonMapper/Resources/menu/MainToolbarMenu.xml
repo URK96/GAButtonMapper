@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/MainAppInfo"
+        android:title="App Info"
+        android:icon="@drawable/info_icon"
+        app:showAsAction="always" />
+</menu>

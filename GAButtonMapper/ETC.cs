@@ -1,0 +1,54 @@
+﻿using Android.App;
+using Android.Content;
+using Android.Content.PM;
+using Android.Media;
+using Android.OS;
+using Android.Views.Accessibility;
+
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
+
+namespace GAButtonMapper
+{
+    public static class ETC
+    {
+        internal enum KeyState { Up, Down, None }
+
+        internal static volatile ISharedPreferences sharedPreferences;
+
+        internal static string sdcardPath = "";
+
+        //internal static string s;
+        internal static PackageManager packm;
+        internal static NotificationManager nm;
+        internal static AccessibilityManager acm;
+        internal static PowerManager pm;
+        internal static AudioManager am;
+        internal static MediaRecorder recorder;
+        internal static Vibrator vibrator;
+
+        internal static KeyState kState = KeyState.None;
+        internal static volatile bool isUnbind = false;
+        internal static volatile bool isTorchOn = false;
+        internal static volatile bool isDown = false;
+        internal static volatile short clickCount = 0;
+        internal static volatile bool isClickMonitoring = false;
+        internal static volatile bool isLongClick = false;
+        internal static volatile bool isRecording = false;
+
+        internal static bool CheckPermission(Context context, string permission)
+        {
+            try
+            {
+                return context.CheckSelfPermission(permission) == Permission.Granted;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+    }
+}
+

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <string-array name="MappingTypeList">
+    <item>@string/MainMenu_Detail_MappingTypeEntry_Action</item>
+    <item>@string/MainMenu_Detail_MappingTypeEntry_App</item>
+  </string-array>
+  <string-array name="MappingTypeList_Value">
+    <item>0</item>
+    <item>1</item>
+  </string-array>
+
+  <string-array name="CustomActionList">
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_Back</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_Home</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_Recent</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_Notification</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_ScreenShot</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_LockScreen</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_QuickSetting</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_SplitScreen</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_Flashlight</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_QuickMemo</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_PrestoMemo</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_ChangeRingerMode</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_MusicPlayPause</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_MusicSkipNext</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_MusicSkipPrevious</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_LGPayQLauncher</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_VoiceRecoder</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_SwitchPreviousApp</item>
+  </string-array>
+  <string-array name="CustomActionList_Value">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+    <item>5</item>
+    <item>6</item>
+    <item>7</item>
+    <item>8</item>
+    <item>9</item>
+    <item>10</item>
+    <item>11</item>
+    <item>12</item>
+    <item>13</item>
+    <item>14</item>
+    <item>15</item>
+    <item>16</item>
+    <item>17</item>
+  </string-array>
+</resources>
+  
