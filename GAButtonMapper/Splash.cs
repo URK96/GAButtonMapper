@@ -42,14 +42,14 @@ namespace GAButtonMapper
 
             ETC.sdcardPath = di.Parent.FullName;
 
-            RequestPermissions(new string[] { Manifest.Permission.ReadExternalStorage, Manifest.Permission.WriteExternalStorage }, 0);
+            RequestPermissions(new string[] { Manifest.Permission.ReadExternalStorage, Manifest.Permission.WriteExternalStorage, Manifest.Permission.Bluetooth, Manifest.Permission.BluetoothAdmin }, 0);
         }
 
         private async Task StartUp()
         {
             await Task.Delay(1000);
 
-            if (!ETC.CheckPermission(this, Manifest.Permission.ReadLogs) || ETC.sharedPreferences.GetBoolean("HasRestart", false))
+            if (!ETC.CheckPermission(this, Manifest.Permission.ReadLogs) || !ETC.CheckPermission(this, Manifest.Permission.WriteSecureSettings) || ETC.sharedPreferences.GetBoolean("HasRestart", false))
             {
                 StartActivity(typeof(InitSettingActivity));
             }
@@ -63,7 +63,7 @@ namespace GAButtonMapper
         {
             foreach (var p in grantResults)
             {
-                if (grantResults[0] == Permission.Denied)
+                if (p == Permission.Denied)
                 {
                     Toast.MakeText(this, Resource.String.Common_EssentialPermissionDenied, ToastLength.Short).Show();
                     FinishAffinity();

@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:animateLayoutChanges="true">
+
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,6 +74,7 @@
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
+
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -125,5 +127,6 @@
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
+
     </LinearLayout>
 </RelativeLayout>

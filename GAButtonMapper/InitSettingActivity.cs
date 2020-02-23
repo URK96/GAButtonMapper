@@ -11,6 +11,7 @@ using Android.Widget;
 using Hoang8f.Widgets;
 
 using System;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GAButtonMapper
@@ -39,6 +40,7 @@ namespace GAButtonMapper
             tvGrantSummary = FindViewById<TextView>(Resource.Id.InitSettingGrantPermissionCardView_SummaryText);
             btGrantCheck = FindViewById<FButton>(Resource.Id.InitSetting_GrantPermission_ExplainCheckButton);
             btGrantCheck.Click += BtGrantCheck_Click;
+
             cvAccessibility = FindViewById<CardView>(Resource.Id.InitSettingAccessibilityCardView);
             cvAccessibility.Click += CvAccessibility_Click;
             tvAccessibilitySummary = FindViewById<TextView>(Resource.Id.InitSettingAccessibilityCardView_SummaryText);
@@ -87,15 +89,23 @@ namespace GAButtonMapper
 
             await Task.Delay(1000);
 
-            if (ETC.CheckPermission(this, Manifest.Permission.ReadLogs))
+            if (!ETC.CheckPermission(this, Manifest.Permission.ReadLogs))
             {
-                Toast.MakeText(this, "OK", ToastLength.Short).Show();
-                _ = ShowSecondCard();
+                Toast.MakeText(this, "Read Logs check Fail", ToastLength.Short).Show();
+
+                return;
             }
-            else
+
+            if (!ETC.CheckPermission(this, Manifest.Permission.WriteSecureSettings))
             {
-                Toast.MakeText(this, "Fail", ToastLength.Short).Show();
+                Toast.MakeText(this, "Write Secure Settings check Fail", ToastLength.Short).Show();
+
+                return;
             }
+
+            Toast.MakeText(this, "OK", ToastLength.Short).Show();
+            _ = ShowSecondCard();
+
         }
 
         private void CvGrantPermission_Click(object sender, EventArgs e)

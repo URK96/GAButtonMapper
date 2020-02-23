@@ -1,11 +1,13 @@
 ﻿using Android;
 using Android.AccessibilityServices;
 using Android.App;
+using Android.Bluetooth;
 using Android.Content;
 using Android.Content.PM;
 using Android.Hardware.Camera2;
 using Android.Media;
 using Android.OS;
+using Android.Provider;
 using Android.Support.V7.Preferences;
 using Android.Views;
 using Android.Views.Accessibility;
@@ -15,7 +17,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
-using System.Timers;
 
 using Xamarin.Essentials;
 
@@ -32,9 +33,6 @@ namespace GAButtonMapper
 
         private Stopwatch longClickSW;
         private Stopwatch clickSW;
-
-        private int longClickInterval = 800;
-        private int clickInterval = 400;
 
         private KeyEvent keyDownEvent;
         private KeyEvent keyUpEvent;
@@ -86,6 +84,9 @@ namespace GAButtonMapper
                 clickSW = new Stopwatch();
             }
 
+            clickInterval = CalcInterval(400, 50, sharedPreferences.GetInt("ClickInterval", 0));
+            longClickInterval = CalcInterval(800, 50, sharedPreferences.GetInt("LongClickInterval", 0));
+
             await MonitoringKeyState();
         }
 
@@ -97,6 +98,8 @@ namespace GAButtonMapper
             {
                 while (true)
                 {
+                    await Task.Delay(1);
+
                     if (!sharedPreferences.GetBoolean("EnableMapping", false) || 
                         (sharedPreferences.GetBoolean("ScreenOffDisableMapping", false) && !pm.IsInteractive))
                     {
@@ -104,7 +107,7 @@ namespace GAButtonMapper
                         continue;
                     }
 
-                    var p = Java.Lang.Runtime.GetRuntime().Exec(new string[] { "/bin/sh", "-c", "logcat -t 80 | grep 'keycode=165' | tail -1" });
+                    var p = Java.Lang.Runtime.GetRuntime().Exec(new string[] { "/bin/sh", "-c", "logcat -t 150 | grep 'keycode=165' | tail -1" });
                     await p.WaitForAsync();
 
                     using (var sr = new StreamReader(p.InputStream))
@@ -346,9 +349,9 @@ namespace GAButtonMapper
 
                                     recorder.Stop();
                                 }
-                                catch (Exception)
+                                catch (Exception ex)
                                 {
-                                    
+                                    Toast.MakeText(this, ex.ToString(), ToastLength.Short).Show();
                                 }
                                 finally
                                 {
@@ -391,6 +394,29 @@ namespace GAButtonMapper
                             PerformGlobalAction(GlobalAction.Recents);
                             await Task.Delay(500);
                             PerformGlobalAction(GlobalAction.Recents);
+                            break;
+                        case 18:
+                            if (sharedPreferences.GetBoolean("ActionFeatureVibrator", true))
+                            {
+                                vibrator.Vibrate(VibrationEffect.CreateWaveform(new long[] { 200, 0 }, new int[] { 30, 0 }, -1));
+                            }
+
+                            Settings.System.PutInt(ContentResolver, Settings.System.AccelerometerRotation, Settings.System.GetInt(ContentResolver, Settings.System.AccelerometerRotation) == 0 ? 1 : 0);
+                            break;
+                        case 19:
+                            Settings.Global.PutInt(ContentResolver, Settings.Global.AirplaneModeOn, Settings.Global.GetInt(ContentResolver, Settings.Global.AirplaneModeOn) == 0 ? 1 : 0);
+                            break;
+                        case 20:
+                            var mBluetoothAdapter = BluetoothAdapter.DefaultAdapter;
+
+                            if (mBluetoothAdapter.IsEnabled)
+                            {
+                                mBluetoothAdapter.Disable();
+                            }
+                            else
+                            {
+                                mBluetoothAdapter.Enable();
+                            }
                             break;
                     }
                 }

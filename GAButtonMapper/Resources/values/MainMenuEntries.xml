@@ -28,6 +28,9 @@
     <item>@string/MainMenu_Detail_ActionSelectorEntry_LGPayQLauncher</item>
     <item>@string/MainMenu_Detail_ActionSelectorEntry_VoiceRecoder</item>
     <item>@string/MainMenu_Detail_ActionSelectorEntry_SwitchPreviousApp</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_ToggleAutoRotate</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_ToggleAirplaneMode</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_ToggleBluetooth</item>
   </string-array>
   <string-array name="CustomActionList_Value">
     <item>0</item>
@@ -48,6 +51,9 @@
     <item>15</item>
     <item>16</item>
     <item>17</item>
+    <item>18</item>
+    <item>19</item>
+    <item>20</item>
   </string-array>
 </resources>
   

@@ -19,12 +19,14 @@
     * 개발자 옵션이 없는 경우 휴대폰 정보 - 소프트웨어 정보 - 빌드 번호를 연속으로 눌러 활성화 시킬 수 있습니다. *\n\n
     2. adb를 실행하여 다음 명령어를 입력합니다.\n\n
     adb shell pm grant com.lgplus.gabtmap android.permission.READ_LOGS\n\n
+    adb shell pm grant com.lgplus.gabtmap android.permission.WRITE_SECURE_SETTINGS\n\n
     3. 명령어를 실행하고 LG 스마트폰을 PC와 연결 해제 후 아래 버튼을 클릭하여 앱을 완전히 종료 후 다시 시작해 주세요.
   </string>
   <string name="InitSetting_GrantPermission_ExplainAfterRestart">
     1. 아래 버튼을 눌러 권한이 제대로 입력됐는지 확인해 주세요.\n\n
     2. 만약 Fail이 뜨면 다시 PC 연결 후 adb 명령어를 입력합니다.\n\n
-    adb shell pm grant com.lgplus.gabtmap android.permission.READ_LOGS
+    adb shell pm grant com.lgplus.gabtmap android.permission.READ_LOGS\n\n
+    adb shell pm grant com.lgplus.gabtmap android.permission.WRITE_SECURE_SETTINGS
   </string>
   <string name="InitSetting_Accessibility_Title">접근성 서비스 활성화</string>
   <string name="InitSetting_Accessibility_Summary">지속적인 모니터링을 위해 사용합니다.\n해당 서비스를 활성화/비활성화 하는 것으로도 맵핑 기능을 활성화/비활성화 할 수 있습니다.</string>
@@ -49,6 +51,8 @@
   <string name="AppInfo_Xamarin">Powered by Xamarin.Android</string>
 
   <!--Alert Dialog-->
+  <string name="AlertDialog_Reset">초기화</string>
+  <string name="AlertDialog_Set">설정</string>
   <string name="AlertDialog_Close">닫기</string>
   <string name="AlertDialog_Accessibility_Title">주의사항</string>
   <string name="AlertDialog_Accessibility_Message">
@@ -78,6 +82,14 @@
   </string>
   <string name="AlertDialog_AudioRecorderPermission_OK">권한 부여</string>
 
+  <string name="AlertDialog_WriteSettingPermission_Title">설정 수정 권한 요청</string>
+  <string name="AlertDialog_WriteSettingPermission_Message">
+    해당 기능을 사용하기 위해서 설정 수정 권한이 필요합니다.\n
+    권한 부여 버튼을 누르면 해당 설정으로 이동합니다.\n
+    해당 권한을 부여하지 않을 시 이와 관련된 기능을 사용하실 수 없습니다.\n\n
+  </string>
+  <string name="AlertDialog_WriteSettingPermission_OK">권한 부여</string>
+
   <!--Toast Message-->
   <string name="ToastMessage_QPayNotification">LG Quick Pay가 곧 실행됩니다.</string>
 
@@ -101,6 +113,10 @@
   <string name="MainMenu_Basic_ActionFeatureVibrator_Title">특정 기능 진동 안내</string>
   <string name="MainMenu_Basic_ActionFeatureVibrator_SummaryOn">특정 기능 실행 시 진동으로 알려줍니다.</string>
   <string name="MainMenu_Basic_ActionFeatureVibrator_SummaryOff">특정 기능 실행 시 진동으로 알려주지 않습니다.</string>
+
+  <string name="MainMenu_Category_ButtonSub">맵핑</string>
+  <string name="MainMenu_ButtonSub_SubPreference_Title">버튼 설정</string>
+  <string name="MainMenu_ButtonSub_SubPreference_Summary">버튼 세부 사항을 설정합니다.</string>
 
   <string name="MainMenu_Detail_MappingType_Title">키 맵핑 종류</string>
   <string name="MainMenu_Detail_MappingTypeEntry_App">앱</string>
@@ -128,6 +144,22 @@
   <string name="MainMenu_Detail_ActionSelectorEntry_LGPayQLauncher">LG Quick Pay</string>
   <string name="MainMenu_Detail_ActionSelectorEntry_VoiceRecoder">녹음 실행/정지</string>
   <string name="MainMenu_Detail_ActionSelectorEntry_SwitchPreviousApp">빠른 앱 전환</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_ToggleAutoRotate">자동 회전 토글</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_ToggleAirplaneMode">비행기 모드 토글</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_ToggleBluetooth">블루투스 토글</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_ToggleWiFi">Wi-Fi 토글</string>
+
+  <string name="MainMenu_Category_ButtonInterval">버튼 클릭 조정</string>
+  <string name="MainMenu_ButtonInterval_Title">클릭 간격 설정</string>
+  <string name="MainMenu_ButtonInterval_Summary">
+    버튼 클릭 간 중복 인식 간격을 설정합니다.\n
+    현재 인식 범위 :
+  </string>
+  <string name="MainMenu_LongClickInterval_Title">롱클릭 간격 설정</string>
+  <string name="MainMenu_LongClickInterval_Summary">
+    롱클릭으로 인식되기 위해 눌러야 하는 시간을 설정합니다.\n
+    현재 인식 시간 :
+  </string>
 
   <string name="MainMenu_Category_SingleClick">단일 클릭</string>
   <string name="MainMenu_SingleClick_FeatureEnable_Title">활성화</string>

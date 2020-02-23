@@ -16,7 +16,7 @@ using Android.Widget;
 namespace GAButtonMapper
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar")]
-    public class MainActivity : AppCompatActivity
+    public class MainActivity : AppCompatActivity, PreferenceFragmentCompat.IOnPreferenceStartFragmentCallback
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -24,8 +24,7 @@ namespace GAButtonMapper
 
             SetContentView(Resource.Layout.MainLayout);
 
-            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.MainToolbar);
-            SetSupportActionBar(toolbar);
+            SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.MainToolbar));
             SupportActionBar.SetDisplayShowTitleEnabled(true);
             SupportActionBar.SetDisplayUseLogoEnabled(true);
             SupportActionBar.SetLogo(Resource.Mipmap.ic_launcher);
@@ -54,33 +53,39 @@ namespace GAButtonMapper
 
         public override void OnBackPressed()
         {
-            FinishAffinity();
+            if (SupportFragmentManager.BackStackEntryCount > 0)
+            {
+                SupportFragmentManager.PopBackStack();
+            }
+            else
+            {
+                FinishAffinity();
+            }
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-	}
+
+        public bool OnPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref)
+        {
+            switch (pref.Key)
+            {
+                case "ButtonSubPreference":
+                    SupportFragmentManager.BeginTransaction().Replace(Resource.Id.MainFragmentContainer, new ButtonSubFragment(), null).AddToBackStack(null).Commit();
+                    break;
+            }
+
+            return true;
+        }
+    }
 
     internal class MainFragment : PreferenceFragmentCompat
     {
         private ISharedPreferencesEditor editor;
-
-        private Preference appSelectorSingleP;
-        private ListPreference actionSelectorSingleP;
-        private Preference appSelectorDoubleP;
-        private ListPreference actionSelectorDoubleP;
-        private Preference appSelectorTripleP;
-        private ListPreference actionSelectorTripleP;
-        private Preference appSelectorSingleLongP;
-        private ListPreference actionSelectorSingleLongP;
-        private Preference appSelectorDoubleLongP;
-        private ListPreference actionSelectorDoubleLongP;
-        private Preference appSelectorTripleLongP;
-        private ListPreference actionSelectorTripleLongP;
 
         private Preference goAccessibilitySettingP;
         private Preference goIgnoreBatteryOptimizationSettingP;
@@ -99,34 +104,6 @@ namespace GAButtonMapper
         public override void OnResume()
         {
             base.OnResume();
-
-            string pkNameSingle = ETC.sharedPreferences.GetString("AppSelector_SingleClick", "");
-            if (!string.IsNullOrWhiteSpace(pkNameSingle))
-            {
-                try
-                {
-                    appSelectorSingleP.Summary = 
-                        $"{Resources.GetString(Resource.String.MainMenu_Detail_AppSelector_Summary_NowApp)} : {ETC.packm.GetApplicationInfo(pkNameSingle, 0).LoadLabel(ETC.packm)} ({pkNameSingle})";
-                }
-                catch (Exception)
-                {
-                    ETC.sharedPreferences.Edit().PutString("AppSelector", "").Apply();
-                }
-            }
-
-            string pkNameDouble = ETC.sharedPreferences.GetString("AppSelector_DoubleClick", "");
-            if (!string.IsNullOrWhiteSpace(pkNameDouble))
-            {
-                try
-                {
-                    appSelectorDoubleP.Summary =
-                        $"{Resources.GetString(Resource.String.MainMenu_Detail_AppSelector_Summary_NowApp)} : {ETC.packm.GetApplicationInfo(pkNameDouble, 0).LoadLabel(ETC.packm)} ({pkNameDouble})";
-                }
-                catch (Exception)
-                {
-                    ETC.sharedPreferences.Edit().PutString("AppSelector", "").Apply();
-                }
-            }
 
             if (!ETC.acm.IsEnabled)
             {
@@ -153,19 +130,6 @@ namespace GAButtonMapper
         private void InitMainMenus()
         {
             editor = ETC.sharedPreferences.Edit();
-
-            appSelectorSingleP = FindPreference("AppSelector_SingleClick");
-            actionSelectorSingleP = FindPreference("ActionSelector_SingleClick") as ListPreference;
-            appSelectorDoubleP = FindPreference("AppSelector_DoubleClick");
-            actionSelectorDoubleP = FindPreference("ActionSelector_DoubleClick") as ListPreference;
-            appSelectorTripleP = FindPreference("AppSelector_TripleClick");
-            actionSelectorTripleP = FindPreference("ActionSelector_TripleClick") as ListPreference;
-            appSelectorSingleLongP = FindPreference("AppSelector_SingleLongClick");
-            actionSelectorSingleLongP = FindPreference("ActionSelector_SingleLongClick") as ListPreference;
-            appSelectorDoubleLongP = FindPreference("AppSelector_DoubleLongClick");
-            actionSelectorDoubleLongP = FindPreference("ActionSelector_DoubleLongClick") as ListPreference;
-            appSelectorTripleLongP = FindPreference("AppSelector_TripleLongClick");
-            actionSelectorTripleLongP = FindPreference("ActionSelector_TripleLongClick") as ListPreference;
 
             goAccessibilitySettingP = FindPreference("GoAccessibilitySetting");
             goIgnoreBatteryOptimizationSettingP = FindPreference("GoIgnoreBatteryOptimizationSetting");
@@ -223,294 +187,6 @@ namespace GAButtonMapper
                 editor.PutBoolean("ActionFeatureVibrator", actionFeatureVibrator.Checked);
             };
 
-            // Single Click Part
-
-            var enableSingleClick = FindPreference("EnableSingleClick") as SwitchPreference;
-            enableSingleClick.Checked = ETC.sharedPreferences.GetBoolean("EnableSingleClick", false);
-            enableSingleClick.PreferenceChange += delegate { editor.PutBoolean("EnableSingleClick", enableSingleClick.Checked).Apply(); };
-
-            var mappingTypeSingle = FindPreference("MappingType_SingleClick") as ListPreference;
-            mappingTypeSingle.SetValueIndex(int.Parse(ETC.sharedPreferences.GetString("MappingType_SingleClick", "0")));
-            mappingTypeSingle.PreferenceChange += (sender, e) =>
-            {
-                switch (int.Parse((string)e.NewValue))
-                {
-                    case 0:
-                        appSelectorSingleP.Visible = false;
-                        actionSelectorSingleP.Visible = true;
-                        break;
-                    case 1:
-                        appSelectorSingleP.Visible = true;
-                        actionSelectorSingleP.Visible = false;
-                        break;
-                    default:
-                        appSelectorSingleP.Visible = false;
-                        actionSelectorSingleP.Visible = false;
-                        break;
-                }
-            };
-
-            if (int.Parse(ETC.sharedPreferences.GetString("MappingType_SingleClick", "0")) == 1)
-            {
-                appSelectorSingleP.Visible = true;
-                actionSelectorSingleP.Visible = false;
-            }
-            appSelectorSingleP.PreferenceClick += delegate 
-            {
-                var intentSingle = new Intent(Activity, typeof(AppSelectorActivity));
-                intentSingle.PutExtra("Type", "SingleClick");
-                Activity.StartActivity(intentSingle); 
-            };
-
-            if (int.Parse(ETC.sharedPreferences.GetString("MappingType_SingleClick", "0")) == 0)
-            {
-                appSelectorSingleP.Visible = false;
-                actionSelectorSingleP.Visible = true;
-            }
-            actionSelectorSingleP.SetValueIndex(int.Parse(ETC.sharedPreferences.GetString("ActionSelector_SingleClick", "0")));
-            actionSelectorSingleP.PreferenceChange += CheckActionSelector;
-
-
-            // Double Click Part
-
-            var enableDoubleClick = FindPreference("EnableDoubleClick") as SwitchPreference;
-            enableDoubleClick.Checked = ETC.sharedPreferences.GetBoolean("EnableDoubleClick", false);
-            enableDoubleClick.PreferenceChange += delegate { editor.PutBoolean("EnableDoubleClick", enableDoubleClick.Checked).Apply(); };
-
-            var mappingTypeDouble = FindPreference("MappingType_DoubleClick") as ListPreference;
-            mappingTypeDouble.SetValueIndex(int.Parse(ETC.sharedPreferences.GetString("MappingType_DoubleClick", "0")));
-            mappingTypeDouble.PreferenceChange += (sender, e) =>
-            {
-                switch (int.Parse((string)e.NewValue))
-                {
-                    case 0:
-                        appSelectorDoubleP.Visible = false;
-                        actionSelectorDoubleP.Visible = true;
-                        break;
-                    case 1:
-                        appSelectorDoubleP.Visible = true;
-                        actionSelectorDoubleP.Visible = false;
-                        break;
-                    default:
-                        appSelectorDoubleP.Visible = false;
-                        actionSelectorDoubleP.Visible = false;
-                        break;
-                }
-            };
-
-            if (int.Parse(ETC.sharedPreferences.GetString("MappingType_DoubleClick", "0")) == 1)
-            {
-                appSelectorDoubleP.Visible = true;
-                actionSelectorDoubleP.Visible = false;
-            }
-            appSelectorDoubleP.PreferenceClick += delegate
-            {
-                var intentDouble = new Intent(Activity, typeof(AppSelectorActivity));
-                intentDouble.PutExtra("Type", "DoubleClick");
-                Activity.StartActivity(intentDouble);
-            };
-
-            if (int.Parse(ETC.sharedPreferences.GetString("MappingType_DoubleClick", "0")) == 0)
-            {
-                appSelectorDoubleP.Visible = false;
-                actionSelectorDoubleP.Visible = true;
-            }
-            actionSelectorDoubleP.SetValueIndex(int.Parse(ETC.sharedPreferences.GetString("ActionSelector_DoubleClick", "0")));
-            actionSelectorDoubleP.PreferenceChange += CheckActionSelector;
-
-
-            // Triple Click Part
-
-            var enableTripleClick = FindPreference("EnableTripleClick") as SwitchPreference;
-            enableTripleClick.Checked = ETC.sharedPreferences.GetBoolean("EnableTripleClick", false);
-            enableTripleClick.PreferenceChange += delegate { editor.PutBoolean("EnableTripleClick", enableTripleClick.Checked).Apply(); };
-
-            var mappingTypeTriple = FindPreference("MappingType_TripleClick") as ListPreference;
-            mappingTypeTriple.SetValueIndex(int.Parse(ETC.sharedPreferences.GetString("MappingType_TripleClick", "0")));
-            mappingTypeTriple.PreferenceChange += (sender, e) =>
-            {
-                switch (int.Parse((string)e.NewValue))
-                {
-                    case 0:
-                        appSelectorTripleP.Visible = false;
-                        actionSelectorTripleP.Visible = true;
-                        break;
-                    case 1:
-                        appSelectorTripleP.Visible = true;
-                        actionSelectorTripleP.Visible = false;
-                        break;
-                    default:
-                        appSelectorTripleP.Visible = false;
-                        actionSelectorTripleP.Visible = false;
-                        break;
-                }
-            };
-
-            if (int.Parse(ETC.sharedPreferences.GetString("MappingType_TripleClick", "0")) == 1)
-            {
-                appSelectorTripleP.Visible = true;
-                actionSelectorTripleP.Visible = false;
-            }
-            appSelectorTripleP.PreferenceClick += delegate
-            {
-                var intentTriple = new Intent(Activity, typeof(AppSelectorActivity));
-                intentTriple.PutExtra("Type", "TripleClick");
-                Activity.StartActivity(intentTriple);
-            };
-
-            if (int.Parse(ETC.sharedPreferences.GetString("MappingType_TripleClick", "0")) == 0)
-            {
-                appSelectorTripleP.Visible = false;
-                actionSelectorTripleP.Visible = true;
-            }
-            actionSelectorTripleP.SetValueIndex(int.Parse(ETC.sharedPreferences.GetString("ActionSelector_TripleClick", "0")));
-            actionSelectorTripleP.PreferenceChange += CheckActionSelector;
-
-
-            // SingleLong Click Part
-
-            var enableSingleLongClick = FindPreference("EnableSingleLongClick") as SwitchPreference;
-            enableSingleLongClick.Checked = ETC.sharedPreferences.GetBoolean("EnableSingleLongClick", false);
-            enableSingleLongClick.PreferenceChange += delegate { editor.PutBoolean("EnableSingleLongClick", enableSingleLongClick.Checked).Apply(); };
-
-            var mappingTypeSingleLong = FindPreference("MappingType_SingleLongClick") as ListPreference;
-            mappingTypeSingleLong.SetValueIndex(int.Parse(ETC.sharedPreferences.GetString("MappingType_SingleLongClick", "0")));
-            mappingTypeSingleLong.PreferenceChange += (sender, e) =>
-            {
-                switch (int.Parse((string)e.NewValue))
-                {
-                    case 0:
-                        appSelectorSingleLongP.Visible = false;
-                        actionSelectorSingleLongP.Visible = true;
-                        break;
-                    case 1:
-                        appSelectorSingleLongP.Visible = true;
-                        actionSelectorSingleLongP.Visible = false;
-                        break;
-                    default:
-                        appSelectorSingleLongP.Visible = false;
-                        actionSelectorSingleLongP.Visible = false;
-                        break;
-                }
-            };
-
-            if (int.Parse(ETC.sharedPreferences.GetString("MappingType_SingleLongClick", "0")) == 1)
-            {
-                appSelectorSingleLongP.Visible = true;
-                actionSelectorSingleLongP.Visible = false;
-            }
-            appSelectorSingleLongP.PreferenceClick += delegate
-            {
-                var intentSingleLong = new Intent(Activity, typeof(AppSelectorActivity));
-                intentSingleLong.PutExtra("Type", "SingleLongClick");
-                Activity.StartActivity(intentSingleLong);
-            };
-
-            if (int.Parse(ETC.sharedPreferences.GetString("MappingType_SingleLongClick", "0")) == 0)
-            {
-                appSelectorSingleLongP.Visible = false;
-                actionSelectorSingleLongP.Visible = true;
-            }
-            actionSelectorSingleLongP.SetValueIndex(int.Parse(ETC.sharedPreferences.GetString("ActionSelector_SingleLongClick", "0")));
-            actionSelectorSingleLongP.PreferenceChange += CheckActionSelector;
-
-
-            // DoubleLong Click Part
-
-            var enableDoubleLongClick = FindPreference("EnableDoubleLongClick") as SwitchPreference;
-            enableDoubleLongClick.Checked = ETC.sharedPreferences.GetBoolean("EnableDoubleLongClick", false);
-            enableDoubleLongClick.PreferenceChange += delegate { editor.PutBoolean("EnableDoubleLongClick", enableDoubleLongClick.Checked).Apply(); };
-
-            var mappingTypeDoubleLong = FindPreference("MappingType_DoubleLongClick") as ListPreference;
-            mappingTypeDoubleLong.SetValueIndex(int.Parse(ETC.sharedPreferences.GetString("MappingType_DoubleLongClick", "0")));
-            mappingTypeDoubleLong.PreferenceChange += (sender, e) =>
-            {
-                switch (int.Parse((string)e.NewValue))
-                {
-                    case 0:
-                        appSelectorDoubleLongP.Visible = false;
-                        actionSelectorDoubleLongP.Visible = true;
-                        break;
-                    case 1:
-                        appSelectorDoubleLongP.Visible = true;
-                        actionSelectorDoubleLongP.Visible = false;
-                        break;
-                    default:
-                        appSelectorDoubleLongP.Visible = false;
-                        actionSelectorDoubleLongP.Visible = false;
-                        break;
-                }
-            };
-
-            if (int.Parse(ETC.sharedPreferences.GetString("MappingType_DoubleLongClick", "0")) == 1)
-            {
-                appSelectorDoubleLongP.Visible = true;
-                actionSelectorDoubleLongP.Visible = false;
-            }
-            appSelectorDoubleLongP.PreferenceClick += delegate
-            {
-                var intentDoubleLong = new Intent(Activity, typeof(AppSelectorActivity));
-                intentDoubleLong.PutExtra("Type", "DoubleLongClick");
-                Activity.StartActivity(intentDoubleLong);
-            };
-
-            if (int.Parse(ETC.sharedPreferences.GetString("MappingType_DoubleLongClick", "0")) == 0)
-            {
-                appSelectorDoubleLongP.Visible = false;
-                actionSelectorDoubleLongP.Visible = true;
-            }
-            actionSelectorDoubleLongP.SetValueIndex(int.Parse(ETC.sharedPreferences.GetString("ActionSelector_DoubleLongClick", "0")));
-            actionSelectorDoubleLongP.PreferenceChange += CheckActionSelector;
-
-
-            // TripleLong Click Part
-
-            var enableTripleLongClick = FindPreference("EnableTripleLongClick") as SwitchPreference;
-            enableTripleLongClick.Checked = ETC.sharedPreferences.GetBoolean("EnableTripleLongClick", false);
-            enableTripleLongClick.PreferenceChange += delegate { editor.PutBoolean("EnableTripleLongClick", enableTripleLongClick.Checked).Apply(); };
-
-            var mappingTypeTripleLong = FindPreference("MappingType_TripleLongClick") as ListPreference;
-            mappingTypeTripleLong.SetValueIndex(int.Parse(ETC.sharedPreferences.GetString("MappingType_TripleLongClick", "0")));
-            mappingTypeTripleLong.PreferenceChange += (sender, e) =>
-            {
-                switch (int.Parse((string)e.NewValue))
-                {
-                    case 0:
-                        appSelectorTripleLongP.Visible = false;
-                        actionSelectorTripleLongP.Visible = true;
-                        break;
-                    case 1:
-                        appSelectorTripleLongP.Visible = true;
-                        actionSelectorTripleLongP.Visible = false;
-                        break;
-                    default:
-                        appSelectorTripleLongP.Visible = false;
-                        actionSelectorTripleLongP.Visible = false;
-                        break;
-                }
-            };
-
-            if (int.Parse(ETC.sharedPreferences.GetString("MappingType_TripleLongClick", "0")) == 1)
-            {
-                appSelectorTripleLongP.Visible = true;
-                actionSelectorTripleLongP.Visible = false;
-            }
-            appSelectorTripleLongP.PreferenceClick += delegate
-            {
-                var intentTripleLong = new Intent(Activity, typeof(AppSelectorActivity));
-                intentTripleLong.PutExtra("Type", "TripleLongClick");
-                Activity.StartActivity(intentTripleLong);
-            };
-
-            if (int.Parse(ETC.sharedPreferences.GetString("MappingType_TripleLongClick", "0")) == 0)
-            {
-                appSelectorTripleLongP.Visible = false;
-                actionSelectorTripleLongP.Visible = true;
-            }
-            actionSelectorTripleLongP.SetValueIndex(int.Parse(ETC.sharedPreferences.GetString("ActionSelector_TripleLongClick", "0")));
-            actionSelectorTripleLongP.PreferenceChange += CheckActionSelector;
-
-
             // ETC Part
 
             goAccessibilitySettingP.PreferenceClick += delegate { StartActivity(new Intent(Settings.ActionAccessibilitySettings)); };
@@ -527,9 +203,270 @@ namespace GAButtonMapper
                 ad.Show();
             };
         }
+    }
+
+    internal class ButtonSubFragment : PreferenceFragmentCompat
+    {
+        private ISharedPreferencesEditor editor;
+
+        private Preference clickInterval;
+        private Preference longClickInterval;
+
+        private Preference[] appSelectorPs;
+        private ListPreference[] actionSelectorPs;
+        readonly string[] clickType =
+        {
+            "SingleClick",
+            "DoubleClick",
+            "TripleClick",
+            "SingleLongClick",
+            "DoubleLongClick",
+            "TripleLongClick"
+        };
+
+        public override void OnCreatePreferences(Bundle savedInstanceState, string rootKey)
+        {
+            AddPreferencesFromResource(Resource.Xml.ButtonMenus);
+
+            clickInterval = FindPreference("ClickInterval");
+            longClickInterval = FindPreference("LongClickInterval");
+
+            appSelectorPs = new Preference[]
+            {
+                FindPreference("AppSelector_SingleClick"),
+                FindPreference("AppSelector_DoubleClick"),
+                FindPreference("AppSelector_TripleClick"),
+                FindPreference("AppSelector_SingleLongClick"),
+                FindPreference("AppSelector_DoubleLongClick"),
+                FindPreference("AppSelector_TripleLongClick")
+            };
+            actionSelectorPs = new ListPreference[]
+            {
+                FindPreference("ActionSelector_SingleClick") as ListPreference,
+                FindPreference("ActionSelector_DoubleClick") as ListPreference,
+                FindPreference("ActionSelector_TripleClick") as ListPreference,
+                FindPreference("ActionSelector_SingleLongClick") as ListPreference,
+                FindPreference("ActionSelector_DoubleLongClick") as ListPreference,
+                FindPreference("ActionSelector_TripleLongClick") as ListPreference
+            };
+
+            InitMainMenus();
+        }
+
+        public override void OnResume()
+        {
+            base.OnResume();
+
+            clickInterval.Summary =
+                $"{Resources.GetString(Resource.String.MainMenu_ButtonInterval_Summary)} {ETC.clickInterval}ms";
+            longClickInterval.Summary =
+                $"{Resources.GetString(Resource.String.MainMenu_LongClickInterval_Summary)} {ETC.longClickInterval}ms";
+
+            for (int i = 0; i < clickType.Length; ++i)
+            {
+                string pkName = ETC.sharedPreferences.GetString($"AppSelector_{clickType[i]}", "");
+
+                if (!string.IsNullOrWhiteSpace(pkName))
+                {
+                    try
+                    {
+                        appSelectorPs[i].Summary =
+                            $"{Resources.GetString(Resource.String.MainMenu_Detail_AppSelector_Summary_NowApp)} : {ETC.packm.GetApplicationInfo(pkName, 0).LoadLabel(ETC.packm)} ({pkName})";
+                    }
+                    catch (Exception)
+                    {
+                        ETC.sharedPreferences.Edit().PutString($"AppSelector_{clickType[i]}", "").Apply();
+                    }
+                }
+            }
+        }
+
+        private void InitMainMenus()
+        {
+            editor = ETC.sharedPreferences.Edit();
+
+            // Click Timing
+
+            clickInterval.PreferenceClick += delegate 
+            {
+                var view = Activity.LayoutInflater.Inflate(Resource.Layout.NumberPickerDialogLayout, null);
+
+                var np = view.FindViewById<NumberPicker>(Resource.Id.NumberPickerControl);
+                np.MaxValue = 8;
+                np.MinValue = 0;
+                np.Value = ETC.sharedPreferences.GetInt("ClickInterval", 0);
+
+                string[] values = new string[np.MaxValue - np.MinValue + 1];
+
+                for (int i = 0; i < values.Length; ++i)
+                {
+                    values[i] = ETC.CalcInterval(400, 50, i).ToString();
+                }
+
+                np.SetDisplayedValues(values);
+
+                var ad = new Android.Support.V7.App.AlertDialog.Builder(Activity);
+                ad.SetTitle(Resource.String.MainMenu_ButtonInterval_Title);
+                ad.SetCancelable(true);
+                ad.SetNegativeButton(Resource.String.AlertDialog_Close, delegate { });
+                ad.SetNeutralButton(Resource.String.AlertDialog_Reset, delegate
+                {
+                    editor.PutInt("ClickInterval", 0);
+                    editor.Apply();
+
+                    ETC.clickInterval = ETC.CalcInterval(400, 50, ETC.sharedPreferences.GetInt("ClickInterval", 0));
+                    clickInterval.Summary =
+                        $"{Resources.GetString(Resource.String.MainMenu_ButtonInterval_Summary)} {ETC.clickInterval}ms";
+                });
+                ad.SetPositiveButton(Resource.String.AlertDialog_Set, delegate
+                {
+                    editor.PutInt("ClickInterval", np.Value);
+                    editor.Apply();
+
+                    ETC.clickInterval = ETC.CalcInterval(400, 50, ETC.sharedPreferences.GetInt("ClickInterval", 0));
+                    clickInterval.Summary =
+                        $"{Resources.GetString(Resource.String.MainMenu_ButtonInterval_Summary)} {ETC.clickInterval}ms";
+
+                });
+                ad.SetView(view);
+
+                ad.Show();
+            };
+
+            longClickInterval.PreferenceClick += delegate
+            {
+                var view = Activity.LayoutInflater.Inflate(Resource.Layout.NumberPickerDialogLayout, null);
+
+                var np = view.FindViewById<NumberPicker>(Resource.Id.NumberPickerControl);
+                np.MaxValue = 8;
+                np.MinValue = 0;
+                np.Value = ETC.sharedPreferences.GetInt("longClickInterval", 2);
+
+                string[] values = new string[np.MaxValue - np.MinValue + 1];
+
+                for (int i = 0; i < values.Length; ++i)
+                {
+                    values[i] = ETC.CalcInterval(800, 50, i).ToString();
+                }
+
+                np.SetDisplayedValues(values);
+
+                var ad = new Android.Support.V7.App.AlertDialog.Builder(Activity);
+                ad.SetTitle(Resource.String.MainMenu_ButtonInterval_Title);
+                ad.SetCancelable(true);
+                ad.SetNegativeButton(Resource.String.AlertDialog_Close, delegate { });
+                ad.SetNeutralButton(Resource.String.AlertDialog_Reset, delegate
+                {
+                    editor.PutInt("longClickInterval", 2);
+                    editor.Apply();
+
+                    ETC.longClickInterval = ETC.CalcInterval(800, 50, ETC.sharedPreferences.GetInt("longClickInterval", 0));
+                    longClickInterval.Summary =
+                        $"{Resources.GetString(Resource.String.MainMenu_LongClickInterval_Summary)} {ETC.longClickInterval}ms";
+                });
+                ad.SetPositiveButton(Resource.String.AlertDialog_Set, delegate
+                {
+                    editor.PutInt("longClickInterval", np.Value);
+                    editor.Apply();
+
+                    ETC.longClickInterval = ETC.CalcInterval(800, 50, ETC.sharedPreferences.GetInt("longClickInterval", 0));
+                    longClickInterval.Summary =
+                        $"{Resources.GetString(Resource.String.MainMenu_LongClickInterval_Summary)} {ETC.longClickInterval}ms";
+                });
+                ad.SetView(view);
+
+                ad.Show();
+            };
+
+            // Button Mapping
+
+            for (int i = 0; i < clickType.Length; ++i)
+            {
+                string type = clickType[i];
+
+                var enableP = FindPreference($"Enable{type}") as SwitchPreference;
+                enableP.Checked = ETC.sharedPreferences.GetBoolean($"Enable{type}", false);
+                enableP.PreferenceChange += delegate { editor.PutBoolean($"Enable{type}", enableP.Checked).Apply(); };
+
+                var mappingTypeP = FindPreference($"MappingType_{type}") as ListPreference;
+                mappingTypeP.SetValueIndex(int.Parse(ETC.sharedPreferences.GetString($"MappingType_{type}", "0")));
+                mappingTypeP.PreferenceChange += (sender, e) =>
+                {
+                    int index = 0;
+                    var lp = sender as ListPreference;
+
+                    for (index = 0; index < clickType.Length; ++index)
+                    {
+                        if (lp.Key == $"MappingType_{clickType[index]}")
+                        {
+                            break;
+                        }
+                    }
+
+                    switch (int.Parse((string)e.NewValue))
+                    {
+                        case 0:
+                            appSelectorPs[index].Visible = false;
+                            actionSelectorPs[index].Visible = true;
+                            break;
+                        case 1:
+                            appSelectorPs[index].Visible = true;
+                            actionSelectorPs[index].Visible = false;
+                            break;
+                        default:
+                            appSelectorPs[index].Visible = false;
+                            actionSelectorPs[index].Visible = false;
+                            break;
+                    }
+                };
+
+                if (int.Parse(ETC.sharedPreferences.GetString($"MappingType_{type}", "0")) == 1)
+                {
+                    appSelectorPs[i].Visible = true;
+                    actionSelectorPs[i].Visible = false;
+                }
+                else if (int.Parse(ETC.sharedPreferences.GetString($"MappingType_{type}", "0")) == 0)
+                {
+                    appSelectorPs[i].Visible = false;
+                    actionSelectorPs[i].Visible = true;
+                }
+
+                appSelectorPs[i].PreferenceClick += (sender, e) =>
+                {
+                    int index = 0;
+                    var p = sender as Preference;
+
+                    for (index = 0; index < clickType.Length; ++index)
+                    {
+                        if (p.Key == $"AppSelector_{clickType[index]}")
+                        {
+                            break;
+                        }
+                    }
+
+                    var intent = new Intent(Activity, typeof(AppSelectorActivity));
+                    intent.PutExtra("Type", clickType[index]);
+                    Activity.StartActivity(intent);
+                };
+
+                actionSelectorPs[i].SetValueIndex(int.Parse(ETC.sharedPreferences.GetString($"ActionSelector_{type}", "0")));
+                actionSelectorPs[i].PreferenceChange += CheckActionSelector;
+            }
+        }
 
         private void CheckActionSelector(object sender, Preference.PreferenceChangeEventArgs e)
         {
+            int index = 0;
+            var lp = sender as ListPreference;
+
+            for (index = 0; index < clickType.Length; ++index)
+            {
+                if (lp.Key == $"ActionSelector_{clickType[index]}")
+                {
+                    break;
+                }
+            }
+
             switch ((string)e.NewValue)
             {
                 case "11":
@@ -544,7 +481,7 @@ namespace GAButtonMapper
                         ad.SetTitle(Resource.String.AlertDialog_DoNotDisturb_Title);
                         ad.SetMessage(Resource.String.AlertDialog_DoNotDisturb_Message);
                         ad.SetPositiveButton(Resource.String.AlertDialog_DoNotDisturb_OK, delegate { StartActivity(new Intent(Settings.ActionNotificationPolicyAccessSettings)); });
-                        ad.SetNegativeButton(Resource.String.AlertDialog_Close, delegate { editor.PutString("ActionSelector_SingleClick", "0").Apply(); });
+                        ad.SetNegativeButton(Resource.String.AlertDialog_Close, delegate { editor.PutString($"ActionSelector_{clickType[index]}", "0").Apply(); });
                         ad.SetCancelable(false);
 
                         ad.Show();
@@ -557,7 +494,20 @@ namespace GAButtonMapper
                         ad.SetTitle(Resource.String.AlertDialog_AudioRecorderPermission_Title);
                         ad.SetMessage(Resource.String.AlertDialog_AudioRecorderPermission_Message);
                         ad.SetPositiveButton(Resource.String.AlertDialog_AudioRecorderPermission_OK, delegate { RequestPermissions(new string[] { Manifest.Permission.RecordAudio }, 0); });
-                        ad.SetNegativeButton(Resource.String.AlertDialog_Close, delegate { editor.PutString("ActionSelector_SingleClick", "0").Apply(); });
+                        ad.SetNegativeButton(Resource.String.AlertDialog_Close, delegate { editor.PutString($"ActionSelector_{clickType[index]}", "0").Apply(); });
+                        ad.SetCancelable(false);
+
+                        ad.Show();
+                    }
+                    break;
+                case "18":
+                    if (!Settings.System.CanWrite(Activity))
+                    {
+                        var ad = new Android.Support.V7.App.AlertDialog.Builder(Activity);
+                        ad.SetTitle(Resource.String.AlertDialog_WriteSettingPermission_Title);
+                        ad.SetMessage(Resource.String.AlertDialog_WriteSettingPermission_Message);
+                        ad.SetPositiveButton(Resource.String.AlertDialog_WriteSettingPermission_OK, delegate { StartActivity(new Intent(Settings.ActionManageWriteSettings)); });
+                        ad.SetNegativeButton(Resource.String.AlertDialog_Close, delegate { editor.PutString($"ActionSelector_{clickType[index]}", "0").Apply(); });
                         ad.SetCancelable(false);
 
                         ad.Show();
@@ -583,5 +533,6 @@ namespace GAButtonMapper
             }
         }
     }
+
 }
 
