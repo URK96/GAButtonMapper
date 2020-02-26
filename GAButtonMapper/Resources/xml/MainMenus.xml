@@ -47,6 +47,12 @@
       android:summary="@string/MainMenu_ButtonSub_SubPreference_Summary"
       app:fragment="com.lgplus.gabtmap.ButtonSubFragment"/>
 
+    <android.support.v7.preference.Preference
+      android:key="TestButtonClick"
+      android:dependency="EnableMapping"
+      android:title="@string/MainMenu_ButtonSub_TestButtonClick_Title"
+      android:summary="@string/MainMenu_ButtonSub_TestButtonClick_Summary"/>
+
   </android.support.v7.preference.PreferenceCategory>
 
   <!--ETC Part-->
@@ -64,6 +70,13 @@
       android:visible="false"
       android:title="@string/MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Title"
       android:summary="@string/MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary"/>
+
+    <!--
+    <android.support.v7.preference.Preference
+      android:key="ViewRecordingFiles"
+      android:visible ="false"
+      android:title="@string/MainMenu_ETC_ViewRecordingFiles_Title"
+      android:summary="@string/MainMenu_ETC_ViewRecordingFiles_Summary"/>-->
 
   </android.support.v7.preference.PreferenceCategory>
 </android.support.v7.preference.PreferenceScreen>

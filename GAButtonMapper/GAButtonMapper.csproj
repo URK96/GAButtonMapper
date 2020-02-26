@@ -76,6 +76,7 @@
     <Compile Include="AccesibilityServiceMapper.cs" />
     <Compile Include="AppInfoActivity.cs" />
     <Compile Include="AppSelectorActivity.cs" />
+    <Compile Include="ButtonTestActivity.cs" />
     <Compile Include="CustomTimer.cs" />
     <Compile Include="ETC.cs" />
     <Compile Include="InitSettingActivity.cs" />
@@ -107,6 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Karamunting.Android.JdAlexander.FlatButton">
+      <Version>1.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.AudioRecorder">
       <Version>1.1.0</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Annotations">
@@ -222,6 +226,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\NumberPickerDialogLayout.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\ButtonTestLayout.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

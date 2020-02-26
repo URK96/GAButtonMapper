@@ -6,6 +6,7 @@ using Android.OS;
 using Android.Views.Accessibility;
 
 using System;
+using System.IO;
 
 namespace GAButtonMapper
 {
@@ -23,19 +24,25 @@ namespace GAButtonMapper
         internal static AccessibilityManager acm;
         internal static PowerManager pm;
         internal static AudioManager am;
-        internal static MediaRecorder recorder;
         internal static Vibrator vibrator;
 
-        internal static KeyState kState = KeyState.None;
+        //internal static KeyState kState = KeyState.None;
         internal static volatile bool isUnbind = false;
         internal static volatile bool isTorchOn = false;
-        internal static volatile bool isDown = false;
+        //internal static volatile bool isDown = false;
         internal static volatile short clickCount = 0;
         internal static volatile bool isClickMonitoring = false;
         internal static volatile bool isLongClick = false;
-        internal static volatile bool isRecording = false;
+        internal static volatile int loggingCount = 80;
         internal static volatile int longClickInterval = 800;
         internal static volatile int clickInterval = 400;
+
+        internal static bool isTest = false;
+        internal static bool isClick = false;
+        internal static string clickType = "";
+
+        internal static string channelId = "";
+        internal static readonly int recorderNotificationId = 0;
 
         internal static bool CheckPermission(Context context, string permission)
         {

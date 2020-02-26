@@ -12,6 +12,7 @@ using System;
 using Android;
 using Android.Content.PM;
 using Android.Widget;
+using Xamarin.Essentials;
 
 namespace GAButtonMapper
 {
@@ -187,6 +188,11 @@ namespace GAButtonMapper
                 editor.PutBoolean("ActionFeatureVibrator", actionFeatureVibrator.Checked);
             };
 
+            // Button Part
+
+            var buttonTest = FindPreference("TestButtonClick");
+            buttonTest.PreferenceClick += delegate { Activity.StartActivity(typeof(ButtonTestActivity)); };
+
             // ETC Part
 
             goAccessibilitySettingP.PreferenceClick += delegate { StartActivity(new Intent(Settings.ActionAccessibilitySettings)); };
@@ -202,6 +208,14 @@ namespace GAButtonMapper
 
                 ad.Show();
             };
+
+            /*var viewRecordingFiles = FindPreference("ViewRecordingFiles");
+            viewRecordingFiles.PreferenceClick += async delegate
+            {
+                var task = await Launcher.TryOpenAsync($"file://{Activity.GetExternalFilesDir(null).AbsolutePath}");
+
+                Toast.MakeText(Activity, task.ToString(), ToastLength.Short).Show();
+            };*/
         }
     }
 
@@ -209,6 +223,7 @@ namespace GAButtonMapper
     {
         private ISharedPreferencesEditor editor;
 
+        private Preference logCounting;
         private Preference clickInterval;
         private Preference longClickInterval;
 
@@ -228,6 +243,7 @@ namespace GAButtonMapper
         {
             AddPreferencesFromResource(Resource.Xml.ButtonMenus);
 
+            logCounting = FindPreference("LogCounting");
             clickInterval = FindPreference("ClickInterval");
             longClickInterval = FindPreference("LongClickInterval");
 
@@ -257,6 +273,8 @@ namespace GAButtonMapper
         {
             base.OnResume();
 
+            logCounting.Summary =
+                 $"{Resources.GetString(Resource.String.MainMenu_LogCounting_Summary)} {ETC.loggingCount}";
             clickInterval.Summary =
                 $"{Resources.GetString(Resource.String.MainMenu_ButtonInterval_Summary)} {ETC.clickInterval}ms";
             longClickInterval.Summary =
@@ -286,6 +304,43 @@ namespace GAButtonMapper
             editor = ETC.sharedPreferences.Edit();
 
             // Click Timing
+
+            logCounting.PreferenceClick += delegate
+            {
+                var view = Activity.LayoutInflater.Inflate(Resource.Layout.NumberPickerDialogLayout, null);
+
+                var np = view.FindViewById<NumberPicker>(Resource.Id.NumberPickerControl);
+                np.MaxValue = 400;
+                np.MinValue = 10;
+                np.Value = ETC.sharedPreferences.GetInt("LogCounting", 80);
+
+                var ad = new Android.Support.V7.App.AlertDialog.Builder(Activity);
+                ad.SetTitle(Resource.String.MainMenu_ButtonInterval_Title);
+                ad.SetCancelable(true);
+                ad.SetNegativeButton(Resource.String.AlertDialog_Close, delegate { });
+                ad.SetNeutralButton(Resource.String.AlertDialog_Reset, delegate
+                {
+                    editor.PutInt("LogCounting", 80);
+                    editor.Apply();
+
+                    ETC.loggingCount = ETC.sharedPreferences.GetInt("LogCounting", 80);
+                    logCounting.Summary =
+                        $"{Resources.GetString(Resource.String.MainMenu_ButtonInterval_Summary)} {ETC.loggingCount}";
+                });
+                ad.SetPositiveButton(Resource.String.AlertDialog_Set, delegate
+                {
+                    editor.PutInt("LogCounting", np.Value);
+                    editor.Apply();
+
+                    ETC.loggingCount = ETC.sharedPreferences.GetInt("LogCounting", 80);
+                    logCounting.Summary =
+                        $"{Resources.GetString(Resource.String.MainMenu_ButtonInterval_Summary)} {ETC.loggingCount}";
+
+                });
+                ad.SetView(view);
+
+                ad.Show();
+            };
 
             clickInterval.PreferenceClick += delegate 
             {
@@ -340,7 +395,7 @@ namespace GAButtonMapper
                 var np = view.FindViewById<NumberPicker>(Resource.Id.NumberPickerControl);
                 np.MaxValue = 8;
                 np.MinValue = 0;
-                np.Value = ETC.sharedPreferences.GetInt("longClickInterval", 2);
+                np.Value = ETC.sharedPreferences.GetInt("longClickInterval", 0);
 
                 string[] values = new string[np.MaxValue - np.MinValue + 1];
 
@@ -357,7 +412,7 @@ namespace GAButtonMapper
                 ad.SetNegativeButton(Resource.String.AlertDialog_Close, delegate { });
                 ad.SetNeutralButton(Resource.String.AlertDialog_Reset, delegate
                 {
-                    editor.PutInt("longClickInterval", 2);
+                    editor.PutInt("longClickInterval", 0);
                     editor.Apply();
 
                     ETC.longClickInterval = ETC.CalcInterval(800, 50, ETC.sharedPreferences.GetInt("longClickInterval", 0));

@@ -118,6 +118,8 @@
   <string name="MainMenu_Category_ButtonSub">맵핑</string>
   <string name="MainMenu_ButtonSub_SubPreference_Title">버튼 설정</string>
   <string name="MainMenu_ButtonSub_SubPreference_Summary">버튼 세부 사항을 설정합니다.</string>
+  <string name="MainMenu_ButtonSub_TestButtonClick_Title">버튼 클릭 테스트</string>
+  <string name="MainMenu_ButtonSub_TestButtonClick_Summary">버튼 클릭 작동이 정상적으로 되는지 테스트합니다.</string>
 
   <string name="MainMenu_Detail_MappingType_Title">키 맵핑 종류</string>
   <string name="MainMenu_Detail_MappingTypeEntry_App">앱</string>
@@ -151,14 +153,19 @@
   <string name="MainMenu_Detail_ActionSelectorEntry_ToggleWiFi">Wi-Fi 토글</string>
 
   <string name="MainMenu_Category_ButtonInterval">버튼 클릭 조정</string>
+  <string name="MainMenu_LogCounting_Title">로그 인식 범위 설정</string>
+  <string name="MainMenu_LogCounting_Summary">
+    로그에서 버튼 값을 인식할 범위를 설정합니다. 이 설정은 기기 환경마다 최적값이 다를 수 있으므로 작동이 잘 안되면 조정을 권합니다.\n
+    현재 인식 범위 :
+  </string>
   <string name="MainMenu_ButtonInterval_Title">클릭 간격 설정</string>
   <string name="MainMenu_ButtonInterval_Summary">
-    버튼 클릭 간 중복 인식 간격을 설정합니다.\n
+    버튼 클릭 간 중복 인식 간격을 설정합니다. 이 설정은 기기 환경마다 최적값이 다를 수 있으므로 작동이 잘 안되면 조정을 권합니다.\n
     현재 인식 범위 :
   </string>
   <string name="MainMenu_LongClickInterval_Title">롱클릭 간격 설정</string>
   <string name="MainMenu_LongClickInterval_Summary">
-    롱클릭으로 인식되기 위해 눌러야 하는 시간을 설정합니다.\n
+    롱클릭으로 인식되기 위해 눌러야 하는 시간을 설정합니다. 이 설정은 기기 환경마다 최적값이 다를 수 있으므로 작동이 잘 안되면 조정을 권합니다.\n
     현재 인식 시간 :
   </string>
 
@@ -200,7 +207,17 @@
   <string name="MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary">배터리 최적화 제외 목록에 해당 앱을 등록하면 기능을 좀 더 안정적으로 이용하실 수 있습니다.</string>
   <string name="MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary_On">활성화(ON) 되어있습니다.</string>
   <string name="MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary_Off">비활성화(OFF) 되어있습니다.</string>
+  <string name="MainMenu_ETC_ViewRecordingFiles_Title">녹음된 파일 보기</string>
+  <string name="MainMenu_ETC_ViewRecordingFiles_Summary">녹음 기능을 이용해서 저장된 파일들을 확인합니다.</string>
 
   <!--App Selector-->
   <string name="AppSelector_Title">앱 선택</string>
+
+  <!--Button Test Acitivity-->
+  <string name="ButtonTestActivity_ClickInitText">버튼을 클릭하세요</string>
+
+  <!--Notification-->
+  <string name="Notification_Channel_Id">Basic</string>
+  <string name="Notification_Channel_Name">기본 알림</string>
+  <string name="Notification_Channel_Description">GAButtonMapper에서 발생시키는 기본 알림입니다.</string>
 </resources>

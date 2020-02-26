@@ -8,6 +8,11 @@
     android:title="@string/MainMenu_Category_ButtonInterval">
 
     <android.support.v7.preference.Preference
+      android:key="LogCounting"
+      android:title="@string/MainMenu_LogCounting_Title"
+      android:summary="@string/MainMenu_LogCounting_Summary"/>
+
+    <android.support.v7.preference.Preference
       android:key="ClickInterval"
       android:title="@string/MainMenu_ButtonInterval_Title"
       android:summary="@string/MainMenu_ButtonInterval_Summary"/>

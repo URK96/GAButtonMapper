@@ -42,12 +42,14 @@ namespace GAButtonMapper
 
             ETC.sdcardPath = di.Parent.FullName;
 
-            RequestPermissions(new string[] { Manifest.Permission.ReadExternalStorage, Manifest.Permission.WriteExternalStorage, Manifest.Permission.Bluetooth, Manifest.Permission.BluetoothAdmin }, 0);
+            RequestPermissions(new string[] { Manifest.Permission.WriteExternalStorage, Manifest.Permission.ReadExternalStorage, Manifest.Permission.Bluetooth, Manifest.Permission.BluetoothAdmin }, 0);
         }
 
         private async Task StartUp()
         {
             await Task.Delay(1000);
+
+            CreateNotificationChannel();
 
             if (!ETC.CheckPermission(this, Manifest.Permission.ReadLogs) || !ETC.CheckPermission(this, Manifest.Permission.WriteSecureSettings) || ETC.sharedPreferences.GetBoolean("HasRestart", false))
             {
@@ -57,6 +59,25 @@ namespace GAButtonMapper
             {
                 StartActivity(typeof(MainActivity));
             }
+        }
+
+        void CreateNotificationChannel()
+        {
+            ETC.channelId = Resources.GetString(Resource.String.Notification_Channel_Id);
+
+            var channelName = Resources.GetString(Resource.String.Notification_Channel_Name);
+            var channelDescription = GetString(Resource.String.Notification_Channel_Description);
+            var channel = new NotificationChannel(ETC.channelId, channelName, NotificationImportance.Default)
+            {
+                Description = channelDescription
+            };
+
+            if (ETC.nm == null)
+            {
+                ETC.nm = GetSystemService(NotificationService) as NotificationManager;
+            }
+
+            ETC.nm.CreateNotificationChannel(channel);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)

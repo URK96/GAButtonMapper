@@ -8,11 +8,12 @@ using Android.Hardware.Camera2;
 using Android.Media;
 using Android.OS;
 using Android.Provider;
+using Android.Support.V4.App;
 using Android.Support.V7.Preferences;
 using Android.Views;
 using Android.Views.Accessibility;
 using Android.Widget;
-
+using Plugin.AudioRecorder;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -37,6 +38,10 @@ namespace GAButtonMapper
         private KeyEvent keyDownEvent;
         private KeyEvent keyUpEvent;
 
+        private AudioRecorderService recorder;
+
+        private NotificationCompat.Builder recorderNBuilder;
+
         public override void OnAccessibilityEvent(AccessibilityEvent e)
         {
             
@@ -47,6 +52,7 @@ namespace GAButtonMapper
             base.OnServiceConnected();
 
             Toast.MakeText(this, "Connected", ToastLength.Short).Show();
+
             isUnbind = false;
 
             if (sharedPreferences == null)
@@ -84,6 +90,12 @@ namespace GAButtonMapper
                 clickSW = new Stopwatch();
             }
 
+            if (recorder == null)
+            {
+                recorder = new AudioRecorderService();
+            }
+
+            loggingCount = sharedPreferences.GetInt("LogCounting", 80);
             clickInterval = CalcInterval(400, 50, sharedPreferences.GetInt("ClickInterval", 0));
             longClickInterval = CalcInterval(800, 50, sharedPreferences.GetInt("LongClickInterval", 0));
 
@@ -107,7 +119,7 @@ namespace GAButtonMapper
                         continue;
                     }
 
-                    var p = Java.Lang.Runtime.GetRuntime().Exec(new string[] { "/bin/sh", "-c", "logcat -t 150 | grep 'keycode=165' | tail -1" });
+                    var p = Java.Lang.Runtime.GetRuntime().Exec(new string[] { "/bin/sh", "-c", $"logcat -t {loggingCount} | grep 'keycode=165' | tail -1" });
                     await p.WaitForAsync();
 
                     using (var sr = new StreamReader(p.InputStream))
@@ -130,7 +142,9 @@ namespace GAButtonMapper
                             {
                                 StartLongClickSW();
                             }
-                            var p1 = Java.Lang.Runtime.GetRuntime().Exec(new string[] { "/bin/sh", "-c", "logcat -t 80 | grep 'keycode=165' | tail -1" });
+
+                            var p1 = Java.Lang.Runtime.GetRuntime().Exec(new string[] { "/bin/sh", "-c", $"logcat -t {loggingCount} | grep 'keycode=165' | tail -1" });
+
                             await p1.WaitForAsync();
 
                             using (var sr = new StreamReader(p1.InputStream))
@@ -210,6 +224,14 @@ namespace GAButtonMapper
                         break;
                     default:
                         return;
+                }
+
+                if (isTest)
+                {
+                    isClick = true;
+                    clickType = countS;
+
+                    return;
                 }
 
                 //MainThread.BeginInvokeOnMainThread(() => { Toast.MakeText(this, countS, ToastLength.Short).Show(); });
@@ -338,7 +360,12 @@ namespace GAButtonMapper
                             SendBroadcast(quickPayIntent);
                             break;
                         case 16:
-                            if (isRecording)
+                            if (nm == null)
+                            {
+                                nm = GetSystemService("notification") as NotificationManager;
+                            }
+
+                            if (recorder.IsRecording)
                             {
                                 try
                                 {
@@ -347,19 +374,19 @@ namespace GAButtonMapper
                                         vibrator.Vibrate(VibrationEffect.CreateWaveform(new long[] { 500, 0, 500, 0 }, new int[] { 30, 0, 60, 0 }, -1));
                                     }
 
-                                    recorder.Stop();
+                                    await recorder.StopRecording();
+
+                                    recorderNBuilder.SetContentTitle("Recorder is stop");
+                                    recorderNBuilder.SetContentText("Recorder is stop");
+                                    recorderNBuilder.SetSmallIcon(Resource.Drawable.splash_icon);
+
+                                    nm.Notify(recorderNotificationId, recorderNBuilder.Build());
+
+                                    MainThread.BeginInvokeOnMainThread(() => { Toast.MakeText(this, "Stop Voice Recording", ToastLength.Short).Show(); });
                                 }
                                 catch (Exception ex)
                                 {
                                     Toast.MakeText(this, ex.ToString(), ToastLength.Short).Show();
-                                }
-                                finally
-                                {
-                                    recorder.Release();
-
-                                    isRecording = false;
-
-                                    MainThread.BeginInvokeOnMainThread(() => { Toast.MakeText(this, "Stop Voice Recording", ToastLength.Short).Show(); });
                                 }
                             }
                             else
@@ -370,22 +397,41 @@ namespace GAButtonMapper
                                 }
 
                                 var dtNow = DateTime.Now;
-                                string filePath = Path.Combine(sdcardPath, "AudioRecorder", "my_sounds", $"gamap_{dtNow.Year}{dtNow.Month}{dtNow.Day}_{dtNow.Hour}{dtNow.Minute}{dtNow.Second}.m4a");
+
+                                string filePath = Path.Combine(GetExternalFilesDir(null).AbsolutePath, $"gamap_{dtNow.Year}{dtNow.Month}{dtNow.Day}_{dtNow.Hour}{dtNow.Minute}{dtNow.Second}.mp3");
+
+                                Toast.MakeText(this, filePath, ToastLength.Short).Show();
 
                                 if (!Directory.Exists(Path.GetDirectoryName(filePath)))
                                 {
                                     Directory.CreateDirectory(Path.GetDirectoryName(filePath));
                                 }
 
-                                recorder = new MediaRecorder();
-                                recorder.SetAudioSource(AudioSource.Mic);
-                                recorder.SetOutputFormat(OutputFormat.Default);
-                                recorder.SetAudioEncoder(AudioEncoder.AmrNb);
-                                recorder.SetOutputFile(filePath);
-                                recorder.Prepare();
-                                recorder.Start();
+                                recorder.FilePath = filePath;
+                                recorder.StopRecordingOnSilence = false;
+                                recorder.StopRecordingAfterTimeout = true;
+                                recorder.TotalAudioTimeout = new TimeSpan(5, 0, 0);
 
-                                isRecording = true;
+                                /*recorder.AudioInputReceived += (sender, e) =>
+                                {
+                                    string target = Path.Combine(sdcardPath, $"gamap_{dtNow.Year}{dtNow.Month}{dtNow.Day}_{dtNow.Hour}{dtNow.Minute}{dtNow.Second}.m4a");
+
+                                    Toast.MakeText(this, target, ToastLength.Short).Show();
+
+                                    File.Copy(filePath, target);
+                                };*/
+
+                                await recorder.StartRecording();
+
+                                recorderNBuilder = new NotificationCompat.Builder(this, channelId);
+                                recorderNBuilder.SetContentTitle("Recorder is running");
+                                recorderNBuilder.SetContentText("Recorder is running");
+                                recorderNBuilder.SetSmallIcon(Resource.Drawable.splash_icon);
+
+                                var notification = recorderNBuilder.Build();
+                                notification.Flags = NotificationFlags.NoClear;
+
+                                nm.Notify(recorderNotificationId, notification);
 
                                 MainThread.BeginInvokeOnMainThread(() => { Toast.MakeText(this, "Start Voice Recording", ToastLength.Short).Show(); });
                             }
@@ -434,7 +480,7 @@ namespace GAButtonMapper
         public override bool OnUnbind(Intent intent)
         {
             Toast.MakeText(this, "Unbind", ToastLength.Short).Show();
-            ETC.isUnbind = true;
+            isUnbind = true;
 
             return base.OnUnbind(intent);
         }
@@ -529,7 +575,7 @@ namespace GAButtonMapper
 
                     StopClickSW();
 
-                    MainThread.BeginInvokeOnMainThread(() => { isClickMonitoring = false; });
+                    isClickMonitoring = false;
                 });
             }
             catch (Exception)
