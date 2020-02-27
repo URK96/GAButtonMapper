@@ -28,6 +28,8 @@ namespace GAButtonMapper
 
         //internal static KeyState kState = KeyState.None;
         internal static volatile bool isUnbind = false;
+        internal static volatile bool isInterrupt = false;
+        internal static volatile bool isRun = false;
         internal static volatile bool isTorchOn = false;
         //internal static volatile bool isDown = false;
         internal static volatile short clickCount = 0;

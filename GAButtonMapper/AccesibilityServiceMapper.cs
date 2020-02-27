@@ -99,105 +99,117 @@ namespace GAButtonMapper
             clickInterval = CalcInterval(400, 50, sharedPreferences.GetInt("ClickInterval", 0));
             longClickInterval = CalcInterval(800, 50, sharedPreferences.GetInt("LongClickInterval", 0));
 
-            await MonitoringKeyState();
+            MonitoringKeyState();
         }
 
-        internal async Task MonitoringKeyState()
+        internal void MonitoringKeyState()
         {
             string s = "";
 
-            try
+            Task.Run(async () =>
             {
-                while (true)
+
+                try
                 {
-                    await Task.Delay(1);
+                    isRun = true;
 
-                    if (!sharedPreferences.GetBoolean("EnableMapping", false) || 
-                        (sharedPreferences.GetBoolean("ScreenOffDisableMapping", false) && !pm.IsInteractive))
+                    while (true)
                     {
-                        await Task.Delay(1000);
-                        continue;
-                    }
+                        await Task.Delay(1);
 
-                    var p = Java.Lang.Runtime.GetRuntime().Exec(new string[] { "/bin/sh", "-c", $"logcat -t {loggingCount} | grep 'keycode=165' | tail -1" });
-                    await p.WaitForAsync();
-
-                    using (var sr = new StreamReader(p.InputStream))
-                    {
-                        s = await sr.ReadToEndAsync();
-                    }
-
-                    if (s.Contains("down=true"))
-                    {
-                        isClickMonitoring = true;
-
-                        while (true)
+                        if (!sharedPreferences.GetBoolean("EnableMapping", false) ||
+                            (sharedPreferences.GetBoolean("ScreenOffDisableMapping", false) && !pm.IsInteractive))
                         {
-                            if (clickSW.IsRunning)
-                            {
-                                StopClickSW();
-                            }
-
-                            if (!isLongClick && !longClickSW.IsRunning)
-                            {
-                                StartLongClickSW();
-                            }
-
-                            var p1 = Java.Lang.Runtime.GetRuntime().Exec(new string[] { "/bin/sh", "-c", $"logcat -t {loggingCount} | grep 'keycode=165' | tail -1" });
-
-                            await p1.WaitForAsync();
-
-                            using (var sr = new StreamReader(p1.InputStream))
-                            {
-                                s = await sr.ReadToEndAsync();
-                            }
-
-                            if (s.Contains("down=false"))
-                            {
-                                if (!clickSW.IsRunning)
-                                {
-                                    StartClickSW();
-                                }
-
-                                if (longClickSW.IsRunning)
-                                {
-                                    StopLongClickSW();
-                                }
-
-                                break;
-                            }
+                            await Task.Delay(1000);
+                            continue;
                         }
 
-                        clickCount += 1;
-                    }
+                        var p = Java.Lang.Runtime.GetRuntime().Exec(new string[] { "/bin/sh", "-c", $"logcat -t {loggingCount} | grep 'keycode=165' | tail -1" });
+                        p.WaitFor();
 
-                    if (clickCount > 0 && !isClickMonitoring)
-                    {
-                        if (longClickSW.IsRunning)
+                        using (var sr = new StreamReader(p.InputStream))
                         {
-                            StopLongClickSW();
+                            s = await sr.ReadToEndAsync();
                         }
 
-                        await RunButtonCommand(clickCount, isLongClick);
+                        if (s.Contains("down=true"))
+                        {
+                            isClickMonitoring = true;
 
-                        clickCount = 0;
-                        isLongClick = false;
-                    }
+                            while (true)
+                            {
+                                await Task.Delay(1);
 
-                    if (isUnbind)
-                    {
-                        return;
+                                if (clickSW.IsRunning)
+                                {
+                                    StopClickSW();
+                                }
+
+                                if (!isLongClick && !longClickSW.IsRunning)
+                                {
+                                    StartLongClickSW();
+                                }
+
+                                var p1 = Java.Lang.Runtime.GetRuntime().Exec(new string[] { "/bin/sh", "-c", $"logcat -t {loggingCount} | grep 'keycode=165' | tail -1" });
+
+                                p1.WaitFor();
+
+                                using (var sr = new StreamReader(p1.InputStream))
+                                {
+                                    s = await sr.ReadToEndAsync();
+                                }
+
+                                if (s.Contains("down=false"))
+                                {
+                                    if (!clickSW.IsRunning)
+                                    {
+                                        StartClickSW();
+                                    }
+
+                                    if (longClickSW.IsRunning)
+                                    {
+                                        StopLongClickSW();
+                                    }
+
+                                    break;
+                                }
+                            }
+
+                            clickCount += 1;
+                        }
+
+                        if (clickCount > 0 && !isClickMonitoring)
+                        {
+                            if (longClickSW.IsRunning)
+                            {
+                                StopLongClickSW();
+                            }
+
+                            await RunButtonCommand(clickCount, isLongClick);
+
+                            clickCount = 0;
+                            isLongClick = false;
+                        }
+
+                        if (isUnbind || isInterrupt)
+                        {
+                            isRun = false;
+                            return;
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Toast.MakeText(this, ex.ToString(), ToastLength.Short).Show();
-            }
+                catch (Exception ex)
+                {
+                    Toast.MakeText(this, ex.ToString(), ToastLength.Short).Show();
+                    isRun = false;
+                }
+            });
         }
 
         private async Task RunButtonCommand(short count, bool longClick = false)
         {
+            await Task.Delay(10);
+
             try
             {
                 string countS = "";
@@ -485,9 +497,12 @@ namespace GAButtonMapper
             return base.OnUnbind(intent);
         }
 
-        public override void OnInterrupt()
+        public override async void OnInterrupt()
         {
             Toast.MakeText(this, "Interrupt", ToastLength.Short).Show();
+            isInterrupt = true;
+
+            MonitoringKeyState();
         }
 
         private async Task HeadSetButtonClick(int repeatCount)
@@ -544,11 +559,8 @@ namespace GAButtonMapper
         {
             try
             {
-                Task.Run(() =>
-                {
-                    longClickSW.Stop();
-                    longClickSW.Reset();
-                });
+                longClickSW.Stop();
+                longClickSW.Reset();
             }
             catch (Exception)
             {
@@ -588,11 +600,8 @@ namespace GAButtonMapper
         {
             try
             {
-                Task.Run(() =>
-                {
-                    clickSW.Stop();
-                    clickSW.Reset();
-                });
+                clickSW.Stop();
+                clickSW.Reset();
             }
             catch (Exception)
             {
