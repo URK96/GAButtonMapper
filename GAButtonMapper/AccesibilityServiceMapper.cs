@@ -98,6 +98,7 @@ namespace GAButtonMapper
             loggingCount = sharedPreferences.GetInt("LogCounting", 80);
             clickInterval = CalcInterval(400, 50, sharedPreferences.GetInt("ClickInterval", 0));
             longClickInterval = CalcInterval(800, 50, sharedPreferences.GetInt("LongClickInterval", 0));
+            monitoringInterval = sharedPreferences.GetInt("MonitoringInterval", 30);
 
             await MonitoringKeyState();
         }
@@ -112,13 +113,21 @@ namespace GAButtonMapper
 
                 while (true)
                 {
-                    await Task.Delay(1);
+                    await Task.Delay(monitoringInterval);
 
                     if (!sharedPreferences.GetBoolean("EnableMapping", false) ||
                         (sharedPreferences.GetBoolean("ScreenOffDisableMapping", false) && !pm.IsInteractive))
                     {
                         await Task.Delay(1000);
+
                         continue;
+                    }
+
+                    if (isUnbind)
+                    {
+                        isRun = false;
+
+                        return;
                     }
 
                     var p = Java.Lang.Runtime.GetRuntime().Exec(new string[] { "/bin/sh", "-c", $"logcat -t {loggingCount} | grep 'keycode=165' | tail -1" });
@@ -148,7 +157,6 @@ namespace GAButtonMapper
                             }
 
                             var p1 = Java.Lang.Runtime.GetRuntime().Exec(new string[] { "/bin/sh", "-c", $"logcat -t {loggingCount} | grep 'keycode=165' | tail -1" });
-
                             await p1.WaitForAsync();
 
                             using (var sr = new StreamReader(p1.InputStream))
@@ -170,6 +178,12 @@ namespace GAButtonMapper
 
                                 break;
                             }
+
+                            if (isUnbind)
+                            {
+                                isRun = false;
+                                return;
+                            }
                         }
 
                         clickCount += 1;
@@ -186,12 +200,6 @@ namespace GAButtonMapper
 
                         clickCount = 0;
                         isLongClick = false;
-                    }
-
-                    if (isUnbind || isInterrupt)
-                    {
-                        isRun = false;
-                        return;
                     }
                 }
             }
@@ -420,14 +428,14 @@ namespace GAButtonMapper
                                 recorder.StopRecordingAfterTimeout = true;
                                 recorder.TotalAudioTimeout = new TimeSpan(5, 0, 0);
 
-                                /*recorder.AudioInputReceived += (sender, e) =>
+                                recorder.AudioInputReceived += (sender, e) =>
                                 {
                                     string target = Path.Combine(sdcardPath, $"gamap_{dtNow.Year}{dtNow.Month}{dtNow.Day}_{dtNow.Hour}{dtNow.Minute}{dtNow.Second}.m4a");
 
                                     Toast.MakeText(this, target, ToastLength.Short).Show();
 
                                     File.Copy(filePath, target);
-                                };*/
+                                };
 
                                 await recorder.StartRecording();
 
@@ -493,12 +501,10 @@ namespace GAButtonMapper
             return base.OnUnbind(intent);
         }
 
-        public override async void OnInterrupt()
+        public override void OnInterrupt()
         {
             Toast.MakeText(this, "Interrupt", ToastLength.Short).Show();
             isInterrupt = true;
-
-            await MonitoringKeyState();
         }
 
         private async Task HeadSetButtonClick(int repeatCount)
@@ -581,9 +587,9 @@ namespace GAButtonMapper
                         }
                     }
 
-                    StopClickSW();
-
                     isClickMonitoring = false;
+
+                    StopClickSW();
                 });
             }
             catch (Exception)

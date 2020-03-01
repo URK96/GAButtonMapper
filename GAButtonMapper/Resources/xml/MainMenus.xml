@@ -78,5 +78,12 @@
       android:title="@string/MainMenu_ETC_ViewRecordingFiles_Title"
       android:summary="@string/MainMenu_ETC_ViewRecordingFiles_Summary"/>-->
 
+    <android.support.v7.preference.Preference
+      android:key="AdvanceSetting"
+      android:visible="false"
+      android:title="@string/MainMenu_ETC_AdvanceSetting_Title"
+      android:summary="@string/MainMenu_ETC_AdvanceSetting_Summary"
+      app:fragment="com.lgplus.gabtmap.AdvanceSettingFragment"/>
+
   </android.support.v7.preference.PreferenceCategory>
 </android.support.v7.preference.PreferenceScreen>

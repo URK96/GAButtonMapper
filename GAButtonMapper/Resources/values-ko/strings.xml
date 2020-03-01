@@ -151,6 +151,7 @@
   <string name="MainMenu_Detail_ActionSelectorEntry_ToggleBluetooth">블루투스 토글</string>
   <string name="MainMenu_Detail_ActionSelectorEntry_ToggleWiFi">Wi-Fi 토글</string>
 
+  <!--Main - Button Sub-->
   <string name="MainMenu_Category_ButtonInterval">버튼 클릭 조정</string>
   <string name="MainMenu_LogCounting_Title">로그 인식 범위 설정</string>
   <string name="MainMenu_LogCounting_Summary">
@@ -208,6 +209,21 @@
   <string name="MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary_Off">비활성화(OFF) 되어있습니다.</string>
   <string name="MainMenu_ETC_ViewRecordingFiles_Title">녹음된 파일 보기</string>
   <string name="MainMenu_ETC_ViewRecordingFiles_Summary">녹음 기능을 이용해서 저장된 파일들을 확인합니다.</string>
+  <string name="MainMenu_ETC_AdvanceSetting_Title">고급 설정</string>
+  <string name="MainMenu_ETC_AdvanceSetting_Summary">앱 작동에 민감한 부분을 설정합니다.</string>
+
+  <!--Main - Advance Sub-->
+  <string name="MainMenu_Advance_Category_Monitoring">모니터링</string>
+  <string name="MainMenu_Advance_MonitoringInterval_Title">모니터링 간격 설정</string>
+  <string name="MainMenu_Advance_MonitoringInterval_Summary">
+    모니터링 간격을 설정합니다. 이 설정은 기기 환경마다 최적값이 다를 수 있으므로 작동이 잘 안되면 조정을 권합니다.\n
+    현재 간격 :
+  </string>
+  <string name="MainMenu_Advance_MonitoringInterval_Caution">
+    * 주의사항 *\n
+    값을 낮출수록 인식 민감도가 좋아지지만 배터리 소모가 심해질 수 있습니다.
+  </string>
+  
 
   <!--App Selector-->
   <string name="AppSelector_Title">앱 선택</string>

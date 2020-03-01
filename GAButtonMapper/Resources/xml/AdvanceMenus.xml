@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<android.support.v7.preference.PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <!--Button Interval Part-->
+
+  <android.support.v7.preference.PreferenceCategory
+    android:title="@string/MainMenu_Advance_Category_Monitoring">
+
+    <android.support.v7.preference.Preference
+      android:key="MonitoringInterval"
+      android:title="@string/MainMenu_Advance_MonitoringInterval_Title"
+      android:summary="@string/MainMenu_Advance_MonitoringInterval_Summary"/>
+
+  </android.support.v7.preference.PreferenceCategory>
+
+</android.support.v7.preference.PreferenceScreen>

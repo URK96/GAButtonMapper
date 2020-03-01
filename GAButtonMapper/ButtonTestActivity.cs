@@ -29,23 +29,30 @@ namespace GAButtonMapper
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
-            base.OnCreate(savedInstanceState);
+            try
+            {
+                base.OnCreate(savedInstanceState);
 
-            // Create your application here
-            SetContentView(Resource.Layout.ButtonTestLayout);
+                // Create your application here
+                SetContentView(Resource.Layout.ButtonTestLayout);
 
-            ETC.isTest = true;
+                ETC.isTest = true;
 
-            SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ButtonTestMainToolbar));
-            SupportActionBar.SetTitle(Resource.String.MainMenu_ButtonSub_TestButtonClick_Title);
-            SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+                SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ButtonTestMainToolbar));
+                SupportActionBar.SetTitle(Resource.String.MainMenu_ButtonSub_TestButtonClick_Title);
+                SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
-            mainLayout = FindViewById<RelativeLayout>(Resource.Id.ButtonTestMainLayout);
-            clickText = FindViewById<TextView>(Resource.Id.ButtonTestResultText);
+                mainLayout = FindViewById<RelativeLayout>(Resource.Id.ButtonTestMainLayout);
+                clickText = FindViewById<TextView>(Resource.Id.ButtonTestResultText);
 
-            clickText.SetText(Resource.String.ButtonTestActivity_ClickInitText);
+                clickText.SetText(Resource.String.ButtonTestActivity_ClickInitText);
 
-            await CheckClicking();
+                await CheckClicking();
+            }
+            catch (Exception ex)
+            {
+                Toast.MakeText(this, ex.ToString(), ToastLength.Short).Show();
+            }
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

@@ -7,6 +7,8 @@ using Android.Views.Accessibility;
 
 using System;
 using System.IO;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace GAButtonMapper
 {
@@ -38,6 +40,7 @@ namespace GAButtonMapper
         internal static volatile int loggingCount = 80;
         internal static volatile int longClickInterval = 800;
         internal static volatile int clickInterval = 400;
+        internal static volatile int monitoringInterval = 30;
 
         internal static bool isTest = false;
         internal static bool isClick = false;
