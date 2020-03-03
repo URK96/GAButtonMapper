@@ -11,9 +11,9 @@
   <string name="Common_EssentialPermissionDenied">권한을 부여하지 않으면 앱을 사용하실 수 없습니다.</string>
 
   <!--Init Setting-->
-  <string name="InitSetting_Title">Before Mapping...</string>
-  <string name="InitSetting_GrantPermission_Title">Grant Permission</string>
-  <string name="InitSetting_GrantPermission_Summary">Require PC Work.</string>
+  <string name="InitSetting_Title">시작하기 전에...</string>
+  <string name="InitSetting_GrantPermission_Title">권한 부여</string>
+  <string name="InitSetting_GrantPermission_Summary">PC 작업이 필요합니다.</string>
   <string name="InitSetting_GrantPermission_Explain">
     1. 설정 - 개발자 옵션 - USB 디버깅을 활성화 합니다.\n\n
     * 개발자 옵션이 없는 경우 휴대폰 정보 - 소프트웨어 정보 - 빌드 번호를 연속으로 눌러 활성화 시킬 수 있습니다. *\n\n
@@ -29,8 +29,8 @@
     adb shell pm grant com.lgplus.gabtmap android.permission.READ_LOGS\n\n
     adb shell pm grant com.lgplus.gabtmap android.permission.WRITE_SECURE_SETTINGS
   </string>
-  <string name="InitSetting_Accessibility_Title">Enable Accessibility</string>
-  <string name="InitSetting_Accessibility_Summary">For monitoring.</string>
+  <string name="InitSetting_Accessibility_Title">접근성 서비스 활성화</string>
+  <string name="InitSetting_Accessibility_Summary">버튼 입력 모니터링을 위해서 필요합니다.</string>
   <string name="InitSetting_Accessibility_Explain">
     1. 아래 Go 버튼을 클릭하여 접근성 설정으로 이동합니다.\n\n
     2. 서비스 목록에서 GAButtonMapper의 접근성 서비스를 활성화 합니다.\n\n
@@ -94,13 +94,26 @@
   <!--Toast Message-->
   <string name="ToastMessage_QPayNotification">LG Quick Pay가 곧 실행됩니다.</string>
 
-  <!--Main Menus-->
+  <!--Main-->
+  <string name="Main_Welcome_On">GABTMap을 사용하고 있습니다 :)</string>
+  <string name="Main_Welcome_Off">GABTMap을 사용하지 않고 있습니다 :( </string>
   <string name="MainMenu_Caution">
     해당 맵핑 기능을 안정적으로 사용하기 위해서는\n기본 어시스턴트 연결 기능을 해제해야 합니다.\n
-    기기의 기본 설정에서 어시스턴트 키에 연결된\n어시스턴트 바로가기 기능을 전부 해제해주세요.\n
+    하단의 해제 버튼을 이용하여\n어시스턴트 바로가기 기능을 전부 해제해주세요.\n
     맵핑 기능을 활성화해도 기존 어시스턴트 바로가기 기능은\n홈버튼 길게 누르기로 사용하실 수 있습니다.\n\n
     맵핑 기능을 사용하지 않을 경우\n접근성 서비스를 비활성화 하시면 배터리 소모를 줄일 수 있습니다.
   </string>
+  <string name="Main_DisableAIShortcut_Title">어시스턴트 바로가기 해제</string>
+  <string name="Main_DisableAIShortcut_Summary">어시스턴트 키 바로가기 기능을 해제합니다.</string>
+  <string name="Main_DisableAIShortcut_Summary_Complete">바로가기 기능이 해제되어 있습니다 :)</string>
+  <string name="Main_DisableAIShortcut_Summary_Unable">
+    해당 기능을 이용하실 수 없습니다.\n
+    기기 설정에서 수동 해제를 권장합니다.
+  </string>
+  <string name="Main_EnterSetting_Title">설정 진입하기</string>
+  <string name="Main_EnterSetting_Summary">맵핑 설정으로 이동합니다</string>
+
+  <!--Main Menus-->
   <string name="MainMenu_Category_Basic">기본</string>
   <string name="MainMenu_Basic_EnableMapping_Title">맵핑 활성화</string>
   <string name="MainMenu_Basic_EnableMapping_SummaryOn">구글 어시스턴트 키의 맵핑을 사용 중입니다.</string>
@@ -230,8 +243,20 @@
   <!--Button Test Acitivity-->
   <string name="ButtonTestActivity_ClickInitText">버튼을 클릭하세요</string>
 
+  <!--Tile Service-->
+  <string name="TileService_Title">GA 맵핑</string>
+  <string name="TileService_UnableMessage">접근성 서비스가 비활성화 되어있습니다.\n먼저 접근성 서비스를 활성화 해 주세요.</string>
+  <string name="TileService_DisableMessage">GA 맵핑이 비활성화 되었습니다.</string>
+  <string name="TileService_EnableMessage">GA 맵핑이 활성화 되었습니다.</string>
+  
   <!--Notification-->
   <string name="Notification_Channel_Id">Basic</string>
   <string name="Notification_Channel_Name">기본 알림</string>
   <string name="Notification_Channel_Description">GAButtonMapper에서 발생시키는 기본 알림입니다.</string>
+
+  <!--Notification - Recorder-->
+  <string name="Notification_Recorder_Start_Title">GABTMap 녹음 기능</string>
+  <string name="Notification_Recorder_Start_Message">녹음이 실행되고 있습니다.</string>
+  <string name="Notification_Recorder_Stop_Title">GABTMap 녹음 기능</string>
+  <string name="Notification_Recorder_Stop_Message">녹음이 완료되었습니다. 클릭하면 녹음 된 파일이 재생됩니다.</string>
 </resources>

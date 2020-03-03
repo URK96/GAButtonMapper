@@ -6,9 +6,6 @@ using Android.OS;
 using Android.Views.Accessibility;
 
 using System;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 namespace GAButtonMapper
 {

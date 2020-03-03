@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <android.support.v7.widget.Toolbar
@@ -12,16 +13,76 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:layout_below="@id/MainToolbar"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold"
+        android:id="@+id/MainWelcomeText"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/MainMenu_Caution"
         android:id="@+id/MainCautionText"/>
-    <RelativeLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/MainCautionText"
-        android:animateLayoutChanges="true"
-        android:id="@+id/MainFragmentContainer"/>
-</RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:minHeight="?android:attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:id="@+id/MainDisableAIShortcutCardView"
+        app:cardCornerRadius="5dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/Main_DisableAIShortcut_Title"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/Main_DisableAIShortcut_Summary"
+                android:id="@+id/MainDisableAIShortcutSummaryText"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:minHeight="?android:attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:id="@+id/MainSettingEnterCardView"
+        app:cardCornerRadius="5dp">
+        <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/Main_EnterSetting_Title"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/Main_EnterSetting_Summary"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

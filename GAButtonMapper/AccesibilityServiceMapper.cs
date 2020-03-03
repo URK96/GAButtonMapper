@@ -42,6 +42,8 @@ namespace GAButtonMapper
 
         private NotificationCompat.Builder recorderNBuilder;
 
+        private string recorderFileName = "";
+
         public override void OnAccessibilityEvent(AccessibilityEvent e)
         {
             
@@ -118,7 +120,7 @@ namespace GAButtonMapper
                     if (!sharedPreferences.GetBoolean("EnableMapping", false) ||
                         (sharedPreferences.GetBoolean("ScreenOffDisableMapping", false) && !pm.IsInteractive))
                     {
-                        await Task.Delay(1000);
+                        await Task.Delay(2000);
 
                         continue;
                     }
@@ -312,14 +314,14 @@ namespace GAButtonMapper
                             cm.SetTorchMode("0", isTorchOn);
                             break;
                         case 9:
-                            Intent quickMemoIntent = new Intent();
+                            var quickMemoIntent = new Intent();
                             quickMemoIntent.SetPackage("com.lge.qmemoplus");
                             quickMemoIntent.SetAction("com.lge.qmemoplus.action.START_QUICKMODE");
                             quickMemoIntent.SetFlags(ActivityFlags.NewTask | ActivityFlags.IncludeStoppedPackages);
                             SendBroadcast(quickMemoIntent, "com.lge.qmemoplus.receiver.permission.BROADCAST_CAPTURE_PLUS");
                             break;
                         case 10:
-                            Intent prestoMemoIntent = new Intent();
+                            var prestoMemoIntent = new Intent();
                             prestoMemoIntent.SetPackage("com.lge.qmemoplus");
                             prestoMemoIntent.SetAction("com.lge.qmemoplus.action.START_PRESTOMEMO");
                             prestoMemoIntent.SetFlags(ActivityFlags.NewTask | ActivityFlags.IncludeStoppedPackages);
@@ -385,18 +387,26 @@ namespace GAButtonMapper
                             {
                                 try
                                 {
+                                    await recorder.StopRecording();
+
                                     if (sharedPreferences.GetBoolean("ActionFeatureVibrator", true))
                                     {
                                         vibrator.Vibrate(VibrationEffect.CreateWaveform(new long[] { 500, 0, 500, 0 }, new int[] { 30, 0, 60, 0 }, -1));
                                     }
 
-                                    await recorder.StopRecording();
+                                    /*var uri = Android.Support.V4.Content.FileProvider.GetUriForFile(this, $"{PackageName}.provider", new Java.IO.File(GetExternalFilesDir(null).AbsolutePath, recorderFileName));
 
-                                    recorderNBuilder.SetContentTitle("Recorder is stop");
-                                    recorderNBuilder.SetContentText("Recorder is stop");
+                                    var recorderIntent = new Intent();
+                                    recorderIntent.SetAction(Intent.ActionView);
+                                    recorderIntent.SetDataAndType(uri, "audio/*");
+                                    recorderIntent.SetFlags(ActivityFlags.GrantReadUriPermission);
+
+                                    recorderNBuilder.SetContentTitle(Resources.GetString(Resource.String.Notification_Recorder_Stop_Title));
+                                    recorderNBuilder.SetContentText(Resources.GetString(Resource.String.Notification_Recorder_Stop_Message));
                                     recorderNBuilder.SetSmallIcon(Resource.Drawable.splash_icon);
+                                    recorderNBuilder.SetContentIntent(PendingIntent.GetActivity(this, 0, recorderIntent, PendingIntentFlags.OneShot));
 
-                                    nm.Notify(recorderNotificationId, recorderNBuilder.Build());
+                                    nm.Notify(recorderNotificationId, recorderNBuilder.Build());*/
 
                                     MainThread.BeginInvokeOnMainThread(() => { Toast.MakeText(this, "Stop Voice Recording", ToastLength.Short).Show(); });
                                 }
@@ -414,9 +424,9 @@ namespace GAButtonMapper
 
                                 var dtNow = DateTime.Now;
 
-                                string filePath = Path.Combine(GetExternalFilesDir(null).AbsolutePath, $"gamap_{dtNow.Year}{dtNow.Month}{dtNow.Day}_{dtNow.Hour}{dtNow.Minute}{dtNow.Second}.mp3");
+                                recorderFileName = $"gamap_{dtNow.Year}{dtNow.Month}{dtNow.Day}_{dtNow.Hour}{dtNow.Minute}{dtNow.Second}.mp3";
 
-                                Toast.MakeText(this, filePath, ToastLength.Short).Show();
+                                string filePath = Path.Combine(GetExternalFilesDir(null).AbsolutePath, recorderFileName);
 
                                 if (!Directory.Exists(Path.GetDirectoryName(filePath)))
                                 {
@@ -428,20 +438,29 @@ namespace GAButtonMapper
                                 recorder.StopRecordingAfterTimeout = true;
                                 recorder.TotalAudioTimeout = new TimeSpan(5, 0, 0);
 
-                                recorder.AudioInputReceived += (sender, e) =>
+                                recorder.AudioInputReceived += delegate
                                 {
-                                    string target = Path.Combine(sdcardPath, $"gamap_{dtNow.Year}{dtNow.Month}{dtNow.Day}_{dtNow.Hour}{dtNow.Minute}{dtNow.Second}.m4a");
+                                    var uri = Android.Support.V4.Content.FileProvider.GetUriForFile(this, $"{PackageName}.provider", new Java.IO.File(GetExternalFilesDir(null).AbsolutePath, recorderFileName));
 
-                                    Toast.MakeText(this, target, ToastLength.Short).Show();
+                                    var recorderIntent = new Intent();
+                                    recorderIntent.SetAction(Intent.ActionView);
+                                    recorderIntent.SetDataAndType(uri, "audio/*");
+                                    recorderIntent.SetFlags(ActivityFlags.GrantReadUriPermission);
 
-                                    File.Copy(filePath, target);
+                                    recorderNBuilder.SetContentTitle(Resources.GetString(Resource.String.Notification_Recorder_Stop_Title));
+                                    recorderNBuilder.SetContentText(Resources.GetString(Resource.String.Notification_Recorder_Stop_Message));
+                                    recorderNBuilder.SetSmallIcon(Resource.Drawable.splash_icon);
+                                    recorderNBuilder.SetContentIntent(PendingIntent.GetActivity(this, 0, recorderIntent, PendingIntentFlags.OneShot));
+                                    recorderNBuilder.SetAutoCancel(true);
+
+                                    nm.Notify(recorderNotificationId, recorderNBuilder.Build());
                                 };
 
                                 await recorder.StartRecording();
 
                                 recorderNBuilder = new NotificationCompat.Builder(this, channelId);
-                                recorderNBuilder.SetContentTitle("Recorder is running");
-                                recorderNBuilder.SetContentText("Recorder is running");
+                                recorderNBuilder.SetContentTitle(Resources.GetString(Resource.String.Notification_Recorder_Start_Title));
+                                recorderNBuilder.SetContentText(Resources.GetString(Resource.String.Notification_Recorder_Start_Message));
                                 recorderNBuilder.SetSmallIcon(Resource.Drawable.splash_icon);
 
                                 var notification = recorderNBuilder.Build();
