@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CA2213: Disposable fields should be disposed
+dotnet_diagnostic.CA2213.severity = suggestion

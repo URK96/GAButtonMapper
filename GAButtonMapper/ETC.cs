@@ -6,11 +6,13 @@ using Android.OS;
 using Android.Views.Accessibility;
 
 using System;
+using System.Threading.Tasks;
 
 namespace GAButtonMapper
 {
     public static class ETC
     {
+        internal delegate Task MonitoringMethod();
         internal enum KeyState { Up, Down, None }
 
         internal static volatile ISharedPreferences sharedPreferences;
@@ -25,9 +27,11 @@ namespace GAButtonMapper
         internal static AudioManager am;
         internal static Vibrator vibrator;
 
+        internal static MonitoringMethod monitoringMethod;
+
         //internal static KeyState kState = KeyState.None;
         internal static volatile bool isUnbind = false;
-        internal static volatile bool isInterrupt = false;
+        //internal static volatile bool isInterrupt = false;
         internal static volatile bool isRun = false;
         internal static volatile bool isTorchOn = false;
         //internal static volatile bool isDown = false;

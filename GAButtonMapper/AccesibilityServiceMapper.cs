@@ -53,7 +53,7 @@ namespace GAButtonMapper
         {
             base.OnServiceConnected();
 
-            Toast.MakeText(this, "Connected", ToastLength.Short).Show();
+            Toast.MakeText(this, Resource.String.AccessibilitySevice_Connected, ToastLength.Short).Show();
 
             isUnbind = false;
 
@@ -102,32 +102,49 @@ namespace GAButtonMapper
             longClickInterval = CalcInterval(800, 50, sharedPreferences.GetInt("LongClickInterval", 0));
             monitoringInterval = sharedPreferences.GetInt("MonitoringInterval", 30);
 
-            await MonitoringKeyState();
+            monitoringMethod = new MonitoringMethod(MonitoringKeyState);
+
+            //await MonitoringKeyState();
+
+            await monitoringMethod();
         }
 
         internal async Task MonitoringKeyState()
-        {
-            string s = "";
+        { 
 
             try
             {
+                if (isUnbind ||
+                !sharedPreferences.GetBoolean("EnableMapping", false) ||
+                (sharedPreferences.GetBoolean("ScreenOffDisableMapping", false) && !pm.IsInteractive))
+                {
+                    return;
+                }
+
+                string s = "";
+
+                Toast.MakeText(this, Resource.String.MonitoringProcess_Start, ToastLength.Short).Show();
+
                 isRun = true;
 
                 while (true)
                 {
                     await Task.Delay(monitoringInterval);
 
-                    if (!sharedPreferences.GetBoolean("EnableMapping", false) ||
-                        (sharedPreferences.GetBoolean("ScreenOffDisableMapping", false) && !pm.IsInteractive))
+                    /*if ()
                     {
                         await Task.Delay(2000);
 
                         continue;
-                    }
+                    }*/
 
-                    if (isUnbind)
+                    if (isUnbind ||
+                        !sharedPreferences.GetBoolean("EnableMapping", false) ||
+                        (sharedPreferences.GetBoolean("ScreenOffDisableMapping", false) && !pm.IsInteractive))
                     {
                         isRun = false;
+
+                        Toast.MakeText(this, Resource.String.MonitoringProcess_End, ToastLength.Short).Show();
 
                         return;
                     }
@@ -181,9 +198,14 @@ namespace GAButtonMapper
                                 break;
                             }
 
-                            if (isUnbind)
+                            if (isUnbind ||
+                                !sharedPreferences.GetBoolean("EnableMapping", false) ||
+                                (sharedPreferences.GetBoolean("ScreenOffDisableMapping", false) && !pm.IsInteractive))
                             {
                                 isRun = false;
+
+                                Toast.MakeText(this, Resource.String.MonitoringProcess_End, ToastLength.Short).Show();
+
                                 return;
                             }
                         }
@@ -207,7 +229,9 @@ namespace GAButtonMapper
             }
             catch (Exception ex)
             {
-                Toast.MakeText(this, ex.ToString(), ToastLength.Short).Show();
+                Toast.MakeText(this, Resource.String.MonitoringProcess_End, ToastLength.Short).Show();
+                Toast.MakeText(this, ex.Message, ToastLength.Short).Show();
+
                 isRun = false;
             }
         }
@@ -514,7 +538,7 @@ namespace GAButtonMapper
 
         public override bool OnUnbind(Intent intent)
         {
-            Toast.MakeText(this, "Unbind", ToastLength.Short).Show();
+            Toast.MakeText(this, Resource.String.AccessibilitySevice_Unbind, ToastLength.Short).Show();
             isUnbind = true;
 
             return base.OnUnbind(intent);
@@ -522,8 +546,7 @@ namespace GAButtonMapper
 
         public override void OnInterrupt()
         {
-            Toast.MakeText(this, "Interrupt", ToastLength.Short).Show();
-            isInterrupt = true;
+
         }
 
         private async Task HeadSetButtonClick(int repeatCount)

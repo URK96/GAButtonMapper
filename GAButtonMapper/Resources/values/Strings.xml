@@ -92,6 +92,10 @@
   <string name="AlertDialog_WriteSettingPermission_OK">권한 부여</string>
 
   <!--Toast Message-->
+  <string name="AccessibilitySevice_Connected">GA 접근성 서비스가 연결되었습니다.</string>
+  <string name="AccessibilitySevice_Unbind">GA 접근성 서비스가 해제되었습니다.</string>
+  <string name="MonitoringProcess_Start">GA 모니터링이 시작되었습니다.</string>
+  <string name="MonitoringProcess_End">GA 모니터링이 종료되었습니다.</string>
   <string name="ToastMessage_QPayNotification">LG Quick Pay가 곧 실행됩니다.</string>
 
   <!--Main-->
@@ -103,6 +107,8 @@
     맵핑 기능을 활성화해도 기존 어시스턴트 바로가기 기능은\n홈버튼 길게 누르기로 사용하실 수 있습니다.\n\n
     맵핑 기능을 사용하지 않을 경우\n접근성 서비스를 비활성화 하시면 배터리 소모를 줄일 수 있습니다.
   </string>
+  <string name="Main_AppUsageCaution_Title">앱 사용 시 주의사항</string>
+  <string name="Main_AppUsageCaution_Summary">꼭 한 번 읽어서 숙지해주시기 바랍니다 :)</string>
   <string name="Main_DisableAIShortcut_Title">어시스턴트 바로가기 해제</string>
   <string name="Main_DisableAIShortcut_Summary">어시스턴트 키 바로가기 기능을 해제합니다.</string>
   <string name="Main_DisableAIShortcut_Summary_Complete">바로가기 기능이 해제되어 있습니다 :)</string>
@@ -112,6 +118,9 @@
   </string>
   <string name="Main_EnterSetting_Title">설정 진입하기</string>
   <string name="Main_EnterSetting_Summary">맵핑 설정으로 이동합니다</string>
+
+  <!--App Usage Caution-->
+  <string name="AppUsageCautionActivity_Title">앱 주의사항</string>
 
   <!--Main Menus-->
   <string name="MainMenu_Category_Basic">기본</string>
@@ -235,6 +244,14 @@
   <string name="MainMenu_Advance_MonitoringInterval_Caution">
     * 주의사항 *\n
     값을 낮출수록 인식 민감도가 좋아지지만 배터리 소모가 심해질 수 있습니다.
+  </string>
+  <string name="MainMenu_Advance_AutoDisableTimeReservation_Title">비활성화 예약 시간 기능 활성화</string>
+  <string name="MainMenu_Advance_AutoDisableTimeReservation_SummaryOn">비활성화 예약 시간 기능을 사용 중 입니다.</string>
+  <string name="MainMenu_Advance_AutoDisableTimeReservation_SummaryOff">비활성화 예약 시간 기능을 사용하지 않고 있습니다.</string>
+  <string name="MainMenu_Advance_AutoDisableTimeSelect_Title">비활성화 예약 시간 설정</string>
+  <string name="MainMenu_Advance_AutoDisableTimeSelect_Summary">
+    기기를 사용하지 않는 시간대를 설정하여 자동으로 해당 시간동안 맵핑 기능을 비활성화 합니다.\n
+    예약 시간 :
   </string>
 
   <!--App Selector-->

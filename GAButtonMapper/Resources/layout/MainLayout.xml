@@ -35,6 +35,35 @@
         android:foreground="?android:attr/selectableItemBackground"
         android:minHeight="?android:attr/actionBarSize"
         android:background="?attr/colorPrimary"
+        android:id="@+id/MainAppUsageCautionCardView"
+        app:cardCornerRadius="5dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/Main_AppUsageCaution_Title"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/Main_AppUsageCaution_Summary"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:minHeight="?android:attr/actionBarSize"
+        android:background="?attr/colorPrimary"
         android:id="@+id/MainDisableAIShortcutCardView"
         app:cardCornerRadius="5dp">
         <LinearLayout

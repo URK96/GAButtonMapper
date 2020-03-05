@@ -76,6 +76,7 @@
     <Compile Include="AdvanceSettingFragment.cs" />
     <Compile Include="AppInfoActivity.cs" />
     <Compile Include="AppSelectorActivity.cs" />
+    <Compile Include="AppUsageCautionActivity.cs" />
     <Compile Include="ButtonSubFragment.cs" />
     <Compile Include="ButtonTestActivity.cs" />
     <Compile Include="CustomTimer.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="GABTMapQuickTileService.cs" />
     <Compile Include="InitSettingActivity.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="ScreenOnReceiver.cs" />
     <Compile Include="SettingActivity.cs" />
     <Compile Include="MainSettingFragment.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -90,6 +92,9 @@
     <Compile Include="Splash.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
@@ -249,6 +254,15 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\qtile_icon.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\AppUsageCautionLayout.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\Caution_ko.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -51,6 +51,8 @@ namespace GAButtonMapper
 
             CreateNotificationChannel();
 
+            RegisterReceiver(new ScreenOnReceiver(), new IntentFilter(Intent.ActionScreenOn));
+
             if (!ETC.CheckPermission(this, Manifest.Permission.ReadLogs) || !ETC.CheckPermission(this, Manifest.Permission.WriteSecureSettings) || ETC.sharedPreferences.GetBoolean("HasRestart", false))
             {
                 StartActivity(typeof(InitSettingActivity));

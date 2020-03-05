@@ -75,11 +75,18 @@ namespace GAButtonMapper
                 ETC.sharedPreferences.Edit().PutBoolean("EnableMapping", false).Apply();
             }
             enableMapping.Checked = ETC.sharedPreferences.GetBoolean("EnableMapping", false);
-            enableMapping.PreferenceChange += delegate
+            enableMapping.PreferenceChange += (sender, e) =>
             {
                 if (ETC.acm.IsEnabled)
                 {
-                    editor.PutBoolean("EnableMapping", enableMapping.Checked).Apply();
+                    var value = (bool)e.NewValue;
+
+                    editor.PutBoolean("EnableMapping", value).Apply();
+
+                    if (value && !ETC.isRun)
+                    {
+                        ETC.monitoringMethod();
+                    }
                 }
                 else
                 {
@@ -100,23 +107,23 @@ namespace GAButtonMapper
 
             var screenOffDiableMapping = FindPreference("ScreenOffDisableMapping") as SwitchPreference;
             screenOffDiableMapping.Checked = ETC.sharedPreferences.GetBoolean("ScreenOffDisableMapping", false);
-            screenOffDiableMapping.PreferenceChange += delegate
+            screenOffDiableMapping.PreferenceChange += (sender, e) =>
             {
-                editor.PutBoolean("ScreenOffDisableMapping", screenOffDiableMapping.Checked);
+                editor.PutBoolean("ScreenOffDisableMapping", (bool)e.NewValue).Apply();
             };
 
             var longClickVibrator = FindPreference("LongClickVibrator") as SwitchPreference;
             longClickVibrator.Checked = ETC.sharedPreferences.GetBoolean("LongClickVibrator", true);
-            longClickVibrator.PreferenceChange += delegate
+            longClickVibrator.PreferenceChange += (sender, e) =>
             {
-                editor.PutBoolean("LongClickVibrator", longClickVibrator.Checked);
+                editor.PutBoolean("LongClickVibrator", (bool)e.NewValue).Apply();
             };
 
             var actionFeatureVibrator = FindPreference("ActionFeatureVibrator") as SwitchPreference;
             actionFeatureVibrator.Checked = ETC.sharedPreferences.GetBoolean("ActionFeatureVibrator", true);
-            actionFeatureVibrator.PreferenceChange += delegate
+            actionFeatureVibrator.PreferenceChange += (sender, e) =>
             {
-                editor.PutBoolean("ActionFeatureVibrator", actionFeatureVibrator.Checked);
+                editor.PutBoolean("ActionFeatureVibrator", (bool)e.NewValue).Apply();
             };
 
             // Button Part

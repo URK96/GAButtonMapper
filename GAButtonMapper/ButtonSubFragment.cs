@@ -238,7 +238,7 @@ namespace GAButtonMapper
 
                 var enableP = FindPreference($"Enable{type}") as SwitchPreference;
                 enableP.Checked = ETC.sharedPreferences.GetBoolean($"Enable{type}", false);
-                enableP.PreferenceChange += delegate { editor.PutBoolean($"Enable{type}", enableP.Checked).Apply(); };
+                enableP.PreferenceChange += (sender, e) => { editor.PutBoolean($"Enable{type}", (bool)e.NewValue).Apply(); };
 
                 var mappingTypeP = FindPreference($"MappingType_{type}") as ListPreference;
                 mappingTypeP.SetValueIndex(int.Parse(ETC.sharedPreferences.GetString($"MappingType_{type}", "0")));

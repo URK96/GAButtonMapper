@@ -93,6 +93,11 @@ namespace GAButtonMapper
                     QsTile.State = TileState.Active;
 
                     Toast.MakeText(this, Resource.String.TileService_EnableMessage, ToastLength.Short).Show();
+
+                    if (!isRun)
+                    {
+                        monitoringMethod();
+                    }
                 }
 
                 QsTile.UpdateTile();
