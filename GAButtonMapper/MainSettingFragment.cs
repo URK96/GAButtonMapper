@@ -83,6 +83,8 @@ namespace GAButtonMapper
 
                     editor.PutBoolean("EnableMapping", value).Apply();
 
+                    ETC.isMappingEnable = value;
+
                     if (value && !ETC.isRun)
                     {
                         ETC.monitoringMethod();
@@ -109,14 +111,22 @@ namespace GAButtonMapper
             screenOffDiableMapping.Checked = ETC.sharedPreferences.GetBoolean("ScreenOffDisableMapping", false);
             screenOffDiableMapping.PreferenceChange += (sender, e) =>
             {
-                editor.PutBoolean("ScreenOffDisableMapping", (bool)e.NewValue).Apply();
+                var value = (bool)e.NewValue;
+
+                editor.PutBoolean("ScreenOffDisableMapping", value).Apply();
+
+                ETC.isScreenOffMappingEnable = value;
             };
 
             var longClickVibrator = FindPreference("LongClickVibrator") as SwitchPreference;
             longClickVibrator.Checked = ETC.sharedPreferences.GetBoolean("LongClickVibrator", true);
             longClickVibrator.PreferenceChange += (sender, e) =>
             {
-                editor.PutBoolean("LongClickVibrator", (bool)e.NewValue).Apply();
+                var value = (bool)e.NewValue;
+
+                editor.PutBoolean("LongClickVibrator", value).Apply();
+
+                ETC.isLongClickVibrate = value;
             };
 
             var actionFeatureVibrator = FindPreference("ActionFeatureVibrator") as SwitchPreference;

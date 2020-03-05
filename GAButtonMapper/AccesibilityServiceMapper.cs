@@ -42,6 +42,8 @@ namespace GAButtonMapper
 
         private NotificationCompat.Builder recorderNBuilder;
 
+        private ScreenStateReceiver screenReceiver;
+
         private string recorderFileName = "";
 
         public override void OnAccessibilityEvent(AccessibilityEvent e)
@@ -55,46 +57,64 @@ namespace GAButtonMapper
 
             Toast.MakeText(this, Resource.String.AccessibilitySevice_Connected, ToastLength.Short).Show();
 
-            isUnbind = false;
-
-            if (sharedPreferences == null)
+            try
             {
-                sharedPreferences = PreferenceManager.GetDefaultSharedPreferences(this);
+                isUnbind = false;
+
+                if (screenReceiver == null)
+                {
+                    screenReceiver = new ScreenStateReceiver();
+                }
+
+                var filter = new IntentFilter();
+                filter.AddAction(Intent.ActionScreenOn);
+                filter.AddAction(Intent.ActionScreenOff);
+
+                RegisterReceiver(screenReceiver, filter);
+
+                if (sharedPreferences == null)
+                {
+                    sharedPreferences = PreferenceManager.GetDefaultSharedPreferences(this);
+                }
+
+                if (vibrator == null)
+                {
+                    vibrator = (GetSystemService(VibratorService) as Vibrator);
+                }
+
+                if (pm == null)
+                {
+                    pm = GetSystemService(PowerService) as PowerManager;
+                }
+
+                if (am == null)
+                {
+                    am = GetSystemService(AudioService) as AudioManager;
+                }
+
+                if (cm == null)
+                {
+                    cm = (GetSystemService(CameraService) as CameraManager);
+                }
+
+                if (longClickSW == null)
+                {
+                    longClickSW = new Stopwatch();
+                }
+
+                if (clickSW == null)
+                {
+                    clickSW = new Stopwatch();
+                }
+
+                if (recorder == null)
+                {
+                    recorder = new AudioRecorderService();
+                }
             }
-
-            if (vibrator == null)
+            catch (Exception ex)
             {
-                vibrator = (GetSystemService(VibratorService) as Vibrator);
-            }
-
-            if (pm == null)
-            {
-                pm = GetSystemService(PowerService) as PowerManager;
-            }
-
-            if (am == null)
-            {
-                am = GetSystemService(AudioService) as AudioManager;
-            }
-
-            if (cm == null)
-            {
-                cm = (GetSystemService(CameraService) as CameraManager);
-            }
-
-            if (longClickSW == null)
-            {
-                longClickSW = new Stopwatch();
-            }
-
-            if (clickSW == null)
-            {
-                clickSW = new Stopwatch();
-            }
-
-            if (recorder == null)
-            {
-                recorder = new AudioRecorderService();
+                Toast.MakeText(this, ex.ToString(), ToastLength.Short).Show();
             }
 
             loggingCount = sharedPreferences.GetInt("LogCounting", 80);
@@ -106,7 +126,10 @@ namespace GAButtonMapper
 
             //await MonitoringKeyState();
 
-            await monitoringMethod();
+            if (isMappingEnable)
+            {
+                await monitoringMethod();
+            }
         }
 
         internal async Task MonitoringKeyState()
@@ -114,10 +137,10 @@ namespace GAButtonMapper
 
             try
             {
-                if (isUnbind ||
-                !sharedPreferences.GetBoolean("EnableMapping", false) ||
-                (sharedPreferences.GetBoolean("ScreenOffDisableMapping", false) && !pm.IsInteractive))
+                if (isUnbind || !isMappingEnable || (isScreenOffMappingEnable && isScreenOff))
                 {
+                    isRun = false;
+
                     return;
                 }
 
@@ -138,9 +161,7 @@ namespace GAButtonMapper
                         continue;
                     }*/
 
-                    if (isUnbind ||
-                        !sharedPreferences.GetBoolean("EnableMapping", false) ||
-                        (sharedPreferences.GetBoolean("ScreenOffDisableMapping", false) && !pm.IsInteractive))
+                    if (isUnbind || !isMappingEnable || (isScreenOffMappingEnable && isScreenOff))
                     {
                         isRun = false;
 
@@ -198,9 +219,7 @@ namespace GAButtonMapper
                                 break;
                             }
 
-                            if (isUnbind ||
-                                !sharedPreferences.GetBoolean("EnableMapping", false) ||
-                                (sharedPreferences.GetBoolean("ScreenOffDisableMapping", false) && !pm.IsInteractive))
+                            if (isUnbind || !isMappingEnable || (isScreenOffMappingEnable && isScreenOff))
                             {
                                 isRun = false;
 
@@ -540,6 +559,8 @@ namespace GAButtonMapper
         {
             Toast.MakeText(this, Resource.String.AccessibilitySevice_Unbind, ToastLength.Short).Show();
             isUnbind = true;
+
+            UnregisterReceiver(screenReceiver);
 
             return base.OnUnbind(intent);
         }

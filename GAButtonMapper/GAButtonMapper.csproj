@@ -84,7 +84,7 @@
     <Compile Include="GABTMapQuickTileService.cs" />
     <Compile Include="InitSettingActivity.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="ScreenOnReceiver.cs" />
+    <Compile Include="ScreenStateReceiver.cs" />
     <Compile Include="SettingActivity.cs" />
     <Compile Include="MainSettingFragment.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

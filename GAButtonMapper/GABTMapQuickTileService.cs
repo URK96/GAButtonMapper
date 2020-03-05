@@ -82,6 +82,7 @@ namespace GAButtonMapper
                 {
                     sharedPreferences.Edit().PutBoolean(mappingPrefId, false).Apply();
 
+                    isMappingEnable = false;
                     QsTile.State = TileState.Inactive;
 
                     Toast.MakeText(this, Resource.String.TileService_DisableMessage, ToastLength.Short).Show();
@@ -93,6 +94,8 @@ namespace GAButtonMapper
                     QsTile.State = TileState.Active;
 
                     Toast.MakeText(this, Resource.String.TileService_EnableMessage, ToastLength.Short).Show();
+
+                    isMappingEnable = true;
 
                     if (!isRun)
                     {

@@ -29,10 +29,14 @@ namespace GAButtonMapper
 
         internal static MonitoringMethod monitoringMethod;
 
+        internal static volatile bool isMappingEnable = false;
+        internal static volatile bool isScreenOffMappingEnable = false;
+        internal static volatile bool isScreenOff = false;
         //internal static KeyState kState = KeyState.None;
         internal static volatile bool isUnbind = false;
         //internal static volatile bool isInterrupt = false;
         internal static volatile bool isRun = false;
+        internal static volatile bool isLongClickVibrate = false;
         internal static volatile bool isTorchOn = false;
         //internal static volatile bool isDown = false;
         internal static volatile short clickCount = 0;
