@@ -79,7 +79,7 @@ namespace GAButtonMapper
 
                 if (vibrator == null)
                 {
-                    vibrator = (GetSystemService(VibratorService) as Vibrator);
+                    vibrator = GetSystemService(VibratorService) as Vibrator;
                 }
 
                 if (pm == null)
@@ -94,7 +94,7 @@ namespace GAButtonMapper
 
                 if (cm == null)
                 {
-                    cm = (GetSystemService(CameraService) as CameraManager);
+                    cm = GetSystemService(CameraService) as CameraManager;
                 }
 
                 if (longClickSW == null)
@@ -111,30 +111,31 @@ namespace GAButtonMapper
                 {
                     recorder = new AudioRecorderService();
                 }
+
+                isMappingEnable = sharedPreferences.GetBoolean("EnableMapping", false);
+                isScreenOffMappingEnable = sharedPreferences.GetBoolean("ScreenOffDisableMapping", false);
+                isScreenOnOffToastMessageEnable = sharedPreferences.GetBoolean("ScreenOnOffToastMessageEnable", true);
+
+                loggingCount = sharedPreferences.GetInt("LogCounting", 80);
+                clickInterval = CalcInterval(400, 50, sharedPreferences.GetInt("ClickInterval", 0));
+                longClickInterval = CalcInterval(800, 50, sharedPreferences.GetInt("LongClickInterval", 0));
+                monitoringInterval = sharedPreferences.GetInt("MonitoringInterval", 30);
+
+                monitoringMethod = new MonitoringMethod(MonitoringKeyState);
+
+                if (isMappingEnable)
+                {
+                    await monitoringMethod();
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Toast.MakeText(this, ex.ToString(), ToastLength.Short).Show();
-            }
-
-            loggingCount = sharedPreferences.GetInt("LogCounting", 80);
-            clickInterval = CalcInterval(400, 50, sharedPreferences.GetInt("ClickInterval", 0));
-            longClickInterval = CalcInterval(800, 50, sharedPreferences.GetInt("LongClickInterval", 0));
-            monitoringInterval = sharedPreferences.GetInt("MonitoringInterval", 30);
-
-            monitoringMethod = new MonitoringMethod(MonitoringKeyState);
-
-            //await MonitoringKeyState();
-
-            if (isMappingEnable)
-            {
-                await monitoringMethod();
+                Toast.MakeText(this, Resource.String.AccessibilitySevice_ConnectError, ToastLength.Short).Show();
             }
         }
 
         internal async Task MonitoringKeyState()
         { 
-
             try
             {
                 if (isUnbind || !isMappingEnable || (isScreenOffMappingEnable && isScreenOff))
@@ -146,7 +147,10 @@ namespace GAButtonMapper
 
                 string s = "";
 
-                Toast.MakeText(this, Resource.String.MonitoringProcess_Start, ToastLength.Short).Show();
+                if (isScreenOnOffToastMessageEnable)
+                {
+                    Toast.MakeText(this, Resource.String.MonitoringProcess_Start, ToastLength.Short).Show();
+                }
 
                 isRun = true;
 
@@ -154,18 +158,14 @@ namespace GAButtonMapper
                 {
                     await Task.Delay(monitoringInterval);
 
-                    /*if ()
-                    {
-                        await Task.Delay(2000);
-
-                        continue;
-                    }*/
-
                     if (isUnbind || !isMappingEnable || (isScreenOffMappingEnable && isScreenOff))
                     {
                         isRun = false;
 
-                        Toast.MakeText(this, Resource.String.MonitoringProcess_End, ToastLength.Short).Show();
+                        if (isScreenOnOffToastMessageEnable)
+                        {
+                            Toast.MakeText(this, Resource.String.MonitoringProcess_End, ToastLength.Short).Show();
+                        }
 
                         return;
                     }
@@ -223,7 +223,10 @@ namespace GAButtonMapper
                             {
                                 isRun = false;
 
-                                Toast.MakeText(this, Resource.String.MonitoringProcess_End, ToastLength.Short).Show();
+                                if (isScreenOnOffToastMessageEnable)
+                                {
+                                    Toast.MakeText(this, Resource.String.MonitoringProcess_End, ToastLength.Short).Show();
+                                }
 
                                 return;
                             }

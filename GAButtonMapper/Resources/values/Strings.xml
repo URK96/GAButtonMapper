@@ -93,6 +93,7 @@
 
   <!--Toast Message-->
   <string name="AccessibilitySevice_Connected">GA 접근성 서비스가 연결되었습니다.</string>
+  <string name="AccessibilitySevice_ConnectError">GA 접근성 서비스 연결 중 오류가 발생했습니다. 해제 후 다시 연결해 주세요.</string>
   <string name="AccessibilitySevice_Unbind">GA 접근성 서비스가 해제되었습니다.</string>
   <string name="MonitoringProcess_Start">GA 모니터링이 시작되었습니다.</string>
   <string name="MonitoringProcess_End">GA 모니터링이 종료되었습니다.</string>
@@ -136,6 +137,9 @@
   <string name="MainMenu_Basic_ActionFeatureVibrator_Title">특정 기능 진동 안내</string>
   <string name="MainMenu_Basic_ActionFeatureVibrator_SummaryOn">특정 기능 실행 시 진동으로 알려줍니다.</string>
   <string name="MainMenu_Basic_ActionFeatureVibrator_SummaryOff">특정 기능 실행 시 진동으로 알려주지 않습니다.</string>
+  <string name="MainMenu_Basic_ScreenOnOffToastMessageEnable_Title">모니터링 안내 메시지 활성화</string>
+  <string name="MainMenu_Basic_ScreenOnOffToastMessageEnable_SummaryOn">모니터링 상태를 하단 메시지로 알려줍니다.</string>
+  <string name="MainMenu_Basic_ScreenOnOffToastMessageEnable_SummaryOff">모니터링이 상태를 하단 메시지로 알려주지 않습니다.</string>
 
   <string name="MainMenu_Category_ButtonSub">맵핑</string>
   <string name="MainMenu_ButtonSub_SubPreference_Title">버튼 설정</string>

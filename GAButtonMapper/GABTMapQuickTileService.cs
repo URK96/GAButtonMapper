@@ -14,7 +14,7 @@ namespace GAButtonMapper
              Permission = Android.Manifest.Permission.BindQuickSettingsTile,
              Label = "@string/TileService_Title",
              Icon = "@drawable/qtile_icon")]
-    [IntentFilter(new[] { ActionQsTile })]
+    [IntentFilter(new[] { ActionQsTile, ActionQsTilePreferences })]
     public class QuickToggleTileService : TileService
     {
         private readonly string mappingPrefId = "EnableMapping";

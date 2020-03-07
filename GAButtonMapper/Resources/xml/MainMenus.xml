@@ -34,6 +34,12 @@
       android:title="@string/MainMenu_Basic_ActionFeatureVibrator_Title"
       android:summaryOn="@string/MainMenu_Basic_ActionFeatureVibrator_SummaryOn"
       android:summaryOff="@string/MainMenu_Basic_ActionFeatureVibrator_SummaryOff"/>
+
+    <android.support.v14.preference.SwitchPreference
+      android:key="ScreenOnOffToastMessageEnable"
+      android:title="@string/MainMenu_Basic_ScreenOnOffToastMessageEnable_Title"
+      android:summaryOn="@string/MainMenu_Basic_ScreenOnOffToastMessageEnable_SummaryOn"
+      android:summaryOff="@string/MainMenu_Basic_ScreenOnOffToastMessageEnable_SummaryOff"/>
     
   </android.support.v7.preference.PreferenceCategory>
 

@@ -13,13 +13,11 @@ namespace GAButtonMapper
     public static class ETC
     {
         internal delegate Task MonitoringMethod();
-        internal enum KeyState { Up, Down, None }
 
         internal static volatile ISharedPreferences sharedPreferences;
 
         internal static string sdcardPath = "";
 
-        //internal static string s;
         internal static PackageManager packm;
         internal static NotificationManager nm;
         internal static AccessibilityManager acm;
@@ -32,13 +30,11 @@ namespace GAButtonMapper
         internal static volatile bool isMappingEnable = false;
         internal static volatile bool isScreenOffMappingEnable = false;
         internal static volatile bool isScreenOff = false;
-        //internal static KeyState kState = KeyState.None;
         internal static volatile bool isUnbind = false;
-        //internal static volatile bool isInterrupt = false;
         internal static volatile bool isRun = false;
         internal static volatile bool isLongClickVibrate = false;
         internal static volatile bool isTorchOn = false;
-        //internal static volatile bool isDown = false;
+        internal static volatile bool isScreenOnOffToastMessageEnable = true;
         internal static volatile short clickCount = 0;
         internal static volatile bool isClickMonitoring = false;
         internal static volatile bool isLongClick = false;

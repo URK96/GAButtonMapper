@@ -87,7 +87,7 @@ namespace GAButtonMapper
 
                     if (value && !ETC.isRun)
                     {
-                        ETC.monitoringMethod();
+                        ETC.monitoringMethod?.Invoke();
                     }
                 }
                 else
@@ -134,6 +134,17 @@ namespace GAButtonMapper
             actionFeatureVibrator.PreferenceChange += (sender, e) =>
             {
                 editor.PutBoolean("ActionFeatureVibrator", (bool)e.NewValue).Apply();
+            };
+
+            var screenOnOffToastMessageEnable = FindPreference("ScreenOnOffToastMessageEnable") as SwitchPreference;
+            screenOnOffToastMessageEnable.Checked = ETC.sharedPreferences.GetBoolean("ScreenOnOffToastMessageEnable", true);
+            screenOnOffToastMessageEnable.PreferenceChange += (sender, e) =>
+            {
+                var value = (bool)e.NewValue;
+
+                ETC.isScreenOnOffToastMessageEnable = value;
+
+                editor.PutBoolean("ScreenOnOffToastMessageEnable", value).Apply();
             };
 
             // Button Part
