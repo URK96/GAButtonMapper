@@ -169,11 +169,19 @@ namespace GAButtonMapper
             };
 
             /*var viewRecordingFiles = FindPreference("ViewRecordingFiles");
-            viewRecordingFiles.PreferenceClick += async delegate
+            viewRecordingFiles.PreferenceClick += delegate
             {
-                var task = await Launcher.TryOpenAsync($"file://{Activity.GetExternalFilesDir(null).AbsolutePath}");
-
-                Toast.MakeText(Activity, task.ToString(), ToastLength.Short).Show();
+                try
+                {
+                    var intent = new Intent();
+                    intent.SetAction(Intent.ActionView);
+                    intent.SetDataAndType(Android.Net.Uri.Parse("file://" + Activity.GetExternalFilesDir(null).AbsolutePath), "resource/folder");
+                    StartActivity(Intent.CreateChooser(intent, "Open Folder"));
+                }
+                catch (Exception ex)
+                {
+                    Toast.MakeText(Activity, ex.ToString(), ToastLength.Long).Show();
+                }
             };*/
         }
     }

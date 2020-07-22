@@ -1,0 +1,5 @@
+- Improve internal monitoring loop system
+- Add disable on screen off option feature
+- Add 3 action mapping
+- Improve music play/pause action
+- Add permission for Q Memo

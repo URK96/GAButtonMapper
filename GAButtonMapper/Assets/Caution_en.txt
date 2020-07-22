@@ -1,0 +1,17 @@
+﻿* Caution before use *
+
+1. Do not need rooting your device. You can use this app on manufacturer firmware. Also, this app do not effect any system files.
+
+2. This app use software (logging) mapping method. So device overload can affect mapping method.
+
+3. This app perform test on LG G7 by developer and other LG devices (~ LG Velvet) by LG device users.
+
+4. If background service or app is too many, this condition can affect mapping method.
+
+5. This app use internal infinite loop. Therefore, the increase in battery usage is a natural result.
+
+6. This app support only Google Assistant button. Other buttons are not support.
+
+7. This app not support LG Google AOSP devices. (LG Q9 One)
+
+8. Because this app's mapping method is log-based, there may be some delay between the button and the actual operation.

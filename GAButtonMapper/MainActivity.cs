@@ -39,8 +39,10 @@ namespace GAButtonMapper
             aiShortcutDisableSummaryTextView = FindViewById<TextView>(Resource.Id.MainDisableAIShortcutSummaryText);
 
             FindViewById<CardView>(Resource.Id.MainAppUsageCautionCardView).Click += delegate { StartActivity(typeof(AppUsageCautionActivity)); };
+            FindViewById<CardView>(Resource.Id.MainQnACardView).Click += delegate { StartActivity(typeof(QnAActivity)); };
             aiShortcutDisableCardView.Click += AiShortcutDisableCardView_Click;
             FindViewById<CardView>(Resource.Id.MainSettingEnterCardView).Click += delegate { StartActivity(typeof(SettingActivity)); };
+            FindViewById<CardView>(Resource.Id.MainDonationEnterCardView).Click += delegate { StartActivity(typeof(DonationActivity)); };
         }
 
         protected override void OnResume()

@@ -1,0 +1,6 @@
+- Fix main info string length
+- Change internal monitoring loop method
+- Add double click feature
+- Add shortcut 'optimize battery exception setting'
+- Add 1 action mapping
+- Fix dialog issue

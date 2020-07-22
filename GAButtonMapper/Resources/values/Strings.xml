@@ -2,7 +2,7 @@
 <resources>
   <string name="app_name">GAButtonMapper</string>
   <string name="app_explain">LG 스마트폰을 위한 구글 어시스턴트 맵핑 앱</string>
-  <string name="accessibility_description">테스트</string>
+  <string name="accessibility_description">구글 어시스턴트 버튼을 맵핑하기 위해서 필요합니다. 해당 접근성 서비스를 실행하면 로그를 감시하는 프로세스가 백그라운드에서 실행됩니다.</string>
 
   <!--Common-->
   <string name="Common_CheckSuccess">확인되었습니다.</string>
@@ -110,6 +110,8 @@
   </string>
   <string name="Main_AppUsageCaution_Title">앱 사용 시 주의사항</string>
   <string name="Main_AppUsageCaution_Summary">꼭 한 번 읽어서 숙지해주시기 바랍니다 :)</string>
+  <string name="Main_QnA_Title">작동에 문제가 있으신가요?</string>
+  <string name="Main_QnA_Summary">대부분의 해결방법은 이 안에 있습니다.</string>
   <string name="Main_DisableAIShortcut_Title">어시스턴트 바로가기 해제</string>
   <string name="Main_DisableAIShortcut_Summary">어시스턴트 키 바로가기 기능을 해제합니다.</string>
   <string name="Main_DisableAIShortcut_Summary_Complete">바로가기 기능이 해제되어 있습니다 :)</string>
@@ -119,10 +121,29 @@
   </string>
   <string name="Main_EnterSetting_Title">설정 진입하기</string>
   <string name="Main_EnterSetting_Summary">맵핑 설정으로 이동합니다</string>
+  <string name="Main_EnterDonation_Title">후원하기</string>
+  <string name="Main_EnterDonation_Summary">개발자에게 후원합니다</string>
 
   <!--App Usage Caution-->
   <string name="AppUsageCautionActivity_Title">앱 주의사항</string>
 
+  <!--QnA-->
+  <string name="QnAActivity_Title">Q &amp; A</string>
+
+  <!--Donation-->
+  <string name="DonationActivity_Title">기부하기</string>
+  <string name="DonationActivity_MainText">개발자에게 기부하기</string>
+  <string name="DonationActivity_SubText"></string>
+  <string name="DonationActivity_DonationText1">₩1,000</string>
+  <string name="DonationActivity_DonationText2">₩2,000</string>
+  <string name="DonationActivity_DonationText3">₩3,000</string>
+  <string name="DonationActivity_DonationText4">₩5,000</string>
+  <string name="DonationActivity_DonationText5">₩10,000</string>
+  <string name="DonationActivity_DonationText6">₩20,000</string>
+  <string name="DonationActivity_PurchaseFail">결제에 실패했습니다. 다시 시도해 주세요.</string>
+  <string name="DonationActivity_PurchaseFail_ConnectError">결제에 실패했습니다. 연결 상태를 확인해 주세요.</string>
+  <string name="DonationActivity_PurchaseSuccess">결제에 성공했습니다.</string>
+  
   <!--Main Menus-->
   <string name="MainMenu_Category_Basic">기본</string>
   <string name="MainMenu_Basic_EnableMapping_Title">맵핑 활성화</string>

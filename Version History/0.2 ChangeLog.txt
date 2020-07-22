@@ -1,0 +1,9 @@
+- Support Android 10
+- Add info string
+- Improve app mapping feature
+- Add 6 action mappings
+- Add permission
+- Add app info activity
+- Shortcut item for accessibility
+- Fix app issue after reboot device
+- Fix button issue

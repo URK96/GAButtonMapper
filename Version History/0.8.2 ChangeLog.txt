@@ -1,0 +1,3 @@
+- Fix monitoring process issue after device reboot
+- Add enable or disable toast message option
+- Optimize memory

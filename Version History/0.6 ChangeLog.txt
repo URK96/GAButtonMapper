@@ -1,0 +1,6 @@
+- Improve record feature
+- Add 3 action mapping
+- Add button click / longclick interval setting
+- Edit some setting item
+- Optimize memory and battery usage
+- Add permission

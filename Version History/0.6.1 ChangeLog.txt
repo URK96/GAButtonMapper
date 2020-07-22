@@ -1,0 +1,4 @@
+- Improve record feature
+- Add button test feature
+- Add log monitoring range option
+- Optimize memory and battery usage

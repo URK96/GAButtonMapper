@@ -16,12 +16,6 @@ namespace GAButtonMapper
             base.OnCreate(savedInstanceState);
 
             // Create your application here
-            /*SetContentView(Resource.Layout.LogcatLayout);
-
-            tv = FindViewById<TextView>(Resource.Id.AppInfoTextView);
-
-            _ = Method();*/
-
             SetContentView(Resource.Layout.AppInfoLayout);
 
             SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.AppInfoToolbar));
@@ -41,15 +35,5 @@ namespace GAButtonMapper
 
             return base.OnOptionsItemSelected(item);
         }
-
-        /*private async Task Method()
-        {
-            while (true)
-            {
-                await Task.Delay(50);
-
-                tv.Text = ETC.s;
-            }
-        }*/
     }
 }

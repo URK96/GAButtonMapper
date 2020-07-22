@@ -1,0 +1,5 @@
+- Improve LG Quick Pay feature
+- Improve media play/pause option
+- Improve media next/previous option
+- Improve quick, presto memo feature
+- Fix app perform issue

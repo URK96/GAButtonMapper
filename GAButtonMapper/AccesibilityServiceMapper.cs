@@ -27,6 +27,7 @@ namespace GAButtonMapper
 {
     [Service(Label = "GAButtonMapper", Permission = Manifest.Permission.BindAccessibilityService)]
     [IntentFilter(new[] { "android.accessibilityservice.AccessibilityService" })]
+    [MetaData("android.accessibilityservice", Resource = "@xml/accessibility_service_config")]
     public class AccesibilityServiceMapper : AccessibilityService
     {
         private CameraManager cm;
@@ -313,7 +314,8 @@ namespace GAButtonMapper
                     {
                         try
                         {
-                            Intent intent = PackageManager.GetLaunchIntentForPackage(pkName);
+                            var intent = PackageManager.GetLaunchIntentForPackage(pkName);
+
                             intent.AddFlags(ActivityFlags.NewTask);
                             StartActivity(intent);
                         }
@@ -364,6 +366,7 @@ namespace GAButtonMapper
                             quickMemoIntent.SetPackage("com.lge.qmemoplus");
                             quickMemoIntent.SetAction("com.lge.qmemoplus.action.START_QUICKMODE");
                             quickMemoIntent.SetFlags(ActivityFlags.NewTask | ActivityFlags.IncludeStoppedPackages);
+
                             SendBroadcast(quickMemoIntent, "com.lge.qmemoplus.receiver.permission.BROADCAST_CAPTURE_PLUS");
                             break;
                         case 10:
@@ -371,6 +374,7 @@ namespace GAButtonMapper
                             prestoMemoIntent.SetPackage("com.lge.qmemoplus");
                             prestoMemoIntent.SetAction("com.lge.qmemoplus.action.START_PRESTOMEMO");
                             prestoMemoIntent.SetFlags(ActivityFlags.NewTask | ActivityFlags.IncludeStoppedPackages);
+
                             SendBroadcast(prestoMemoIntent, "com.lge.qmemoplus.receiver.permission.BROADCAST_CAPTURE_PLUS");
                             break;
                         case 11:
@@ -409,18 +413,11 @@ namespace GAButtonMapper
                                 vibrator.Vibrate(VibrationEffect.CreateWaveform(new long[] { 200, 0, 200, 0, 200 }, new int[] { 30, 0, 100, 0, 30 }, -1));
                             }
 
-                            /*Intent qPayIntent = new Intent();
-                            qPayIntent.SetClassName("com.lge.lgpay", "com.lge.lgpay.view.voiceassistant.VoiceAssistantLaunchActivity");
-                            qPayIntent.SetAction("com.lge.lgpay.action.SHOW_CARDHISTORY");
-                            qPayIntent.AddCategory("android.intent.category.DEFAULT");
-                            qPayIntent.SetData(Android.Net.Uri.Parse("com.lge.lgpay"));
-                            qPayIntent.SetFlags(ActivityFlags.NewTask);
-                            StartActivity(qPayIntent);*/
-
-                            Intent quickPayIntent = new Intent();
+                            var quickPayIntent = new Intent();
                             quickPayIntent.SetPackage("com.lge.lgpay");
                             quickPayIntent.SetAction("com.lge.lgpay.action.SHOW_QUICKPAY");
                             quickPayIntent.SetFlags(ActivityFlags.NewTask | ActivityFlags.IncludeStoppedPackages);
+
                             SendBroadcast(quickPayIntent);
                             break;
                         case 16:
@@ -439,20 +436,6 @@ namespace GAButtonMapper
                                     {
                                         vibrator.Vibrate(VibrationEffect.CreateWaveform(new long[] { 500, 0, 500, 0 }, new int[] { 30, 0, 60, 0 }, -1));
                                     }
-
-                                    /*var uri = Android.Support.V4.Content.FileProvider.GetUriForFile(this, $"{PackageName}.provider", new Java.IO.File(GetExternalFilesDir(null).AbsolutePath, recorderFileName));
-
-                                    var recorderIntent = new Intent();
-                                    recorderIntent.SetAction(Intent.ActionView);
-                                    recorderIntent.SetDataAndType(uri, "audio/*");
-                                    recorderIntent.SetFlags(ActivityFlags.GrantReadUriPermission);
-
-                                    recorderNBuilder.SetContentTitle(Resources.GetString(Resource.String.Notification_Recorder_Stop_Title));
-                                    recorderNBuilder.SetContentText(Resources.GetString(Resource.String.Notification_Recorder_Stop_Message));
-                                    recorderNBuilder.SetSmallIcon(Resource.Drawable.splash_icon);
-                                    recorderNBuilder.SetContentIntent(PendingIntent.GetActivity(this, 0, recorderIntent, PendingIntentFlags.OneShot));
-
-                                    nm.Notify(recorderNotificationId, recorderNBuilder.Build());*/
 
                                     MainThread.BeginInvokeOnMainThread(() => { Toast.MakeText(this, "Stop Voice Recording", ToastLength.Short).Show(); });
                                 }
@@ -534,15 +517,15 @@ namespace GAButtonMapper
                             Settings.Global.PutInt(ContentResolver, Settings.Global.AirplaneModeOn, Settings.Global.GetInt(ContentResolver, Settings.Global.AirplaneModeOn) == 0 ? 1 : 0);
                             break;
                         case 20:
-                            var mBluetoothAdapter = BluetoothAdapter.DefaultAdapter;
+                            var btAdapter = BluetoothAdapter.DefaultAdapter;
 
-                            if (mBluetoothAdapter.IsEnabled)
+                            if (btAdapter.IsEnabled)
                             {
-                                mBluetoothAdapter.Disable();
+                                btAdapter.Disable();
                             }
                             else
                             {
-                                mBluetoothAdapter.Enable();
+                                btAdapter.Enable();
                             }
                             break;
                     }
@@ -561,6 +544,7 @@ namespace GAButtonMapper
         public override bool OnUnbind(Intent intent)
         {
             Toast.MakeText(this, Resource.String.AccessibilitySevice_Unbind, ToastLength.Short).Show();
+
             isUnbind = true;
 
             UnregisterReceiver(screenReceiver);
@@ -600,6 +584,7 @@ namespace GAButtonMapper
                         if (!longClickSW.IsRunning)
                         {
                             longClickSW.Reset();
+
                             return;
                         }
                     }
@@ -649,6 +634,7 @@ namespace GAButtonMapper
                         if (!clickSW.IsRunning)
                         {
                             clickSW.Reset();
+
                             return;
                         }
                     }

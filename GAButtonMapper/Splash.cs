@@ -8,6 +8,8 @@ using Android.Support.V7.App;
 using Android.Support.V7.Preferences;
 using Android.Views.Accessibility;
 using Android.Widget;
+using Plugin.CurrentActivity;
+using Plugin.InAppBilling;
 using System.IO;
 using System.Threading.Tasks;
 
