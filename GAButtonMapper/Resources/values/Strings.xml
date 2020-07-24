@@ -221,7 +221,7 @@
   <string name="MainMenu_SingleClick_FeatureEnable_SummaryOn">단일 클릭 기능이 활성화 되었습니다.</string>
   <string name="MainMenu_SingleClick_FeatureEnable_SummaryOff">단일 클릭 기능이 비활성화 되었습니다.</string>
 
-  <string name="MainMenu_Category_DoubleClick">이중 클릭(베타)</string>
+  <string name="MainMenu_Category_DoubleClick">이중 클릭</string>
   <string name="MainMenu_DoubleClick_FeatureEnable_Title">활성화</string>
   <string name="MainMenu_DoubleClick_FeatureEnable_SummaryOn">이중 클릭 기능이 활성화 되었습니다.</string>
   <string name="MainMenu_DoubleClick_FeatureEnable_SummaryOff">이중 클릭 기능이 비활성화 되었습니다.</string>
@@ -231,12 +231,12 @@
   <string name="MainMenu_TripleClick_FeatureEnable_SummaryOn">삼중 클릭 기능이 활성화 되었습니다.</string>
   <string name="MainMenu_TripleClick_FeatureEnable_SummaryOff">삼중 클릭 기능이 비활성화 되었습니다.</string>
 
-  <string name="MainMenu_Category_SingleLongClick">단일 롱클릭(베타)</string>
+  <string name="MainMenu_Category_SingleLongClick">단일 롱클릭</string>
   <string name="MainMenu_SingleLongClick_FeatureEnable_Title">활성화</string>
   <string name="MainMenu_SingleLongClick_FeatureEnable_SummaryOn">단일 롱클릭 기능이 활성화 되었습니다.</string>
   <string name="MainMenu_SingleLongClick_FeatureEnable_SummaryOff">단일 롱클릭 기능이 비활성화 되었습니다.</string>
 
-  <string name="MainMenu_Category_DoubleLongClick">이중 롱클릭(베타)</string>
+  <string name="MainMenu_Category_DoubleLongClick">이중 롱클릭</string>
   <string name="MainMenu_DoubleLongClick_FeatureEnable_Title">활성화</string>
   <string name="MainMenu_DoubleLongClick_FeatureEnable_SummaryOn">이중 롱클릭 기능이 활성화 되었습니다.</string>
   <string name="MainMenu_DoubleLongClick_FeatureEnable_SummaryOff">이중 롱클릭 기능이 비활성화 되었습니다.</string>

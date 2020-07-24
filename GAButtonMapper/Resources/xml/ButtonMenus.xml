@@ -98,8 +98,10 @@
 
   <!--Triple Click Part-->
 
+  <!--
   <android.support.v7.preference.PreferenceCategory
-    android:title="@string/MainMenu_Category_TripleClick">
+    android:title="@string/MainMenu_Category_TripleClick"
+    android:visibility="gone">
 
     <android.support.v14.preference.SwitchPreference
       android:key="EnableTripleClick"
@@ -131,6 +133,7 @@
       android:summary="@string/MainMenu_Detail_ActionSelector_Summary"/>
 
   </android.support.v7.preference.PreferenceCategory>
+  -->
 
   <!--Single Long Click Part-->
 
@@ -206,6 +209,7 @@
 
   <!--Triple Long Click Part-->
 
+  <!--
   <android.support.v7.preference.PreferenceCategory
     android:title="@string/MainMenu_Category_TripleLongClick">
 
@@ -239,5 +243,6 @@
       android:summary="@string/MainMenu_Detail_ActionSelector_Summary"/>
 
   </android.support.v7.preference.PreferenceCategory>
+  -->
 
 </android.support.v7.preference.PreferenceScreen>

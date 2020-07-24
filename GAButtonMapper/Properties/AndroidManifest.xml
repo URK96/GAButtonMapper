@@ -5,6 +5,9 @@
 		<provider android:name="android.support.v4.content.FileProvider" android:authorities="${applicationId}.provider" android:exported="false" android:grantUriPermissions="true" tools:replace="android:authorities">
 			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/fileprovider_path" tools:replace="android:resource" />
 		</provider>
+    <meta-data
+			android:name="com.google.android.gms.ads.APPLICATION_ID"
+			android:value="ca-app-pub-4576756770200148~5162682480"/>
 	</application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.READ_LOGS" />
@@ -13,7 +16,6 @@
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.VIBRATE" />
 	<uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-	<uses-permission android:name="android.permission.RECORD_AUDIO" />
 	<uses-permission android:name="android.permission.WRITE_SETTINGS" />
 	<uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
 	<uses-permission android:name="android.permission.BLUETOOTH" />
@@ -22,4 +24,6 @@
 	<uses-permission android:name="com.lge.qmemoplus.receiver.permission.BROADCAST_CAPTURE_PLUS" />
 	<uses-permission android:name="android.permission.BIND_QUICK_SETTINGS_TILE" />
 	<uses-permission android:name="com.android.vending.BILLING" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
 </manifest>

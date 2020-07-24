@@ -12,7 +12,9 @@
         android:id="@+id/MainToolbar"/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -36,9 +38,7 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_margin="10dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:minHeight="?android:attr/actionBarSize"
                 android:background="?attr/colorPrimary"
@@ -65,9 +65,7 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_margin="10dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:minHeight="?android:attr/actionBarSize"
                 android:background="?attr/colorPrimary"
@@ -94,9 +92,7 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_margin="10dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:minHeight="?android:attr/actionBarSize"
                 android:background="?attr/colorPrimary"
@@ -124,18 +120,16 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_margin="10dp"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:minHeight="?android:attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 android:id="@+id/MainSettingEnterCardView"
                 app:cardCornerRadius="5dp">
                 <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -153,18 +147,17 @@
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_margin="10dp"
+                android:visibility="gone"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:minHeight="?android:attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 android:id="@+id/MainDonationEnterCardView"
                 app:cardCornerRadius="5dp">
                 <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -181,10 +174,16 @@
             </android.support.v7.widget.CardView>
         </LinearLayout>
     </ScrollView>
-    <com.google.android.gms.ads.AdView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/MainAdsView"
-        app:adSize="BANNER"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.gms.ads.AdView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:id="@+id/MainAdsView"
+            app:adSize="BANNER"
+            app:adUnitId="ca-app-pub-4576756770200148/8335640732"/>
+    </RelativeLayout>
 </LinearLayout>

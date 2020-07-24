@@ -2,14 +2,14 @@
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
+using Android.Gms.Ads;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Support.V7.Preferences;
 using Android.Views.Accessibility;
 using Android.Widget;
-using Plugin.CurrentActivity;
-using Plugin.InAppBilling;
+
 using System.IO;
 using System.Threading.Tasks;
 
@@ -21,6 +21,7 @@ namespace GAButtonMapper
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+
 
             ETC.sharedPreferences = PreferenceManager.GetDefaultSharedPreferences(this);
             ETC.packm = PackageManager;

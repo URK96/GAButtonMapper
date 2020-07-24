@@ -30,10 +30,10 @@ namespace GAButtonMapper
         {
             "SingleClick",
             "DoubleClick",
-            "TripleClick",
+            //"TripleClick",
             "SingleLongClick",
             "DoubleLongClick",
-            "TripleLongClick"
+            //"TripleLongClick"
         };
 
         public override void OnCreatePreferences(Bundle savedInstanceState, string rootKey)
@@ -48,19 +48,19 @@ namespace GAButtonMapper
             {
                 FindPreference("AppSelector_SingleClick"),
                 FindPreference("AppSelector_DoubleClick"),
-                FindPreference("AppSelector_TripleClick"),
+                //FindPreference("AppSelector_TripleClick"),
                 FindPreference("AppSelector_SingleLongClick"),
                 FindPreference("AppSelector_DoubleLongClick"),
-                FindPreference("AppSelector_TripleLongClick")
+                //FindPreference("AppSelector_TripleLongClick")
             };
             actionSelectorPs = new ListPreference[]
             {
                 FindPreference("ActionSelector_SingleClick") as ListPreference,
                 FindPreference("ActionSelector_DoubleClick") as ListPreference,
-                FindPreference("ActionSelector_TripleClick") as ListPreference,
+                //FindPreference("ActionSelector_TripleClick") as ListPreference,
                 FindPreference("ActionSelector_SingleLongClick") as ListPreference,
                 FindPreference("ActionSelector_DoubleLongClick") as ListPreference,
-                FindPreference("ActionSelector_TripleLongClick") as ListPreference
+                //FindPreference("ActionSelector_TripleLongClick") as ListPreference
             };
 
             InitMainMenus();

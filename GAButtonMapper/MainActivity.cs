@@ -1,12 +1,14 @@
-﻿
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
+using Android.Gms.Ads;
 using Android.OS;
+using Android.Provider;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using Android.Provider;
+using Android;
+
 using System;
 
 namespace GAButtonMapper
@@ -14,6 +16,8 @@ namespace GAButtonMapper
     [Activity(Label = "MainActivity", Theme = "@style/AppTheme.NoActionBar", ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : AppCompatActivity
     {
+        static internal Activity context;
+
         private readonly string shortcutAIOpenAssistant = "shortcut_ai_key_open_assistant";
         private readonly string shortcutAIOpenLens = "shortcut_ai_key_open_lens";
         private readonly string shortcutAITalkToAssistant = "shortcut_ai_key_talk_to_assistant";
@@ -21,6 +25,7 @@ namespace GAButtonMapper
         TextView welcomeTextView;
         CardView aiShortcutDisableCardView;
         TextView aiShortcutDisableSummaryTextView;
+        AdView adView;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -28,6 +33,8 @@ namespace GAButtonMapper
 
             // Create your application here
             SetContentView(Resource.Layout.MainLayout);
+
+            context = this;
 
             SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.MainToolbar));
             SupportActionBar.SetDisplayShowTitleEnabled(true);
@@ -43,6 +50,14 @@ namespace GAButtonMapper
             aiShortcutDisableCardView.Click += AiShortcutDisableCardView_Click;
             FindViewById<CardView>(Resource.Id.MainSettingEnterCardView).Click += delegate { StartActivity(typeof(SettingActivity)); };
             FindViewById<CardView>(Resource.Id.MainDonationEnterCardView).Click += delegate { StartActivity(typeof(DonationActivity)); };
+
+            adView = FindViewById<AdView>(Resource.Id.MainAdsView);
+            //adView.AdListener = new AdsListener();
+
+            MobileAds.Initialize(this);
+
+            adView.LoadAd(new AdRequest.Builder().Build());
+            adView.Resume();
         }
 
         protected override void OnResume()
@@ -71,6 +86,8 @@ namespace GAButtonMapper
                 aiShortcutDisableSummaryTextView.SetText(Resource.String.Main_DisableAIShortcut_Summary_Unable);
                 aiShortcutDisableCardView.Enabled = false;
             }
+
+            adView?.Resume();
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -113,6 +130,23 @@ namespace GAButtonMapper
         {
             base.OnBackPressed();
             FinishAffinity();
+        }
+
+        internal class AdsListener : AdListener
+        {
+            public override void OnAdLoaded()
+            {
+                base.OnAdLoaded();
+
+                Toast.MakeText(context, "Ads Load Success", ToastLength.Short).Show();
+            }
+
+            public override void OnAdFailedToLoad(int p0)
+            {
+                base.OnAdFailedToLoad(p0);
+
+                Toast.MakeText(context, $"Ads Load Fail : {p0}", ToastLength.Short).Show();
+            }
         }
     }
 }
