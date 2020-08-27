@@ -1,7 +1,12 @@
 # GAButtonMapper
 LG 스마트폰을 위한 Google Assistant 버튼 맵핑 앱
+
 Google Assistant Button Mapping Application for LG Devices
 
+
+
+<img alt="RespectU" src="https://raw.github.com/URK96/GAButtonMapper/blob/master/Image/1.png" style="max-width: 80%">
+<img alt="RespectU" src="https://raw.github.com/URK96/GAButtonMapper/blob/master/Image/2.png" style="max-width: 80%">
 
 
 
