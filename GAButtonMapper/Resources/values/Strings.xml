@@ -198,6 +198,10 @@
   <string name="MainMenu_Detail_ActionSelectorEntry_ToggleAirplaneMode">비행기 모드 토글</string>
   <string name="MainMenu_Detail_ActionSelectorEntry_ToggleBluetooth">블루투스 토글</string>
   <string name="MainMenu_Detail_ActionSelectorEntry_ToggleWiFi">Wi-Fi 토글</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_ToggleAutoScreenBrightness">자동 밝기 토글</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_ToggleVolumeUp">음량 Up</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_ToggleVolumeDown">음량 Down</string>
+  <string name="MainMenu_Detail_ActionSelectorEntry_ToggleVolumeMute">음소거 토글</string>
 
   <string name="MainMenu_Category_ButtonInterval">버튼 클릭 조정</string>
   <string name="MainMenu_LogCounting_Title">로그 인식 범위 설정</string>

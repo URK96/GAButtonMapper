@@ -8,6 +8,7 @@ using Android.Views;
 using Android.Widget;
 
 using AndroidX.CardView.Widget;
+
 using Plugin.CurrentActivity;
 using Plugin.InAppBilling;
 using Plugin.InAppBilling.Abstractions;
@@ -45,7 +46,7 @@ namespace GAButtonMapper
                 FindViewById<CardView>(Resource.Id.DonationActivityCardView5),
                 FindViewById<CardView>(Resource.Id.DonationActivityCardView6)
             };
-            
+
             foreach (var cv in donationCardList)
             {
                 cv.Click += DonationCardView_Click;

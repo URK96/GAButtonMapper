@@ -1,13 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" android:versionName="1.0.0" package="com.lgplus.gabtmap" android:installLocation="auto" android:versionCode="18">
-	<uses-sdk android:minSdkVersion="26" android:targetSdkVersion="29" />
+	<uses-sdk android:minSdkVersion="26" android:targetSdkVersion="28" />
 	<application android:allowBackup="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:roundIcon="@mipmap/ic_launcher_round" android:supportsRtl="true" android:theme="@style/AppTheme">
 		<provider android:name="android.support.v4.content.FileProvider" android:authorities="${applicationId}.provider" android:exported="false" android:grantUriPermissions="true" tools:replace="android:authorities">
 			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/fileprovider_path" tools:replace="android:resource" />
 		</provider>
-    <meta-data
-			android:name="com.google.android.gms.ads.APPLICATION_ID"
-			android:value="ca-app-pub-4576756770200148~5162682480"/>
+		<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-4576756770200148~5162682480" />
 	</application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.READ_LOGS" />
@@ -26,4 +24,7 @@
 	<uses-permission android:name="com.android.vending.BILLING" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.RECORD_AUDIO" />
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+	<uses-permission android:name="android.permission.NFC" />
 </manifest>

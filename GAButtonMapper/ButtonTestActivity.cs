@@ -100,7 +100,7 @@ namespace GAButtonMapper
                     ETC.isClick = false;
                     Toast.MakeText(this, ex.ToString(), ToastLength.Short).Show();
                 }
-                
+
                 if (!ETC.isTest)
                 {
                     break;

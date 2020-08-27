@@ -31,7 +31,13 @@
     <item>@string/MainMenu_Detail_ActionSelectorEntry_ToggleAutoRotate</item>
     <item>@string/MainMenu_Detail_ActionSelectorEntry_ToggleAirplaneMode</item>
     <item>@string/MainMenu_Detail_ActionSelectorEntry_ToggleBluetooth</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_ToggleWiFi</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_ToggleAutoScreenBrightness</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_ToggleVolumeUp</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_ToggleVolumeDown</item>
+    <item>@string/MainMenu_Detail_ActionSelectorEntry_ToggleVolumeMute</item>
   </string-array>
+  
   <string-array name="CustomActionList_Value">
     <item>0</item>
     <item>1</item>
@@ -54,6 +60,11 @@
     <item>18</item>
     <item>19</item>
     <item>20</item>
+    <item>21</item>
+    <item>22</item>
+    <item>23</item>
+    <item>24</item>
+    <item>25</item>
   </string-array>
 </resources>
   

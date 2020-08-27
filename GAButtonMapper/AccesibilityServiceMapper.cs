@@ -6,6 +6,8 @@ using Android.Content;
 using Android.Content.PM;
 using Android.Hardware.Camera2;
 using Android.Media;
+using Android.Net.Wifi;
+using Android.Nfc;
 using Android.OS;
 using Android.Provider;
 using Android.Support.V4.App;
@@ -13,7 +15,12 @@ using Android.Support.V7.Preferences;
 using Android.Views;
 using Android.Views.Accessibility;
 using Android.Widget;
+
+using Java.Lang;
+using Java.Lang.Reflect;
+
 using Plugin.AudioRecorder;
+
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -22,6 +29,8 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 
 using static GAButtonMapper.ETC;
+
+using Exception = System.Exception;
 
 namespace GAButtonMapper
 {
@@ -49,7 +58,7 @@ namespace GAButtonMapper
 
         public override void OnAccessibilityEvent(AccessibilityEvent e)
         {
-            
+
         }
 
         protected override async void OnServiceConnected()
@@ -136,7 +145,7 @@ namespace GAButtonMapper
         }
 
         internal async Task MonitoringKeyState()
-        { 
+        {
             try
             {
                 if (isUnbind || !isMappingEnable || (isScreenOffMappingEnable && isScreenOff))
@@ -528,6 +537,26 @@ namespace GAButtonMapper
                                 btAdapter.Enable();
                             }
                             break;
+                        case 21:
+                            var wifiManager = (WifiManager)GetSystemService(WifiService);
+                            bool wifiStatus = !wifiManager.IsWifiEnabled;
+
+                            wifiManager.SetWifiEnabled(wifiStatus);
+                            break;
+                        case 22:
+                            int brightnessModeValue = Settings.System.GetInt(ContentResolver, Settings.System.ScreenBrightnessMode);
+
+                            Settings.System.PutInt(ContentResolver, Settings.System.ScreenBrightnessMode, (brightnessModeValue == 0) ? 1 : 0);
+                            break;
+                        case 23:
+                            am.AdjustVolume(Adjust.Raise, VolumeNotificationFlags.ShowUi);
+                            break;
+                        case 24:
+                            am.AdjustVolume(Adjust.Lower, VolumeNotificationFlags.ShowUi);
+                            break;
+                        case 25:
+                            am.AdjustVolume(Adjust.ToggleMute, VolumeNotificationFlags.ShowUi);
+                            break;
                     }
                 }
             }
@@ -591,7 +620,7 @@ namespace GAButtonMapper
 
                     StopLongClickSW();
 
-                    MainThread.BeginInvokeOnMainThread(() => 
+                    MainThread.BeginInvokeOnMainThread(() =>
                     {
                         isLongClick = true;
 

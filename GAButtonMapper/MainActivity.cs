@@ -7,7 +7,6 @@ using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using Android;
 
 using System;
 
@@ -99,7 +98,7 @@ namespace GAButtonMapper
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            switch(item?.ItemId)
+            switch (item?.ItemId)
             {
                 case Resource.Id.MainAppInfo:
                     StartActivity(typeof(AppInfoActivity));

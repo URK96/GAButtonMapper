@@ -11,7 +11,6 @@ using Android.Widget;
 using Hoang8f.Widgets;
 
 using System;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GAButtonMapper

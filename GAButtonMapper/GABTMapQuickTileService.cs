@@ -1,10 +1,10 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Service.QuickSettings;
 using Android.Views.Accessibility;
 using Android.Widget;
+
+using System;
 
 using static GAButtonMapper.ETC;
 

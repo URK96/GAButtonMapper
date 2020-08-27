@@ -2,7 +2,6 @@
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.Gms.Ads;
 using Android.OS;
 using Android.Runtime;
 using Android.Support.V7.App;
@@ -45,7 +44,16 @@ namespace GAButtonMapper
 
             ETC.sdcardPath = di.Parent.FullName;
 
-            RequestPermissions(new string[] { Manifest.Permission.WriteExternalStorage, Manifest.Permission.ReadExternalStorage, Manifest.Permission.Bluetooth, Manifest.Permission.BluetoothAdmin }, 0);
+            RequestPermissions(new string[]
+            {
+                Manifest.Permission.WriteExternalStorage,
+                Manifest.Permission.ReadExternalStorage,
+                Manifest.Permission.Bluetooth,
+                Manifest.Permission.BluetoothAdmin,
+                Manifest.Permission.AccessWifiState,
+                Manifest.Permission.ChangeWifiState,
+                Manifest.Permission.Nfc
+            }, 0);
         }
 
         private async Task StartUp()
