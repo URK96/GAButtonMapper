@@ -5,8 +5,8 @@ Google Assistant Button Mapping Application for LG Devices
 
 
 
-<img alt="RespectU" src="https://raw.github.com/URK96/GAButtonMapper/blob/master/Image/1.png" style="max-width: 80%">
-<img alt="RespectU" src="https://raw.github.com/URK96/GAButtonMapper/blob/master/Image/2.png" style="max-width: 80%">
+<img alt="1.png" src="https://github.com/URK96/GAButtonMapper/blob/master/Image/1.png" style="max-width: 80%">
+<img alt="2.png" src="https://github.com/URK96/GAButtonMapper/blob/master/Image/2.png" style="max-width: 80%">
 
 
 
