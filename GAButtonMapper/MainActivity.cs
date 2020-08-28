@@ -1,6 +1,5 @@
 ﻿using Android.App;
 using Android.Content.PM;
-using Android.Gms.Ads;
 using Android.OS;
 using Android.Provider;
 using Android.Support.V7.App;
@@ -9,6 +8,8 @@ using Android.Views;
 using Android.Widget;
 
 using System;
+
+using Xamarin.Essentials;
 
 namespace GAButtonMapper
 {
@@ -24,7 +25,6 @@ namespace GAButtonMapper
         TextView welcomeTextView;
         CardView aiShortcutDisableCardView;
         TextView aiShortcutDisableSummaryTextView;
-        AdView adView;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -48,15 +48,7 @@ namespace GAButtonMapper
             FindViewById<CardView>(Resource.Id.MainQnACardView).Click += delegate { StartActivity(typeof(QnAActivity)); };
             aiShortcutDisableCardView.Click += AiShortcutDisableCardView_Click;
             FindViewById<CardView>(Resource.Id.MainSettingEnterCardView).Click += delegate { StartActivity(typeof(SettingActivity)); };
-            FindViewById<CardView>(Resource.Id.MainDonationEnterCardView).Click += delegate { StartActivity(typeof(DonationActivity)); };
-
-            adView = FindViewById<AdView>(Resource.Id.MainAdsView);
-            //adView.AdListener = new AdsListener();
-
-            MobileAds.Initialize(this);
-
-            adView.LoadAd(new AdRequest.Builder().Build());
-            adView.Resume();
+            FindViewById<CardView>(Resource.Id.MainDonationEnterCardView).Click += delegate { Launcher.OpenAsync("https://donaricano.com/mypage/1461890811_WuZ36S"); };
         }
 
         protected override void OnResume()
@@ -85,8 +77,6 @@ namespace GAButtonMapper
                 aiShortcutDisableSummaryTextView.SetText(Resource.String.Main_DisableAIShortcut_Summary_Unable);
                 aiShortcutDisableCardView.Enabled = false;
             }
-
-            adView?.Resume();
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -129,23 +119,6 @@ namespace GAButtonMapper
         {
             base.OnBackPressed();
             FinishAffinity();
-        }
-
-        internal class AdsListener : AdListener
-        {
-            public override void OnAdLoaded()
-            {
-                base.OnAdLoaded();
-
-                Toast.MakeText(context, "Ads Load Success", ToastLength.Short).Show();
-            }
-
-            public override void OnAdFailedToLoad(int p0)
-            {
-                base.OnAdFailedToLoad(p0);
-
-                Toast.MakeText(context, $"Ads Load Fail : {p0}", ToastLength.Short).Show();
-            }
         }
     }
 }

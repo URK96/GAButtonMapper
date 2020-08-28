@@ -21,7 +21,8 @@
     3. adb를 실행하여 다음 명령어를 입력합니다.\n\n
     adb shell pm grant com.lgplus.gabtmap android.permission.READ_LOGS\n\n
     adb shell pm grant com.lgplus.gabtmap android.permission.WRITE_SECURE_SETTINGS\n\n
-    4. 명령어를 실행하고 LG 스마트폰을 PC와 연결 해제 후 아래 버튼을 클릭하여 앱을 완전히 종료 후 다시 시작해 주세요.
+    4. 명령어를 실행하고 LG 스마트폰을 PC와 연결 해제 후 아래 버튼을 클릭하여 앱을 완전히 종료 후 다시 시작해 주세요.\n\n\n
+    또는 https://github.com/URK96/GAButtonMapper/wiki 를 참고해주세요.
   </string>
   <string name="InitSetting_GrantPermission_ExplainAfterRestart">
     1. 아래 버튼을 눌러 권한이 제대로 입력됐는지 확인해 주세요.\n\n

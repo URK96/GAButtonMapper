@@ -148,7 +148,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:visibility="gone"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:minHeight="?android:attr/actionBarSize"
                 android:background="?attr/colorPrimary"
@@ -174,16 +173,4 @@
             </android.support.v7.widget.CardView>
         </LinearLayout>
     </ScrollView>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <com.google.android.gms.ads.AdView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:id="@+id/MainAdsView"
-            app:adSize="BANNER"
-            app:adUnitId="ca-app-pub-4576756770200148/8335640732"/>
-    </RelativeLayout>
 </LinearLayout>

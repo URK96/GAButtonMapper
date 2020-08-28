@@ -21,7 +21,6 @@ namespace GAButtonMapper
         {
             base.OnCreate(savedInstanceState);
 
-
             ETC.sharedPreferences = PreferenceManager.GetDefaultSharedPreferences(this);
             ETC.packm = PackageManager;
             ETC.acm = GetSystemService("accessibility") as AccessibilityManager;
