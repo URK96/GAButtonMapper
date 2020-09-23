@@ -48,6 +48,7 @@ namespace GAButtonMapper
 
             FindViewById<CardView>(Resource.Id.MainAppUsageCautionCardView).Click += delegate { StartActivity(typeof(AppUsageCautionActivity)); };
             FindViewById<CardView>(Resource.Id.MainQnACardView).Click += delegate { StartActivity(typeof(QnAActivity)); };
+            FindViewById<CardView>(Resource.Id.Main3rdPartyAppCardView).Click += delegate { StartActivity(typeof(OtherAppIssueActivity)); };
             aiShortcutDisableCardView.Click += AiShortcutDisableCardView_Click;
             FindViewById<CardView>(Resource.Id.MainSettingEnterCardView).Click += delegate { StartActivity(typeof(SettingActivity)); };
             FindViewById<CardView>(Resource.Id.MainDonationEnterCardView).Click += delegate { Launcher.OpenAsync("https://donaricano.com/mypage/1461890811_WuZ36S"); };

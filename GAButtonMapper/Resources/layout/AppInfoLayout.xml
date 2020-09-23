@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/AppInfoMainLayout">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -34,7 +35,7 @@
         android:layout_margin="5dp"
         android:gravity="center"
         android:layout_below="@id/AppInfoAppName"
-        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold"
         android:text="@string/app_explain"
         android:id="@+id/AppInfoAppExplain"/>
@@ -45,17 +46,40 @@
         android:gravity="center"
         android:layout_below="@id/AppInfoAppExplain"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="@string/app_explain"
+        android:text=""
         android:id="@+id/AppInfoAppVersion"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:layout_below="@id/AppInfoAppVersion"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text=""
+        android:id="@+id/AppInfoCheckVersion"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/AppInfoCheckVersion"
+        android:id="@+id/AppInfoUpdateButtonLayout">
+        <info.hoang8f.widget.FButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:text="@string/AppInfo_CheckVersion_ButtonText"
+            android:id="@+id/AppInfoUpdateButton"/>
+    </FrameLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:gravity="center"
-        android:layout_below="@id/AppInfoAppVersion"
+        android:layout_below="@id/AppInfoUpdateButtonLayout"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold"
-        android:text="Developer Info"
+        android:text="@string/AppInfo_DeveloperInfo_Title"
         android:id="@+id/AppInfoDeveloperInfoTitle"/>
     <TextView
         android:layout_width="match_parent"
@@ -66,6 +90,19 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/AppInfo_DeveloperInfo"
         android:id="@+id/AppInfoDeveloperInfo"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/AppInfoDeveloperInfo"
+        android:id="@+id/AppInfoLicenseButtonLayout">
+        <info.hoang8f.widget.FButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="License"
+            android:id="@+id/AppInfoLicenseButton"/>
+    </FrameLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"

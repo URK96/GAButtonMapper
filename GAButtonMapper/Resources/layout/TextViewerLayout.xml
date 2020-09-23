@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        android:id="@+id/QnAMainToolbar"/>
+        android:id="@+id/TextViewerMainToolbar"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -19,6 +19,6 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/QnAText"/>
+            android:id="@+id/TextViewerText"/>
     </ScrollView>
 </LinearLayout>

@@ -6,19 +6,14 @@ using Android.Content;
 using Android.Content.PM;
 using Android.Hardware.Camera2;
 using Android.Media;
-using Android.Net.Wifi;
-using Android.Nfc;
 using Android.OS;
 using Android.Provider;
-using Android.Support.V4.App;
-using Android.Support.V7.Preferences;
 using Android.Views;
 using Android.Views.Accessibility;
 using Android.Widget;
 
-using Java.Lang;
-using Java.Lang.Reflect;
-using Java.Net;
+using AndroidX.Core.App;
+using AndroidX.Preference;
 
 using Plugin.AudioRecorder;
 
@@ -493,7 +488,7 @@ namespace GAButtonMapper
 
                                 recorder.AudioInputReceived += delegate
                                 {
-                                    var uri = Android.Support.V4.Content.FileProvider.GetUriForFile(this, $"{PackageName}.provider", new Java.IO.File(GetExternalFilesDir(null).AbsolutePath, recorderFileName));
+                                    var uri = AndroidX.Core.Content.FileProvider.GetUriForFile(this, $"{PackageName}.provider", new Java.IO.File(GetExternalFilesDir(null).AbsolutePath, recorderFileName));
 
                                     var recorderIntent = new Intent();
                                     recorderIntent.SetAction(Intent.ActionView);

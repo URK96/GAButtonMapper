@@ -47,7 +47,7 @@ namespace GAButtonMapper
                 np.MinValue = 1;
                 np.Value = ETC.sharedPreferences.GetInt("MonitoringInterval", 10);
 
-                var ad = new Android.Support.V7.App.AlertDialog.Builder(Activity);
+                var ad = new AndroidX.AppCompat.App.AlertDialog.Builder(Activity);
                 ad.SetTitle(Resource.String.MainMenu_Advance_MonitoringInterval_Title);
                 ad.SetMessage(Resource.String.MainMenu_Advance_MonitoringInterval_Caution);
                 ad.SetCancelable(true);

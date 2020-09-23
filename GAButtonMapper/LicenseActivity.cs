@@ -12,9 +12,9 @@ using System.IO;
 namespace GAButtonMapper
 {
     [Activity(Label = "AppUsageCautionActivity", Theme = "@style/AppTheme.NoActionBar", ScreenOrientation = ScreenOrientation.Portrait)]
-    public class QnAActivity : AppCompatActivity
+    public class LicenseActivity : AppCompatActivity
     {
-        TextView cautionTextView;
+        TextView licenseTextView;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -25,15 +25,15 @@ namespace GAButtonMapper
 
             SetSupportActionBar(FindViewById<AndroidX.AppCompat.Widget.Toolbar>(Resource.Id.TextViewerMainToolbar));
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
-            SupportActionBar.SetTitle(Resource.String.QnAActivity_Title);
+            SupportActionBar.SetTitle(Resource.String.LicenseActivity_Title);
 
-            cautionTextView = FindViewById<TextView>(Resource.Id.TextViewerText);
+            licenseTextView = FindViewById<TextView>(Resource.Id.TextViewerText);
 
-            string assetName = "QnA_ko.txt";
+            string assetName = "License.txt";
 
             using (var sr = new StreamReader(Assets.Open(assetName)))
             {
-                cautionTextView.Text = sr.ReadToEnd();
+                licenseTextView.Text = sr.ReadToEnd();
             }
         }
 

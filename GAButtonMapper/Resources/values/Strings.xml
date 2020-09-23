@@ -46,6 +46,12 @@
   
   <!--App Info-->
   <string name="AppInfo_Title">앱 정보</string>
+  <string name="AppInfo_CheckVersion_Checking">버전 확인 중...</string>
+  <string name="AppInfo_CheckVersion_Updated">최신 버전입니다</string>
+  <string name="AppInfo_CheckVersion_NewUpdate">새로운 버전이 존재합니다</string>
+  <string name="AppInfo_CheckVersion_CheckFail">업데이트 확인에 실패하였습니다</string>
+  <string name="AppInfo_CheckVersion_ButtonText">업데이트</string>
+  <string name="AppInfo_DeveloperInfo_Title">개발자 정보</string>
   <string name="AppInfo_DeveloperInfo">
     URK96\n
     E-Mail : chlwlsgur96@hotmail.com
@@ -113,6 +119,8 @@
   <string name="Main_AppUsageCaution_Summary">꼭 한 번 읽어서 숙지해주시기 바랍니다 :)</string>
   <string name="Main_QnA_Title">작동에 문제가 있으신가요?</string>
   <string name="Main_QnA_Summary">대부분의 해결방법은 이 안에 있습니다.</string>
+  <string name="Main_3rdParty_Title">서드파티 앱 접근성 문제</string>
+  <string name="Main_3rdParty_Summary">Youtube 등의 서드파티 접근성 설정을 해결합니다.</string>
   <string name="Main_DisableAIShortcut_Title">어시스턴트 바로가기 해제</string>
   <string name="Main_DisableAIShortcut_Summary">어시스턴트 키 바로가기 기능을 해제합니다.</string>
   <string name="Main_DisableAIShortcut_Summary_Complete">바로가기 기능이 해제되어 있습니다 :)</string>
@@ -130,6 +138,9 @@
 
   <!--QnA-->
   <string name="QnAActivity_Title">Q &amp; A</string>
+
+  <!--License-->
+  <string name="LicenseActivity_Title">외부 라이선스</string>
 
   <!--Donation-->
   <string name="DonationActivity_Title">기부하기</string>

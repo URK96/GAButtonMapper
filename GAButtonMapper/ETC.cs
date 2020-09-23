@@ -50,6 +50,9 @@ namespace GAButtonMapper
         internal static string channelId = "";
         internal const int recorderNotificationId = 0;
 
+        internal const string versionURL = "https://raw.githubusercontent.com/URK96/GAButtonMapper/master/Version";
+        internal const string updateURL = "https://github.com/URK96/GAButtonMapper/releases";
+
         internal static bool CheckPermission(Context context, string permission)
         {
             try

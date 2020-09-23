@@ -12,7 +12,7 @@ using System.IO;
 namespace GAButtonMapper
 {
     [Activity(Label = "AppUsageCautionActivity", Theme = "@style/AppTheme.NoActionBar", ScreenOrientation = ScreenOrientation.Portrait)]
-    public class QnAActivity : AppCompatActivity
+    public class OtherAppIssueActivity : AppCompatActivity
     {
         TextView cautionTextView;
 
@@ -29,7 +29,7 @@ namespace GAButtonMapper
 
             cautionTextView = FindViewById<TextView>(Resource.Id.TextViewerText);
 
-            string assetName = "QnA_ko.txt";
+            string assetName = "OtherAppIssue_ko.txt";
 
             using (var sr = new StreamReader(Assets.Open(assetName)))
             {
