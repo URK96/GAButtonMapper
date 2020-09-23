@@ -347,6 +347,9 @@ namespace GAButtonMapper
                     }
                     break;
             }
+
+            editor.PutString($"ActionSelector_{clickType[index]}", (string)e.NewValue).Apply();
+            UpdateSummary();
         }
 
         private void UpdateSummary()
