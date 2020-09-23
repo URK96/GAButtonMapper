@@ -1,8 +1,8 @@
 ﻿using Android.Content;
 using Android.OS;
 using Android.Provider;
-using Android.Support.V14.Preferences;
-using Android.Support.V7.Preferences;
+
+using AndroidX.Preference;
 
 namespace GAButtonMapper
 {
@@ -38,16 +38,9 @@ namespace GAButtonMapper
                 goAccessibilitySettingP.SetSummary(Resource.String.MainMenu_ETC_GoAccessibilitySetting_Summary_On);
             }
 
-            if (ETC.pm.IsIgnoringBatteryOptimizations(Activity.PackageName))
-            {
-                goIgnoreBatteryOptimizationSettingP.Summary =
-                    $"{Resources.GetString(Resource.String.MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary)}\n{Resources.GetString(Resource.String.MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary_On)}";
-            }
-            else
-            {
-                goIgnoreBatteryOptimizationSettingP.Summary =
-                    $"{Resources.GetString(Resource.String.MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary)}\n{Resources.GetString(Resource.String.MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary_Off)}";
-            }
+            goIgnoreBatteryOptimizationSettingP.Summary = ETC.pm.IsIgnoringBatteryOptimizations(Activity.PackageName) ?
+                $"{Resources.GetString(Resource.String.MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary)}\n{Resources.GetString(Resource.String.MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary_On)}" :
+                $"{Resources.GetString(Resource.String.MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary)}\n{Resources.GetString(Resource.String.MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary_Off)}";
         }
 
         private void InitMainMenus()
@@ -61,10 +54,12 @@ namespace GAButtonMapper
             // Basic Part
 
             var enableMapping = FindPreference("EnableMapping") as SwitchPreference;
+
             if (!ETC.acm.IsEnabled)
             {
                 ETC.sharedPreferences.Edit().PutBoolean("EnableMapping", false).Apply();
             }
+
             enableMapping.Checked = ETC.sharedPreferences.GetBoolean("EnableMapping", false);
             enableMapping.PreferenceChange += (sender, e) =>
             {
@@ -83,7 +78,7 @@ namespace GAButtonMapper
                 }
                 else
                 {
-                    var ad = new Android.Support.V7.App.AlertDialog.Builder(Activity);
+                    var ad = new AndroidX.AppCompat.App.AlertDialog.Builder(Activity);
                     ad.SetTitle(Resource.String.AlertDialog_Accessibility_Title);
                     ad.SetMessage(Resource.String.AlertDialog_Accessibility_Message);
                     ad.SetPositiveButton(Resource.String.AlertDialog_Accessibility_OK, delegate
@@ -149,7 +144,7 @@ namespace GAButtonMapper
 
             goIgnoreBatteryOptimizationSettingP.PreferenceClick += delegate
             {
-                var ad = new Android.Support.V7.App.AlertDialog.Builder(Activity);
+                var ad = new AndroidX.AppCompat.App.AlertDialog.Builder(Activity);
                 ad.SetTitle(Resource.String.AlertDialog_IgnoreBatteryOptimization_Title);
                 ad.SetMessage(Resource.String.AlertDialog_IgnoreBatteryOptimization_Message);
                 ad.SetPositiveButton(Resource.String.AlertDialog_IgnoreBatteryOptimization_OK, delegate { StartActivity(new Intent(Settings.ActionIgnoreBatteryOptimizationSettings)); });

@@ -1,55 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
-<android.support.v7.preference.PreferenceScreen
+<androidx.preference.PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android">
 
   <!--Button Interval Part-->
 
-  <android.support.v7.preference.PreferenceCategory
+  <androidx.preference.PreferenceCategory
     android:title="@string/MainMenu_Category_ButtonInterval">
 
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="LogCounting"
       android:title="@string/MainMenu_LogCounting_Title"
       android:summary="@string/MainMenu_LogCounting_Summary"/>
 
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="ClickInterval"
       android:title="@string/MainMenu_ButtonInterval_Title"
       android:summary="@string/MainMenu_ButtonInterval_Summary"/>
 
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="LongClickInterval"
       android:title="@string/MainMenu_LongClickInterval_Title"
       android:summary="@string/MainMenu_LongClickInterval_Summary"/>
 
-  </android.support.v7.preference.PreferenceCategory>
+  </androidx.preference.PreferenceCategory>
 
   <!--Single Click Part-->
   
-  <android.support.v7.preference.PreferenceCategory
+  <androidx.preference.PreferenceCategory
     android:title="@string/MainMenu_Category_SingleClick">
     
-    <android.support.v14.preference.SwitchPreference
+    <androidx.preference.SwitchPreference
       android:key="EnableSingleClick"
       android:title="@string/MainMenu_SingleClick_FeatureEnable_Title"
       android:summaryOn="@string/MainMenu_SingleClick_FeatureEnable_SummaryOn"
       android:summaryOff="@string/MainMenu_SingleClick_FeatureEnable_SummaryOff"/>
 
-    <android.support.v7.preference.ListPreference
+    <androidx.preference.ListPreference
       android:key="MappingType_SingleClick"
       android:dependency="EnableSingleClick"
       android:entries="@array/MappingTypeList"
       android:entryValues="@array/MappingTypeList_Value"
       android:title="@string/MainMenu_Detail_MappingType_Title"/>
 
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="AppSelector_SingleClick"
       android:dependency="EnableSingleClick"
       android:visible="false"
       android:title="@string/MainMenu_Detail_AppSelector_Title"
       android:summary="@string/MainMenu_Detail_AppSelector_Summary"/>
 
-    <android.support.v7.preference.ListPreference
+    <androidx.preference.ListPreference
       android:key="ActionSelector_SingleClick"
       android:dependency="EnableSingleClick"
       android:visible="false"
@@ -57,35 +57,42 @@
       android:entryValues="@array/CustomActionList_Value"
       android:title="@string/MainMenu_Detail_ActionSelector_Title"
       android:summary="@string/MainMenu_Detail_ActionSelector_Summary"/>
+
+    <androidx.preference.Preference
+      android:key="URLSelector_SingleClick"
+      android:dependency="EnableSingleClick"
+      android:visible="false"
+      android:title="@string/MainMenu_Detail_URLSelector_Title"
+      android:summary="@string/MainMenu_Detail_URLSelector_Summary"/>
     
-  </android.support.v7.preference.PreferenceCategory>
+  </androidx.preference.PreferenceCategory>
 
   <!--Double Click Part-->
     
-  <android.support.v7.preference.PreferenceCategory
+  <androidx.preference.PreferenceCategory
     android:title="@string/MainMenu_Category_DoubleClick">
 
-    <android.support.v14.preference.SwitchPreference
+    <androidx.preference.SwitchPreference
       android:key="EnableDoubleClick"
       android:title="@string/MainMenu_DoubleClick_FeatureEnable_Title"
       android:summaryOn="@string/MainMenu_DoubleClick_FeatureEnable_SummaryOn"
       android:summaryOff="@string/MainMenu_DoubleClick_FeatureEnable_SummaryOff"/>
 
-    <android.support.v7.preference.ListPreference
+    <androidx.preference.ListPreference
       android:key="MappingType_DoubleClick"
       android:dependency="EnableDoubleClick"
       android:entries="@array/MappingTypeList"
       android:entryValues="@array/MappingTypeList_Value"
       android:title="@string/MainMenu_Detail_MappingType_Title"/>
 
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="AppSelector_DoubleClick"
       android:dependency="EnableDoubleClick"
       android:visible="false"
       android:title="@string/MainMenu_Detail_AppSelector_Title"
       android:summary="@string/MainMenu_Detail_AppSelector_Summary"/>
 
-    <android.support.v7.preference.ListPreference
+    <androidx.preference.ListPreference
       android:key="ActionSelector_DoubleClick"
       android:dependency="EnableDoubleClick"
       android:visible="false"
@@ -94,36 +101,43 @@
       android:title="@string/MainMenu_Detail_ActionSelector_Title"
       android:summary="@string/MainMenu_Detail_ActionSelector_Summary"/>
 
-  </android.support.v7.preference.PreferenceCategory>
+    <androidx.preference.Preference
+      android:key="URLSelector_DoubleClick"
+      android:dependency="EnableDoubleClick"
+      android:visible="false"
+      android:title="@string/MainMenu_Detail_URLSelector_Title"
+      android:summary="@string/MainMenu_Detail_URLSelector_Summary"/>
+
+  </androidx.preference.PreferenceCategory>
 
   <!--Triple Click Part-->
 
   <!--
-  <android.support.v7.preference.PreferenceCategory
+  <androidx.preference.PreferenceCategory
     android:title="@string/MainMenu_Category_TripleClick"
     android:visibility="gone">
 
-    <android.support.v14.preference.SwitchPreference
+    <androidx.preference.SwitchPreference
       android:key="EnableTripleClick"
       android:title="@string/MainMenu_TripleClick_FeatureEnable_Title"
       android:summaryOn="@string/MainMenu_TripleClick_FeatureEnable_SummaryOn"
       android:summaryOff="@string/MainMenu_TripleClick_FeatureEnable_SummaryOff"/>
 
-    <android.support.v7.preference.ListPreference
+    <androidx.preference.ListPreference
       android:key="MappingType_TripleClick"
       android:dependency="EnableTripleClick"
       android:entries="@array/MappingTypeList"
       android:entryValues="@array/MappingTypeList_Value"
       android:title="@string/MainMenu_Detail_MappingType_Title"/>
 
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="AppSelector_TripleClick"
       android:dependency="EnableTripleClick"
       android:visible="false"
       android:title="@string/MainMenu_Detail_AppSelector_Title"
       android:summary="@string/MainMenu_Detail_AppSelector_Summary"/>
 
-    <android.support.v7.preference.ListPreference
+    <androidx.preference.ListPreference
       android:key="ActionSelector_TripleClick"
       android:dependency="EnableTripleClick"
       android:visible="false"
@@ -132,35 +146,35 @@
       android:title="@string/MainMenu_Detail_ActionSelector_Title"
       android:summary="@string/MainMenu_Detail_ActionSelector_Summary"/>
 
-  </android.support.v7.preference.PreferenceCategory>
+  </androidx.preference.PreferenceCategory>
   -->
 
   <!--Single Long Click Part-->
 
-  <android.support.v7.preference.PreferenceCategory
+  <androidx.preference.PreferenceCategory
     android:title="@string/MainMenu_Category_SingleLongClick">
 
-    <android.support.v14.preference.SwitchPreference
+    <androidx.preference.SwitchPreference
       android:key="EnableSingleLongClick"
       android:title="@string/MainMenu_SingleLongClick_FeatureEnable_Title"
       android:summaryOn="@string/MainMenu_SingleLongClick_FeatureEnable_SummaryOn"
       android:summaryOff="@string/MainMenu_SingleLongClick_FeatureEnable_SummaryOff"/>
 
-    <android.support.v7.preference.ListPreference
+    <androidx.preference.ListPreference
       android:key="MappingType_SingleLongClick"
       android:dependency="EnableSingleLongClick"
       android:entries="@array/MappingTypeList"
       android:entryValues="@array/MappingTypeList_Value"
       android:title="@string/MainMenu_Detail_MappingType_Title"/>
 
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="AppSelector_SingleLongClick"
       android:dependency="EnableSingleLongClick"
       android:visible="false"
       android:title="@string/MainMenu_Detail_AppSelector_Title"
       android:summary="@string/MainMenu_Detail_AppSelector_Summary"/>
 
-    <android.support.v7.preference.ListPreference
+    <androidx.preference.ListPreference
       android:key="ActionSelector_SingleLongClick"
       android:dependency="EnableSingleLongClick"
       android:visible="false"
@@ -169,34 +183,41 @@
       android:title="@string/MainMenu_Detail_ActionSelector_Title"
       android:summary="@string/MainMenu_Detail_ActionSelector_Summary"/>
 
-  </android.support.v7.preference.PreferenceCategory>
+    <androidx.preference.Preference
+      android:key="URLSelector_SingleLongClick"
+      android:dependency="EnableSingleLongClick"
+      android:visible="false"
+      android:title="@string/MainMenu_Detail_URLSelector_Title"
+      android:summary="@string/MainMenu_Detail_URLSelector_Summary"/>
+
+  </androidx.preference.PreferenceCategory>
 
   <!--Double Long Click Part-->
 
-  <android.support.v7.preference.PreferenceCategory
+  <androidx.preference.PreferenceCategory
     android:title="@string/MainMenu_Category_DoubleLongClick">
 
-    <android.support.v14.preference.SwitchPreference
+    <androidx.preference.SwitchPreference
       android:key="EnableDoubleLongClick"
       android:title="@string/MainMenu_DoubleLongClick_FeatureEnable_Title"
       android:summaryOn="@string/MainMenu_DoubleLongClick_FeatureEnable_SummaryOn"
       android:summaryOff="@string/MainMenu_DoubleLongClick_FeatureEnable_SummaryOff"/>
 
-    <android.support.v7.preference.ListPreference
+    <androidx.preference.ListPreference
       android:key="MappingType_DoubleLongClick"
       android:dependency="EnableDoubleLongClick"
       android:entries="@array/MappingTypeList"
       android:entryValues="@array/MappingTypeList_Value"
       android:title="@string/MainMenu_Detail_MappingType_Title"/>
 
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="AppSelector_DoubleLongClick"
       android:dependency="EnableDoubleLongClick"
       android:visible="false"
       android:title="@string/MainMenu_Detail_AppSelector_Title"
       android:summary="@string/MainMenu_Detail_AppSelector_Summary"/>
 
-    <android.support.v7.preference.ListPreference
+    <androidx.preference.ListPreference
       android:key="ActionSelector_DoubleLongClick"
       android:dependency="EnableDoubleLongClick"
       android:visible="false"
@@ -205,35 +226,42 @@
       android:title="@string/MainMenu_Detail_ActionSelector_Title"
       android:summary="@string/MainMenu_Detail_ActionSelector_Summary"/>
 
-  </android.support.v7.preference.PreferenceCategory>
+    <androidx.preference.Preference
+      android:key="URLSelector_DoubleLongClick"
+      android:dependency="EnableDoubleLongClick"
+      android:visible="false"
+      android:title="@string/MainMenu_Detail_URLSelector_Title"
+      android:summary="@string/MainMenu_Detail_URLSelector_Summary"/>
+
+  </androidx.preference.PreferenceCategory>
 
   <!--Triple Long Click Part-->
 
   <!--
-  <android.support.v7.preference.PreferenceCategory
+  <androidx.preference.PreferenceCategory
     android:title="@string/MainMenu_Category_TripleLongClick">
 
-    <android.support.v14.preference.SwitchPreference
+    <androidx.preference.SwitchPreference
       android:key="EnableTripleLongClick"
       android:title="@string/MainMenu_TripleLongClick_FeatureEnable_Title"
       android:summaryOn="@string/MainMenu_TripleLongClick_FeatureEnable_SummaryOn"
       android:summaryOff="@string/MainMenu_TripleLongClick_FeatureEnable_SummaryOff"/>
 
-    <android.support.v7.preference.ListPreference
+    <androidx.preference.ListPreference
       android:key="MappingType_TripleLongClick"
       android:dependency="EnableTripleLongClick"
       android:entries="@array/MappingTypeList"
       android:entryValues="@array/MappingTypeList_Value"
       android:title="@string/MainMenu_Detail_MappingType_Title"/>
 
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="AppSelector_TripleLongClick"
       android:dependency="EnableTripleLongClick"
       android:visible="false"
       android:title="@string/MainMenu_Detail_AppSelector_Title"
       android:summary="@string/MainMenu_Detail_AppSelector_Summary"/>
 
-    <android.support.v7.preference.ListPreference
+    <androidx.preference.ListPreference
       android:key="ActionSelector_TripleLongClick"
       android:dependency="EnableTripleLongClick"
       android:visible="false"
@@ -242,7 +270,7 @@
       android:title="@string/MainMenu_Detail_ActionSelector_Title"
       android:summary="@string/MainMenu_Detail_ActionSelector_Summary"/>
 
-  </android.support.v7.preference.PreferenceCategory>
+  </androidx.preference.PreferenceCategory>
   -->
 
-</android.support.v7.preference.PreferenceScreen>
+</androidx.preference.PreferenceScreen>

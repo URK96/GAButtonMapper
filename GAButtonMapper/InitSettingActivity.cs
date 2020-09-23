@@ -2,11 +2,12 @@
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Support.Transitions;
-using Android.Support.V7.App;
-using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+
+using AndroidX.AppCompat.App;
+using AndroidX.CardView.Widget;
+using AndroidX.Transitions;
 
 using Hoang8f.Widgets;
 
@@ -90,21 +91,21 @@ namespace GAButtonMapper
 
             if (!ETC.CheckPermission(this, Manifest.Permission.ReadLogs))
             {
-                Toast.MakeText(this, "Read Logs check Fail", ToastLength.Short).Show();
+                Toast.MakeText(this, "Read Logs check fail", ToastLength.Short).Show();
 
                 return;
             }
 
             if (!ETC.CheckPermission(this, Manifest.Permission.WriteSecureSettings))
             {
-                Toast.MakeText(this, "Write Secure Settings check Fail", ToastLength.Short).Show();
+                Toast.MakeText(this, "Write Secure Settings check fail", ToastLength.Short).Show();
 
                 return;
             }
 
             Toast.MakeText(this, "OK", ToastLength.Short).Show();
-            _ = ShowSecondCard();
 
+            _ = ShowSecondCard();
         }
 
         private void CvGrantPermission_Click(object sender, EventArgs e)
@@ -217,18 +218,6 @@ namespace GAButtonMapper
             base.OnBackPressed();
 
             FinishAffinity();
-
-            /*if (!exitTimer.Enabled)
-            {
-                exitTimer.Start();
-                ETC.ShowSnackbar(snackbarLayout, Resource.String.Main_CheckExit, Snackbar.LengthLong, Android.Graphics.Color.DarkOrange);
-            }
-            else
-            {
-                FinishAffinity();
-                OverridePendingTransition(Resource.Animation.Activity_SlideInLeft, Resource.Animation.Activity_SlideOutRight);
-                Process.KillProcess(Process.MyPid());
-            }*/
         }
     }
 }

@@ -1,7 +1,0 @@
-- Change UI
-- Fix some string issue
-- Fix Q Memo feature issue
-- Add auto disable assistant setting option
-- Add quick setting tile feature
-- Add quick play after record complete
-- Optimize battery usage 

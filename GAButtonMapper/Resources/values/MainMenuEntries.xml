@@ -3,10 +3,12 @@
   <string-array name="MappingTypeList">
     <item>@string/MainMenu_Detail_MappingTypeEntry_Action</item>
     <item>@string/MainMenu_Detail_MappingTypeEntry_App</item>
+    <item>@string/MainMenu_Detail_MappingTypeEntry_URL</item>
   </string-array>
   <string-array name="MappingTypeList_Value">
     <item>0</item>
     <item>1</item>
+    <item>2</item>
   </string-array>
 
   <string-array name="CustomActionList">

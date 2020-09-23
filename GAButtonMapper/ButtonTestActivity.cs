@@ -1,9 +1,10 @@
 ﻿using Android.App;
 using Android.Graphics;
 using Android.OS;
-using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+
+using AndroidX.AppCompat.App;
 
 using System;
 using System.Threading.Tasks;
@@ -38,7 +39,7 @@ namespace GAButtonMapper
 
                 ETC.isTest = true;
 
-                SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.ButtonTestMainToolbar));
+                SetSupportActionBar(FindViewById<AndroidX.AppCompat.Widget.Toolbar>(Resource.Id.ButtonTestMainToolbar));
                 SupportActionBar.SetTitle(Resource.String.MainMenu_ButtonSub_TestButtonClick_Title);
                 SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 

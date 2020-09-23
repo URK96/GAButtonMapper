@@ -1,8 +1,9 @@
 ﻿using Android.App;
 using Android.OS;
-using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+
+using AndroidX.AppCompat.App;
 
 namespace GAButtonMapper
 {
@@ -16,10 +17,10 @@ namespace GAButtonMapper
             // Create your application here
             SetContentView(Resource.Layout.AppInfoLayout);
 
-            SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.AppInfoToolbar));
+            SetSupportActionBar(FindViewById<AndroidX.AppCompat.Widget.Toolbar>(Resource.Id.AppInfoToolbar));
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
-            FindViewById<TextView>(Resource.Id.AppInfoAppVersion).Text = $"v{ETC.packm.GetPackageInfo(PackageName, 0).VersionName} Release";
+            FindViewById<TextView>(Resource.Id.AppInfoAppVersion).Text = $"v{ETC.packm.GetPackageInfo(PackageName, 0).VersionName}";
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

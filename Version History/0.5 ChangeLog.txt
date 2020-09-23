@@ -1,7 +1,0 @@
-- Improve internal monitoring loop system
-- Add triple click feature
-- Add long click feature
-- Improve diable mapping on screen off option
-- Add 1 action mapping
-- Add vibration option
-- Add permission request dialog

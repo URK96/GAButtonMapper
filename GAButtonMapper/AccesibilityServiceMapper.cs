@@ -18,6 +18,7 @@ using Android.Widget;
 
 using Java.Lang;
 using Java.Lang.Reflect;
+using Java.Net;
 
 using Plugin.AudioRecorder;
 
@@ -278,23 +279,14 @@ namespace GAButtonMapper
 
                 switch (count)
                 {
-                    case 1 when longClick:
-                        countS = "SingleLongClick";
+                    case 1:
+                        countS = longClick ? "SingleLongClick" : "SingleClick";
                         break;
-                    case 1 when !longClick:
-                        countS = "SingleClick";
+                    case 2:
+                        countS = longClick ? "DoubleLongClick" : "DoubleClick";
                         break;
-                    case 2 when longClick:
-                        countS = "DoubleLongClick";
-                        break;
-                    case 2 when !longClick:
-                        countS = "DoubleClick";
-                        break;
-                    case 3 when longClick:
-                        countS = "TripleLongClick";
-                        break;
-                    case 3 when !longClick:
-                        countS = "TripleClick";
+                    case 3:
+                        countS = longClick ? "TripleLongClick" : "TripleClick";
                         break;
                     default:
                         return;
@@ -315,7 +307,9 @@ namespace GAButtonMapper
                     return;
                 }
 
-                if (int.Parse(sharedPreferences.GetString($"MappingType_{countS}", "0")) == 1)
+                string mappingValue = sharedPreferences.GetString($"MappingType_{countS}", "0");
+
+                if (mappingValue == "1")
                 {
                     string pkName = sharedPreferences.GetString($"AppSelector_{countS}", "");
 
@@ -335,10 +329,31 @@ namespace GAButtonMapper
                     }
                     else
                     {
-                        throw new Exception($"{pkName} is not available");
+                        Toast.MakeText(this, Resource.String.Message_NoMappingApp, ToastLength.Short).Show();
                     }
                 }
-                else if (int.Parse(sharedPreferences.GetString($"MappingType_{countS}", "0")) == 0)
+                else if (mappingValue == "2")
+                {
+                    string url = sharedPreferences.GetString($"URLSelector_{countS}", "");
+
+                    try
+                    {
+                        if (string.IsNullOrWhiteSpace(url))
+                        {
+                            return;
+                        }
+
+                        if (!await Launcher.TryOpenAsync(url))
+                        {
+                            throw new Exception();
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        Toast.MakeText(this, $"Cannot open {url}", ToastLength.Short).Show();
+                    }
+                }
+                else if (mappingValue == "0")
                 {
                     switch (int.Parse(sharedPreferences.GetString($"ActionSelector_{countS}", "0")))
                     {
@@ -538,10 +553,10 @@ namespace GAButtonMapper
                             }
                             break;
                         case 21:
-                            var wifiManager = (WifiManager)GetSystemService(WifiService);
+                            /*var wifiManager = (WifiManager)GetSystemService(WifiService);
                             bool wifiStatus = !wifiManager.IsWifiEnabled;
 
-                            wifiManager.SetWifiEnabled(wifiStatus);
+                            wifiManager.SetWifiEnabled(wifiStatus);*/
                             break;
                         case 22:
                             int brightnessModeValue = Settings.System.GetInt(ContentResolver, Settings.System.ScreenBrightnessMode);

@@ -1,3 +1,0 @@
-- Fix monitoring loop crash issue
-- Optimize memory and battery usage
-- Add monitoring interval option

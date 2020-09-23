@@ -1,3 +1,0 @@
-- Add QnA string
-- Improve log monitoring process
-- Fix some string

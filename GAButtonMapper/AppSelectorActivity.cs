@@ -2,10 +2,11 @@
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using Android.Support.V7.App;
-using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+
+using AndroidX.AppCompat.App;
+using AndroidX.RecyclerView.Widget;
 
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace GAButtonMapper
     [Activity(Label = "@string/AppSelector_Title", Theme = "@style/AppTheme.NoActionBar")]
     public class AppSelectorActivity : AppCompatActivity
     {
-        private Android.Support.V7.Widget.SearchView searchView;
+        private AndroidX.AppCompat.Widget.SearchView searchView;
         private RecyclerView recyclerView;
 
         private PackageManager pm;
@@ -36,10 +37,10 @@ namespace GAButtonMapper
 
             clickType = Intent.GetStringExtra("Type");
 
-            SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.AppSelectorToolbar));
+            SetSupportActionBar(FindViewById<AndroidX.AppCompat.Widget.Toolbar>(Resource.Id.AppSelectorToolbar));
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
-            searchView = FindViewById<Android.Support.V7.Widget.SearchView>(Resource.Id.AppSelectorSearchView);
+            searchView = FindViewById<AndroidX.AppCompat.Widget.SearchView>(Resource.Id.AppSelectorSearchView);
             searchView.QueryTextChange += async (sender, e) => { await ListApp(e.NewText); };
             recyclerView = FindViewById<RecyclerView>(Resource.Id.AppSelectorRecyclerView);
             recyclerView.SetLayoutManager(new LinearLayoutManager(this));
@@ -80,7 +81,8 @@ namespace GAButtonMapper
 
                 foreach (var info in pkInfo)
                 {
-                    if (!string.IsNullOrWhiteSpace(searchName) && (!info.LoadLabel(pm)?.ToLower().Contains(searchName) ?? true))
+                    if (!string.IsNullOrWhiteSpace(searchName) && 
+                        (!info.LoadLabel(pm)?.ToLower().Contains(searchName) ?? true))
                     {
                         continue;
                     }
@@ -152,7 +154,7 @@ namespace GAButtonMapper
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
         {
-            View view = LayoutInflater.From(parent?.Context).Inflate(Resource.Layout.AppSelectorListLayout, parent, false);
+            var view = LayoutInflater.From(parent?.Context).Inflate(Resource.Layout.AppSelectorListLayout, parent, false);
             var vh = new AppListViewHolder(view, OnClick);
 
             return vh;

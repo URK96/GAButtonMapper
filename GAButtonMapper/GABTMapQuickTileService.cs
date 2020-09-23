@@ -38,19 +38,13 @@ namespace GAButtonMapper
                 if (!acm.IsEnabled)
                 {
                     QsTile.State = TileState.Inactive;
+
                     QsTile.UpdateTile();
 
                     return;
                 }
 
-                if (sharedPreferences.GetBoolean(mappingPrefId, false))
-                {
-                    QsTile.State = TileState.Active;
-                }
-                else
-                {
-                    QsTile.State = TileState.Inactive;
-                }
+                QsTile.State = sharedPreferences.GetBoolean(mappingPrefId, false) ? TileState.Active : TileState.Inactive;
 
                 QsTile.UpdateTile();
             }

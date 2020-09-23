@@ -26,14 +26,6 @@ namespace GAButtonMapper
                     isScreenOff = true;
                     break;
             }
-
-            /*if (sharedPreferences.GetBoolean("EnableMapping", false) &&
-                sharedPreferences.GetBoolean("ScreenOffDisableMapping", false) &&
-                pm.IsInteractive &&
-                !isRun)
-            {
-                monitoringMethod();
-            }*/
         }
     }
 }

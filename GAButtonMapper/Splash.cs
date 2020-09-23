@@ -4,10 +4,11 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V7.App;
-using Android.Support.V7.Preferences;
 using Android.Views.Accessibility;
 using Android.Widget;
+
+using AndroidX.AppCompat.App;
+using AndroidX.Preference;
 
 using System.IO;
 using System.Threading.Tasks;
@@ -48,10 +49,7 @@ namespace GAButtonMapper
                 Manifest.Permission.WriteExternalStorage,
                 Manifest.Permission.ReadExternalStorage,
                 Manifest.Permission.Bluetooth,
-                Manifest.Permission.BluetoothAdmin,
-                Manifest.Permission.AccessWifiState,
-                Manifest.Permission.ChangeWifiState,
-                Manifest.Permission.Nfc
+                Manifest.Permission.BluetoothAdmin
             }, 0);
         }
 
@@ -61,7 +59,9 @@ namespace GAButtonMapper
 
             CreateNotificationChannel();
 
-            if (!ETC.CheckPermission(this, Manifest.Permission.ReadLogs) || !ETC.CheckPermission(this, Manifest.Permission.WriteSecureSettings) || ETC.sharedPreferences.GetBoolean("HasRestart", false))
+            if (!ETC.CheckPermission(this, Manifest.Permission.ReadLogs) || 
+                !ETC.CheckPermission(this, Manifest.Permission.WriteSecureSettings) || 
+                ETC.sharedPreferences.GetBoolean("HasRestart", false))
             {
                 StartActivity(typeof(InitSettingActivity));
             }

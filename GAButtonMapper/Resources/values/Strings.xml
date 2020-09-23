@@ -172,11 +172,18 @@
   <string name="MainMenu_Detail_MappingType_Title">키 맵핑 종류</string>
   <string name="MainMenu_Detail_MappingTypeEntry_App">앱</string>
   <string name="MainMenu_Detail_MappingTypeEntry_Action">동작</string>
+  <string name="MainMenu_Detail_MappingTypeEntry_URL">URI</string>
   <string name="MainMenu_Detail_AppSelector_Title">사용자 앱 선택</string>
-  <string name="MainMenu_Detail_AppSelector_Summary">어시스턴트 키를 입력할 때 실행할 사용자 앱을 선택하세요</string>
-  <string name="MainMenu_Detail_AppSelector_Summary_NowApp">선택된 앱</string>
+  <string name="MainMenu_Detail_AppSelector_Summary">
+    어시스턴트 키를 입력할 때 실행할 사용자 앱을 선택하세요.\n\n
+    현재 앱 : 
+  </string>
   <string name="MainMenu_Detail_ActionSelector_Title">사용자 정의 동작 선택</string>
-  <string name="MainMenu_Detail_ActionSelector_Summary">어시스턴트 키를 입력할 때 실행할 동작을 선택하세요</string>
+  <string name="MainMenu_Detail_ActionSelector_Summary">
+    어시스턴트 키를 입력할 때 실행할 동작을 선택하세요.\n\n
+    현재 동작 : 
+  </string>
+  <string name="MainMenu_Detail_ActionSelector_Summary_NowAction">선택된 동작</string>
   <string name="MainMenu_Detail_ActionSelectorEntry_Back">Back 버튼</string>
   <string name="MainMenu_Detail_ActionSelectorEntry_Home">Home 버튼</string>
   <string name="MainMenu_Detail_ActionSelectorEntry_Recent">최근 앱 목록</string>
@@ -203,6 +210,13 @@
   <string name="MainMenu_Detail_ActionSelectorEntry_ToggleVolumeUp">음량 Up</string>
   <string name="MainMenu_Detail_ActionSelectorEntry_ToggleVolumeDown">음량 Down</string>
   <string name="MainMenu_Detail_ActionSelectorEntry_ToggleVolumeMute">음소거 토글</string>
+  <string name="MainMenu_Detail_URLSelector_Title">URI 정의</string>
+  <string name="MainMenu_Detail_URLSelector_Summary">
+    어시스턴트 키를 입력할 때 연결할 URI를 입력하세요.\n\n
+    현재 URI : 
+  </string>
+  <string name="MainMenu_Detail_URLSelector_Dialog_Title">URI 입력</string>
+  <string name="MainMenu_Detail_URLSelector_Dialog_Message">연결할 URI를 입력하세요</string>
 
   <string name="MainMenu_Category_ButtonInterval">버튼 클릭 조정</string>
   <string name="MainMenu_LogCounting_Title">로그 인식 범위 설정</string>
@@ -306,4 +320,7 @@
   <string name="Notification_Recorder_Start_Message">녹음이 실행되고 있습니다.</string>
   <string name="Notification_Recorder_Stop_Title">GABTMap 녹음 기능</string>
   <string name="Notification_Recorder_Stop_Message">녹음이 완료되었습니다. 클릭하면 녹음 된 파일이 재생됩니다.</string>
+
+  <!--Message-->
+  <string name="Message_NoMappingApp">연결된 앱이 없습니다.</string>
 </resources>

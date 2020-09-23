@@ -1,95 +1,95 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
-<android.support.v7.preference.PreferenceScreen
+<androidx.preference.PreferenceScreen
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
   <!--Basic Part-->
   
-  <android.support.v7.preference.PreferenceCategory
+  <androidx.preference.PreferenceCategory
     android:title="@string/MainMenu_Category_Basic">
     
-    <android.support.v14.preference.SwitchPreference
+    <androidx.preference.SwitchPreference
       android:key="EnableMapping"
       android:title="@string/MainMenu_Basic_EnableMapping_Title"
       android:summaryOn="@string/MainMenu_Basic_EnableMapping_SummaryOn"
       android:summaryOff="@string/MainMenu_Basic_EnableMapping_SummaryOff"/>
 
-    <android.support.v14.preference.SwitchPreference
+    <androidx.preference.SwitchPreference
       android:key="ScreenOffDisableMapping"
       android:dependency="EnableMapping"
       android:title="@string/MainMenu_Basic_ScreenOffDisableMapping_Title"
       android:summaryOn="@string/MainMenu_Basic_ScreenOffDisableMapping_SummaryOn"
       android:summaryOff="@string/MainMenu_Basic_ScreenOffDisableMapping_SummaryOff"/>
 
-    <android.support.v14.preference.SwitchPreference
+    <androidx.preference.SwitchPreference
       android:key="LongClickVibrator"
       android:dependency="EnableMapping"
       android:title="@string/MainMenu_Basic_LongClickVibrator_Title"
       android:summaryOn="@string/MainMenu_Basic_LongClickVibrator_SummaryOn"
       android:summaryOff="@string/MainMenu_Basic_LongClickVibrator_SummaryOff"/>
 
-    <android.support.v14.preference.SwitchPreference
+    <androidx.preference.SwitchPreference
       android:key="ActionFeatureVibrator"
       android:dependency="EnableMapping"
       android:title="@string/MainMenu_Basic_ActionFeatureVibrator_Title"
       android:summaryOn="@string/MainMenu_Basic_ActionFeatureVibrator_SummaryOn"
       android:summaryOff="@string/MainMenu_Basic_ActionFeatureVibrator_SummaryOff"/>
 
-    <android.support.v14.preference.SwitchPreference
+    <androidx.preference.SwitchPreference
       android:key="ScreenOnOffToastMessageEnable"
       android:title="@string/MainMenu_Basic_ScreenOnOffToastMessageEnable_Title"
       android:summaryOn="@string/MainMenu_Basic_ScreenOnOffToastMessageEnable_SummaryOn"
       android:summaryOff="@string/MainMenu_Basic_ScreenOnOffToastMessageEnable_SummaryOff"/>
     
-  </android.support.v7.preference.PreferenceCategory>
+  </androidx.preference.PreferenceCategory>
 
-  <android.support.v7.preference.PreferenceCategory
+  <androidx.preference.PreferenceCategory
     android:title="@string/MainMenu_Category_ButtonSub">
 
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="ButtonSubPreference"
       android:dependency="EnableMapping"
       android:title="@string/MainMenu_ButtonSub_SubPreference_Title"
       android:summary="@string/MainMenu_ButtonSub_SubPreference_Summary"
       app:fragment="com.lgplus.gabtmap.ButtonSubFragment"/>
 
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="TestButtonClick"
       android:dependency="EnableMapping"
       android:title="@string/MainMenu_ButtonSub_TestButtonClick_Title"
       android:summary="@string/MainMenu_ButtonSub_TestButtonClick_Summary"/>
 
-  </android.support.v7.preference.PreferenceCategory>
+  </androidx.preference.PreferenceCategory>
 
   <!--ETC Part-->
   
-  <android.support.v7.preference.PreferenceCategory
+  <androidx.preference.PreferenceCategory
     android:title="@string/MainMenu_Category_ETC">
 
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="GoAccessibilitySetting"
       android:visible="false"
       android:title="@string/MainMenu_ETC_GoAccessibilitySetting_Title"/>
 
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="GoIgnoreBatteryOptimizationSetting"
       android:visible="false"
       android:title="@string/MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Title"
       android:summary="@string/MainMenu_ETC_GoIgnoreBatteryOptimizationSetting_Summary"/>
 
     <!--
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="ViewRecordingFiles"
       android:visible ="false"
       android:title="@string/MainMenu_ETC_ViewRecordingFiles_Title"
       android:summary="@string/MainMenu_ETC_ViewRecordingFiles_Summary"/>-->
 
-    <android.support.v7.preference.Preference
+    <androidx.preference.Preference
       android:key="AdvanceSetting"
       android:visible="false"
       android:title="@string/MainMenu_ETC_AdvanceSetting_Title"
       android:summary="@string/MainMenu_ETC_AdvanceSetting_Summary"
       app:fragment="com.lgplus.gabtmap.AdvanceSettingFragment"/>
 
-  </android.support.v7.preference.PreferenceCategory>
-</android.support.v7.preference.PreferenceScreen>
+  </androidx.preference.PreferenceCategory>
+</androidx.preference.PreferenceScreen>

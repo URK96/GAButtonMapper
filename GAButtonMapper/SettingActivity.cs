@@ -2,9 +2,10 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V7.App;
-using Android.Support.V7.Preferences;
 using Android.Views;
+
+using AndroidX.AppCompat.App;
+using AndroidX.Preference;
 
 using Xamarin.Essentials;
 
@@ -19,7 +20,7 @@ namespace GAButtonMapper
 
             SetContentView(Resource.Layout.SettingLayout);
 
-            SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.MainSettingToolbar));
+            SetSupportActionBar(FindViewById<AndroidX.AppCompat.Widget.Toolbar>(Resource.Id.MainSettingToolbar));
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 
             SupportFragmentManager.BeginTransaction().Replace(Resource.Id.MainSettingFragmentContainer, new MainFragment(), null).Commit();

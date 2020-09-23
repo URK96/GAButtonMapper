@@ -2,10 +2,12 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Provider;
-using Android.Support.V7.App;
-using Android.Support.V7.Widget;
+
 using Android.Views;
 using Android.Widget;
+
+using AndroidX.AppCompat.App;
+using AndroidX.CardView.Widget;
 
 using System;
 
@@ -35,7 +37,7 @@ namespace GAButtonMapper
 
             context = this;
 
-            SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.MainToolbar));
+            SetSupportActionBar(FindViewById<AndroidX.AppCompat.Widget.Toolbar>(Resource.Id.MainToolbar));
             SupportActionBar.SetDisplayShowTitleEnabled(true);
             SupportActionBar.SetDisplayUseLogoEnabled(true);
             SupportActionBar.SetLogo(Resource.Mipmap.ic_launcher);
@@ -118,6 +120,7 @@ namespace GAButtonMapper
         public override void OnBackPressed()
         {
             base.OnBackPressed();
+
             FinishAffinity();
         }
     }

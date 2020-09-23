@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -35,7 +35,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="@string/MainMenu_Caution"
                 android:id="@+id/MainCautionText"/>
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -61,8 +61,8 @@
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="@string/Main_AppUsageCaution_Summary"/>
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -88,8 +88,8 @@
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="@string/Main_QnA_Summary"/>
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -116,8 +116,8 @@
                         android:text="@string/Main_DisableAIShortcut_Summary"
                         android:id="@+id/MainDisableAIShortcutSummaryText"/>
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -143,8 +143,8 @@
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="@string/Main_EnterSetting_Summary"/>
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -170,7 +170,7 @@
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="@string/Main_EnterDonation_Summary"/>
                 </LinearLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

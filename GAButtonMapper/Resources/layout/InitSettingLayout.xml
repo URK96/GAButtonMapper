@@ -21,7 +21,7 @@
         android:layout_centerInParent="true"
         android:animateLayoutChanges="true">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -73,9 +73,9 @@
                         android:id="@+id/InitSetting_GrantPermission_ExplainCheckButton"/>
                 </LinearLayout>
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -126,7 +126,7 @@
                         android:id="@+id/InitSetting_Accessibility_ExplainCheckButton"/>
                 </LinearLayout>
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 </RelativeLayout>

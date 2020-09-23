@@ -3,8 +3,9 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V7.Preferences;
 using Android.Widget;
+
+using AndroidX.Preference;
 
 namespace GAButtonMapper
 {
@@ -53,8 +54,7 @@ namespace GAButtonMapper
                 ad.SetNegativeButton(Resource.String.AlertDialog_Close, delegate { });
                 ad.SetNeutralButton(Resource.String.AlertDialog_Reset, delegate
                 {
-                    editor.PutInt("MonitoringInterval", 30);
-                    editor.Apply();
+                    editor.PutInt("MonitoringInterval", 30).Apply();
 
                     ETC.monitoringInterval = ETC.sharedPreferences.GetInt("MonitoringInterval", 30);
                     monitoringInterval.Summary =
@@ -62,8 +62,7 @@ namespace GAButtonMapper
                 });
                 ad.SetPositiveButton(Resource.String.AlertDialog_Set, delegate
                 {
-                    editor.PutInt("MonitoringInterval", np.Value);
-                    editor.Apply();
+                    editor.PutInt("MonitoringInterval", np.Value).Apply();
 
                     ETC.monitoringInterval = ETC.sharedPreferences.GetInt("MonitoringInterval", 30);
                     monitoringInterval.Summary =

@@ -2,9 +2,10 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
+
+using AndroidX.AppCompat.App;
 
 using System.IO;
 
@@ -22,7 +23,7 @@ namespace GAButtonMapper
             // Create your application here
             SetContentView(Resource.Layout.QnALayout);
 
-            SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.QnAMainToolbar));
+            SetSupportActionBar(FindViewById<AndroidX.AppCompat.Widget.Toolbar>(Resource.Id.QnAMainToolbar));
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
             SupportActionBar.SetTitle(Resource.String.QnAActivity_Title);
 
@@ -30,7 +31,7 @@ namespace GAButtonMapper
 
             string assetName = "QnA_ko.txt";
 
-            using (StreamReader sr = new StreamReader(Assets.Open(assetName)))
+            using (var sr = new StreamReader(Assets.Open(assetName)))
             {
                 cautionTextView.Text = sr.ReadToEnd();
             }

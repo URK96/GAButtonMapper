@@ -1,5 +1,0 @@
-- Add caution string
-- Add toast messages
-- Fix some string issue
-- Exit monitoring process when disable mapping feature
-- Optimize battery usage

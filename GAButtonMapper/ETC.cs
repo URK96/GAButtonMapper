@@ -48,7 +48,7 @@ namespace GAButtonMapper
         internal static string clickType = "";
 
         internal static string channelId = "";
-        internal static readonly int recorderNotificationId = 0;
+        internal const int recorderNotificationId = 0;
 
         internal static bool CheckPermission(Context context, string permission)
         {
@@ -64,7 +64,7 @@ namespace GAButtonMapper
 
         internal static int CalcInterval(int start, int stepSize, int count)
         {
-            return (start + (stepSize * count));
+            return start + (stepSize * count);
         }
     }
 }
