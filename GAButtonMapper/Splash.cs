@@ -27,6 +27,8 @@ namespace GAButtonMapper
             ETC.acm = GetSystemService("accessibility") as AccessibilityManager;
             ETC.pm = GetSystemService(PowerService) as PowerManager;
 
+            ETC.locale = Resources.Configuration.Locales.Get(0);
+
             var intentToAccessibility = new Intent(this, typeof(AccesibilityServiceMapper));
             StartService(intentToAccessibility);
 

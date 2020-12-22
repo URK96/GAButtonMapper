@@ -1,44 +1,43 @@
 ﻿
 
-Q1> 권한 부여 후 맵핑 설정까지 했는데 동작이 되질 않습니다.
+Q1> I even set up mapping after granting permissions, but it doesn't work.
 
-A1> 앱에 제대로 권한이 적용되지 않은 경우입니다. 재부팅 후 다시 맵핑 설정을 완료한 후 시도해 보세요.
-
-
-
-Q2> 맵핑 동작이 어느 순간에 안되더니 잠시 후에 다시 동작합니다.
-
-A2> 기기의 메모리 (RAM)이 부족할 경우 해당 맵핑 앱이 정리되어 종료되는 현상입니다. 배터리 최적화 예외 설정을 활성화 하시면 해당 현상의 발생 횟수를 최소화 하실 수 있습니다.
+A1> The app is not properly granted permissions. Please reboot and retry after completing the mapping setup.
 
 
 
-Q3> LG 퀵페이를 맵핑 설정하고 동작을 해도 LG 페이 메인화면으로만 연결됩니다.
+Q2> The mapping operation didn't work at some point, so it will work again after a while.
 
-A3> LG 페이 앱에 문제가 있는 경우입니다. 등록된 카드 전부 삭제 후 재등록하시거나 LG 페이 앱을 삭제 후 재설치 하시기 바랍니다.
-
-
-
-Q4> 맵핑 동작이 간헐적으로 되질 않습니다.
-
-A4> 기기 내부에 동작이 많아 로그가 한꺼번에 올라오는 경우 발생하는 현상입니다. 해당 현상은 로그 기반 캡쳐 방식의 한계로 기기가 동작이 많을 때를 피해서 버튼을 눌러주시기 바랍니다.
+A2> If the machine runs out of memory (RAM), the mapping app is cleaned up and shut down. Enabling the Ignore Battery Optimization setting minimizes the number of occurrences of that phenomenon.
 
 
 
-Q5> 롱클릭이나 더블 클릭이 단일 클릭으로 인식됩니다.
+Q3> Even if set up and operate LG QuickPay, it will only be connected to the main screen of LG Pay.
 
-A5> Q4와 마찬가지로 기기에 많은 동작이 실행될 때 해당 현상이 발생합니다. 맵핑 설정에서 롱클릭 또는 클릭 간격 설정을 기기 환경에 맞추어 주시고 기기에 많은 동작이 발생할 때를 피해서 버튼을 눌러주시기 바랍니다. 
+A3> There is a problem with LG Pay app. Please delete all registered cards and re-register or reinstall the LG Pay app after deleting it.
+
+
+Q4> Mapping behavior is not operated intermittent.
+
+A4> This happens when logs are uploaded all at once due to a lot of activity inside the machine. This phenomenon is limited to log-based capture, so please press the button to avoid when the device has a lot of activity.
 
 
 
-Q6> 녹음된 파일은 어디에 저장이 되나요?
+Q5> A long or double click is recognized as a single click.
 
-A6> 내부 저장소의 Android - data - com.lgplus.gabtmap - files 폴더에 저장이 됩니다. 앱 제거 시에는 전부 녹음된 파일이 사라지므로 녹음 후에는 저장된 파일을 미리 옮겨주시는 것을 권장드립니다.
+A5> As with Q4, this happens when many actions are performed a lot of activity. Under Mapping Settings, adjust Long-Click or Click Interval settings to the instrument environment and press the button to avoid when the device has a lot of activity. 
 
+
+
+Q6> Where can I check the recorded file?
+
+A6> It is saved at 'Android - data - com.lgplus.gabtmap - files' directory. All recorded files will delete when the app is removed, so it is recommended that you move the saved files in advance after recording.
 
 
 
 
-여기에 해당하지 않거나 해결되지 않는 문제의 경우 개발자 이메일로 건의해주시기 바랍니다.
+
+If this does not apply or cannot be resolved, please make a suggestion via developer email.
 
 
 

@@ -29,7 +29,12 @@ namespace GAButtonMapper
 
             cautionTextView = FindViewById<TextView>(Resource.Id.TextViewerText);
 
-            string assetName = "OtherAppIssue_ko.txt";
+            string assetName = "OtherAppIssue_en.txt";
+
+            if (ETC.locale.Language == "ko")
+            {
+                assetName = "OtherAppIssue_ko.txt";
+            }
 
             using (var sr = new StreamReader(Assets.Open(assetName)))
             {

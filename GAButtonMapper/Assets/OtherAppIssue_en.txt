@@ -1,0 +1,17 @@
+﻿
+
+* How to troubleshoot YouTube accessibility problems *
+
+1. Run Youtube application.
+
+2. When you click the profile icon in the upper right corner, several settings items appear.
+
+3. Enter 'Settings - Accessibility' to disable the 'Accessibility Player' item.
+
+
+
+
+
+
+
+# You can also enter other apps to disable accessibility related items.
