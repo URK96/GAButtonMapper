@@ -1,13 +1,6 @@
 # GAButtonMapper
-## LG 스마트폰을 위한 Google Assistant 버튼 맵핑 앱
-
-## Google Assistant Button Mapping Application for LG Devices
-
-
-
-<img alt="1.png" src="https://github.com/URK96/GAButtonMapper/blob/master/Image/1.png" style="max-width: 40%">
-<img alt="2.png" src="https://github.com/URK96/GAButtonMapper/blob/master/Image/2.png" style="max-width: 40%">
-
+### LG 스마트폰을 위한 Google Assistant 버튼 맵핑 앱
+### Google Assistant Button Mapping Application for LG Devices
 
 
 Google Asssistant 버튼이 있는 LG 스마트폰을 위한 맵핑 앱입니다.
@@ -22,8 +15,14 @@ Google Asssistant 버튼이 있는 LG 스마트폰을 위한 맵핑 앱입니다
 
 
 
-해당 앱은 시스템 로그를 읽어서 작동을 하기 때문에 기기에 문제가 생기지 않는 특별한 권한을 필요로 합니다.
+해당 앱은 시스템 로그를 읽어서 작동을 하기 때문에 기기에 문제가 생기지 않는 특별한 권한을 필요로 합니다!
+
+
 사용하기 전 초기 설정 방법을 적은 [Wiki](https://github.com/URK96/GAButtonMapper/wiki)를 반드시 읽고 적용해주세요!
+
+## Screenshot
+
+<img alt="1.png" src="https://github.com/URK96/GAButtonMapper/blob/master/Image/1.png" width="400px"> <img alt="2.png" src="https://github.com/URK96/GAButtonMapper/blob/master/Image/2.png" width="400px">
 
 ---
 
